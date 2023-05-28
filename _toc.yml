@@ -4,12 +4,9 @@
 format: jb-book
 root: intro
 parts:
-	- caption: Lecture 
-Notes
-	chapters:
-	- file: DSC_340_Week_1_LectureNotes
-- caption: Pre-Class 
-Notebooks
-- caption: In-Class Notebooks
-- caption: Post-Class 
-Notebooks
+  - caption: Lecture Notes
+    chapters:
+    - file: DSC_340_Week_1_LectureNotes
+  - caption: Slides
+    chapters:
+    - file: DSC_340_Week1_Slides
