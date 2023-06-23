@@ -1,11 +1,8 @@
-# Welcome to your Jupyter Book
+# DSC 340: Machine Learning and Neural Network Processing
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+This website contains lecture notes and slides for DSC 340: Machine Learning and Neural Network Processing, taught at the University of Mount Union in Fall 2023.  The table of contents is located on the left side bar, with each link represent the lecture notes or slides for the entire week.
 
-Check out the content pages bundled with this sample book to see more.
+Any questions or comments should be directed to Dr. Julie Butler at juliebutler@juliebutler.org
 
 ```{tableofcontents}
 ```
