@@ -7,6 +7,8 @@ parts:
   - caption: Lecture Notes
     chapters:
     - file: Week_1_LectureNotes
+    - file: Week2_LectureNotes
   - caption: Slides
     chapters:
     - file: Week1_Slides
+    - file: Week2_Slides
