@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>DSC 340 Week 1: Introduction to Machine Learning &#8212; My sample book</title>
   
@@ -44,6 +44,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -65,9 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'DSC_340_Week1_Slides';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="DSC 340 Week 1: Introduction to Machine Learning and the Mathematics of Machine Learning" href="DSC_340_Week_1_LectureNotes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -152,17 +152,20 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    DSC 340: Machine Learning and Neural Network Processing
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="DSC_340_Week_1_LectureNotes.html">DSC 340 Week 1: Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">DSC 340 Week 1: Introduction to Machine Learning</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
+
 
 
 </ul>
@@ -420,20 +423,20 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dsc-340-week-1-introduction-to-machine-learning">
-<h1>DSC 340 Week 1: Introduction to Machine Learning<a class="headerlink" href="#dsc-340-week-1-introduction-to-machine-learning" title="Permalink to this headline">#</a></h1>
+<h1>DSC 340 Week 1: Introduction to Machine Learning<a class="headerlink" href="#dsc-340-week-1-introduction-to-machine-learning" title="Permalink to this heading">#</a></h1>
 <p><span class="xref myst">Dr. Julie Butler</span></p>
 <p>DATE: TBD</p>
 <section id="plans-for-the-week">
-<h2>Plans for the Week<a class="headerlink" href="#plans-for-the-week" title="Permalink to this headline">#</a></h2>
+<h2>Plans for the Week<a class="headerlink" href="#plans-for-the-week" title="Permalink to this heading">#</a></h2>
 <section id="monday">
-<h3>Monday<a class="headerlink" href="#monday" title="Permalink to this headline">#</a></h3>
+<h3>Monday<a class="headerlink" href="#monday" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Introduction to the Course</p></li>
 <li><p>Begin “What is Machine Learning?”</p></li>
 </ul>
 </section>
 <section id="wednesday">
-<h3>Wednesday<a class="headerlink" href="#wednesday" title="Permalink to this headline">#</a></h3>
+<h3>Wednesday<a class="headerlink" href="#wednesday" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Finish “What is Machine Learning?”</p></li>
 <li><p>Begin In-Class Project: Mathematical Crash Course with Python</p></li>
@@ -441,14 +444,14 @@ document.write(`
 </ul>
 </section>
 <section id="friday">
-<h3>Friday<a class="headerlink" href="#friday" title="Permalink to this headline">#</a></h3>
+<h3>Friday<a class="headerlink" href="#friday" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>In-Class Project: Mathematical Crash Course with Python</p></li>
 </ul>
 </section>
 </section>
 <section id="course-information">
-<h2>Course Information<a class="headerlink" href="#course-information" title="Permalink to this headline">#</a></h2>
+<h2>Course Information<a class="headerlink" href="#course-information" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Course Meetings: MWF 8:45am - 9:50am</p></li>
 <li><p>Room: TBD</p></li>
@@ -456,7 +459,7 @@ document.write(`
 </ul>
 </section>
 <section id="instructor-information">
-<h2>Instructor Information<a class="headerlink" href="#instructor-information" title="Permalink to this headline">#</a></h2>
+<h2>Instructor Information<a class="headerlink" href="#instructor-information" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Dr. Julie Butler</p></li>
 <li><p>Email: TBD</p></li>
@@ -465,9 +468,9 @@ document.write(`
 </ul>
 </section>
 <section id="general-weekly-schedule">
-<h2>General Weekly Schedule<a class="headerlink" href="#general-weekly-schedule" title="Permalink to this headline">#</a></h2>
+<h2>General Weekly Schedule<a class="headerlink" href="#general-weekly-schedule" title="Permalink to this heading">#</a></h2>
 <section id="id1">
-<h3>Monday<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h3>Monday<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Introduction to new material with lecture and some guided examples</p></li>
 <li><p>Office Hours: 12:30pm - 3pm</p></li>
@@ -476,13 +479,13 @@ document.write(`
 </ul>
 </section>
 <section id="tuesday">
-<h3>Tuesday<a class="headerlink" href="#tuesday" title="Permalink to this headline">#</a></h3>
+<h3>Tuesday<a class="headerlink" href="#tuesday" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Office Hours 3:30pm - 6pm</p></li>
 </ul>
 </section>
 <section id="id2">
-<h3>Wednesday<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<h3>Wednesday<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Finish lecture material</p></li>
 <li><p>Begin weekly in-class project individually or in groups up to three people</p></li>
@@ -490,13 +493,13 @@ document.write(`
 </ul>
 </section>
 <section id="thursday">
-<h3>Thursday<a class="headerlink" href="#thursday" title="Permalink to this headline">#</a></h3>
+<h3>Thursday<a class="headerlink" href="#thursday" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Pre-class homework for next week released</p></li>
 </ul>
 </section>
 <section id="id3">
-<h3>Friday<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<h3>Friday<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Finish weekly in-class project</p></li>
 <li><p>Post-class homework released</p></li>
@@ -504,7 +507,7 @@ document.write(`
 </section>
 </section>
 <section id="topics-covered-by-week">
-<h2>Topics Covered (By Week)<a class="headerlink" href="#topics-covered-by-week" title="Permalink to this headline">#</a></h2>
+<h2>Topics Covered (By Week)<a class="headerlink" href="#topics-covered-by-week" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>What is machine learning?; Mathematics Crash Course</p></li>
 <li><p>Introduction to Machine Learning with Linear Regression</p></li>
@@ -523,7 +526,7 @@ document.write(`
 </ol>
 </section>
 <section id="grading-policy">
-<h2>Grading Policy<a class="headerlink" href="#grading-policy" title="Permalink to this headline">#</a></h2>
+<h2>Grading Policy<a class="headerlink" href="#grading-policy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Pre-class Homework: 10%</p></li>
 <li><p>In-Class Projects: 20%</p></li>
@@ -534,7 +537,7 @@ document.write(`
 <p>Assignments that are not turned in will recieve a zero</p>
 </section>
 <section id="pre-class-homework">
-<h2>Pre-Class Homework<a class="headerlink" href="#pre-class-homework" title="Permalink to this headline">#</a></h2>
+<h2>Pre-Class Homework<a class="headerlink" href="#pre-class-homework" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Short assigments to introduce concepts before the lecture</p></li>
 <li><p>Will include some reading assigments, some conceptual questions, and some programming questions</p></li>
@@ -543,7 +546,7 @@ document.write(`
 </ul>
 </section>
 <section id="in-class-projects">
-<h2>In-Class Projects<a class="headerlink" href="#in-class-projects" title="Permalink to this headline">#</a></h2>
+<h2>In-Class Projects<a class="headerlink" href="#in-class-projects" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>In-class projects will be worked on during class on Wednesdays (if lecture is complete) and Fridays.</p></li>
 <li><p>They can be completed after class on Friday if needed.  They are due before class on Monday the week after they are assigned.</p></li>
@@ -551,14 +554,14 @@ document.write(`
 </ul>
 </section>
 <section id="post-class-homework">
-<h2>Post-Class Homework<a class="headerlink" href="#post-class-homework" title="Permalink to this headline">#</a></h2>
+<h2>Post-Class Homework<a class="headerlink" href="#post-class-homework" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Post-class homework assignments are released at the end of class on Friday and are due at the start of class on the following Wednesday.</p></li>
 <li><p>Longer and more in-depth machine learning problems, should take around 3 hours to complete</p></li>
 </ul>
 </section>
 <section id="final-project">
-<h2>Final Project<a class="headerlink" href="#final-project" title="Permalink to this headline">#</a></h2>
+<h2>Final Project<a class="headerlink" href="#final-project" title="Permalink to this heading">#</a></h2>
 <p>The final project will consist of two components: a 10 minute presentation given during the last week of the course and a report written in the style of a scientific paper due the last day of this course.</p>
 <p>Small pieces of the final project are due throughout the semester, and a complete list of expectations can be found at the below website.</p>
 <p>Any topic and machine learning algorithm are valid for this project but the proposed project must have sufficient complexity and be unique (different from other works found online).</p>
@@ -566,27 +569,27 @@ document.write(`
 <p>More details: <span class="xref myst">juliebutler.org/DSC340/finalproject</span></p>
 </section>
 <section id="late-work-policy">
-<h2>Late Work Policy<a class="headerlink" href="#late-work-policy" title="Permalink to this headline">#</a></h2>
+<h2>Late Work Policy<a class="headerlink" href="#late-work-policy" title="Permalink to this heading">#</a></h2>
 <p>Everyone has 10 late days that they can apply to turning in any pre-class homework, in-class project, or post-class homework.  You can apply as many days as you want but you only get 10 late days in total for the entire semester.  You must email me if you plan on using the late days and how many.</p>
 <p>Example, you can apply 2 late days to pre-class homework #3, so you turn it in on Wednesday instead of Monday.  You now have 8 late days remaining to use on other assignments.</p>
 <p>Other extensions will not be given on assignments and late work will not be accepted EXCEPT in very special circumstances (talk to me).</p>
 <p>Note, late days cannot be used on turning in the final report or the final presentation.</p>
 </section>
 <section id="group-work-policy">
-<h2>Group Work Policy<a class="headerlink" href="#group-work-policy" title="Permalink to this headline">#</a></h2>
+<h2>Group Work Policy<a class="headerlink" href="#group-work-policy" title="Permalink to this heading">#</a></h2>
 <p>Working on assignments in groups is allowed and encouraged in the course.  Group size must be limited to three people however.  For assignments that you complete in a group, the same assignment can be submitted by all group members.  Everyone must submit the assignment and it must contain everyone’s names.</p>
 <p>Working in groups implies that everyone in the group is contributing equally.  If this becomes a problem, I reserve the right to restructure or disband certain groups.</p>
 </section>
 <section id="technology-requirements">
-<h2>Technology Requirements<a class="headerlink" href="#technology-requirements" title="Permalink to this headline">#</a></h2>
+<h2>Technology Requirements<a class="headerlink" href="#technology-requirements" title="Permalink to this heading">#</a></h2>
 <p>A laptop or other device with an internet connection is required in every class period and to complete all out of class assignments.  All assignments will be completed on Google’s Colab, a cloud based Python notebook computing environment which has all libraies needed for this class pre-installed.</p>
 </section>
 <section id="assignment-submission">
-<h2>Assignment Submission<a class="headerlink" href="#assignment-submission" title="Permalink to this headline">#</a></h2>
+<h2>Assignment Submission<a class="headerlink" href="#assignment-submission" title="Permalink to this heading">#</a></h2>
 <p>Assignments will be submitted through the course’s D2L page.  For notebook submittions, please submit a “View” link to your Google Colab notebook.  Details on getting this link can be found in the syllabus.</p>
 </section>
 <section id="important-resources">
-<h2>Important Resources<a class="headerlink" href="#important-resources" title="Permalink to this headline">#</a></h2>
+<h2>Important Resources<a class="headerlink" href="#important-resources" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Course Website: <span class="xref myst">juliebutler.org/DSC340</span></p></li>
 <li><p>Assignments are turned in on D2L page</p></li>
@@ -597,24 +600,24 @@ document.write(`
 </ul>
 </section>
 <section id="providing-feedback">
-<h2>Providing Feedback<a class="headerlink" href="#providing-feedback" title="Permalink to this headline">#</a></h2>
+<h2>Providing Feedback<a class="headerlink" href="#providing-feedback" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://docs.google.com/forms/d/e/1FAIpQLSfYrE_mdlmqkfnVuImoCDFfh39Aw-zR1TBGLDplna6M5nXdkg/viewform?usp=sf_link">Annoymous Feedback Form</a></p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="questions">
-<h1>Questions?<a class="headerlink" href="#questions" title="Permalink to this headline">#</a></h1>
+<h1>Questions?<a class="headerlink" href="#questions" title="Permalink to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="what-is-machine-learning">
-<h1>What is Machine Learning?<a class="headerlink" href="#what-is-machine-learning" title="Permalink to this headline">#</a></h1>
+<h1>What is Machine Learning?<a class="headerlink" href="#what-is-machine-learning" title="Permalink to this heading">#</a></h1>
 <section id="id4">
-<h2>What is Machine Learning?<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h2>What is Machine Learning?<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>There has been much recent interest in machine learning and artifical intelligence (ChatGTP, self-driving cars, etc.) but generally not a good explantion of what it is.</p></li>
 <li><p>Machine learning is the field that occurs at artificial intelligence and data science; it is a collection of programs that learn from given data</p></li>
 </ul>
 </section>
 <section id="when-is-machine-learning-useful">
-<h2>When is Machine Learning Useful?<a class="headerlink" href="#when-is-machine-learning-useful" title="Permalink to this headline">#</a></h2>
+<h2>When is Machine Learning Useful?<a class="headerlink" href="#when-is-machine-learning-useful" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Large datsets</p></li>
 <li><p>Datasets with unknown patterns</p></li>
@@ -624,7 +627,7 @@ document.write(`
 </ul>
 </section>
 <section id="the-machine-learning-workflow">
-<h2>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">#</a></h2>
+<h2>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Importing your data set and formatting it</p></li>
 <li><p>Splitting the data into a training set and a test set</p></li>
@@ -634,7 +637,7 @@ document.write(`
 </ol>
 </section>
 <section id="types-of-machine-learning">
-<h2>Types of Machine Learning<a class="headerlink" href="#types-of-machine-learning" title="Permalink to this headline">#</a></h2>
+<h2>Types of Machine Learning<a class="headerlink" href="#types-of-machine-learning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Machine learning algorithms are classified on what kind of data they take</p></li>
 <li><p>Data sets have two components:</p>
@@ -646,7 +649,7 @@ document.write(`
 </ul>
 </section>
 <section id="supervised-learning">
-<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">#</a></h2>
+<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Takes labelled data (i.e. both X and y) and learns the pattern between the features and the labels</p></li>
 <li><p>Two types of supervised learning based on the task</p>
@@ -670,7 +673,7 @@ document.write(`
 </ul>
 </section>
 <section id="unsupervised-learning">
-<h2>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">#</a></h2>
+<h2>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Learn patterns from unlabelled data (i.e. its given only X)</p></li>
 <li><p>Can also be roughly split into two categories depending on the task</p>
@@ -695,7 +698,7 @@ document.write(`
 </ul>
 </section>
 <section id="semisupervised-learning">
-<h2>Semisupervised Learning<a class="headerlink" href="#semisupervised-learning" title="Permalink to this headline">#</a></h2>
+<h2>Semisupervised Learning<a class="headerlink" href="#semisupervised-learning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Most data is unlabelled but some is labelled</p></li>
 <li><p>Not always considered a separate type of machine learning</p></li>
@@ -703,14 +706,14 @@ document.write(`
 </ul>
 </section>
 <section id="reinforcement-learning">
-<h2>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">#</a></h2>
+<h2>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Based around an agent that learns to perform a task by maximizing a reward</p></li>
 <li><p>Common in fields such as robotics</p></li>
 </ul>
 </section>
 <section id="offline-vs-online-learning">
-<h2>Offline vs. Online Learning<a class="headerlink" href="#offline-vs-online-learning" title="Permalink to this headline">#</a></h2>
+<h2>Offline vs. Online Learning<a class="headerlink" href="#offline-vs-online-learning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Offline Learning</p>
 <ul>
@@ -727,9 +730,9 @@ document.write(`
 </ul>
 </section>
 <section id="challenges-of-machine-learning">
-<h2>Challenges of Machine Learning<a class="headerlink" href="#challenges-of-machine-learning" title="Permalink to this headline">#</a></h2>
+<h2>Challenges of Machine Learning<a class="headerlink" href="#challenges-of-machine-learning" title="Permalink to this heading">#</a></h2>
 <section id="problems-with-data-sets">
-<h3>Problems with Data Sets<a class="headerlink" href="#problems-with-data-sets" title="Permalink to this headline">#</a></h3>
+<h3>Problems with Data Sets<a class="headerlink" href="#problems-with-data-sets" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Small training sets</p></li>
 <li><p>Poor quality data</p></li>
@@ -738,7 +741,7 @@ document.write(`
 </ul>
 </section>
 <section id="computational-limitations">
-<h3>Computational Limitations<a class="headerlink" href="#computational-limitations" title="Permalink to this headline">#</a></h3>
+<h3>Computational Limitations<a class="headerlink" href="#computational-limitations" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Memory (RAM)</p></li>
 <li><p>Lack of GPUs and computing clusters</p></li>
@@ -778,15 +781,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="DSC_340_Week_1_LectureNotes.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">DSC 340 Week 1: Introduction to Machine Learning and the Mathematics of Machine Learning</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
