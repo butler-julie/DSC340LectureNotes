@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Machine Learning &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '.ipynb_checkpoint2s/Week1_Slides-checkpoint';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    DSC 340: Machine Learning and Neural Network Processing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week1_Slides.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F.ipynb_checkpoint2s/Week1_Slides-checkpoint.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/.ipynb_checkpoint2s/Week1_Slides-checkpoint.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-1-slides">DSC 340 Week 1 Slides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-for-the-week">Plan for the Week</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monday-august-21">Monday (August 21)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuesday-august-22">Tuesday (August 22)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wednesday-august-23">Wednesday (August 23)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thursday-august-24">Thursday (August 24)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#friday-august-25">Friday (August 25)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syllabus-review-15-minutes">Syllabus Review (~15 minutes)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-do-you-know-about-machine-learning-why-are-you-taking-this-class-5-minutes">What do you know about machine learning? Why are you taking this class? (~5 minutes)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-you-learn-what-machine-learning-is-and-not-just-how-to-use-it">Why should you learn what machine learning is and not just how to use it?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-end-goal-of-this-class-is-to-do-a-machine-learning-project-from-coming-up-with-the-idea-to-publishing-and-presenting-the-results">The end goal of this class is to do a machine learning project from coming up with the idea to “publishing” and presenting the results.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project-ideas">Final Project Ideas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#science-and-engineering">Science and Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-and-finance">Business and Finance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sports">Sports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hobbies">Hobbies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-machine-learning">What is Machine Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What is Machine Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-is-machine-learning-useful">When is Machine Learning Useful?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semisupervised-learning">Semisupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-vs-online-learning">Offline vs. Online Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-of-machine-learning">Challenges of Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-with-data-sets">Problems with Data Sets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-limitations">Computational Limitations</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning">
+<h1>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this headline">#</a></h1>
+<section id="dsc-340-week-1-slides">
+<h2>DSC 340 Week 1 Slides<a class="headerlink" href="#dsc-340-week-1-slides" title="Permalink to this headline">#</a></h2>
+<p><span class="xref myst">Dr. Julie Butler</span></p>
+<p>August 21 - August 24, 2023</p>
+</section>
+<section id="plan-for-the-week">
+<h2>Plan for the Week<a class="headerlink" href="#plan-for-the-week" title="Permalink to this headline">#</a></h2>
+<section id="monday-august-21">
+<h3>Monday (August 21)<a class="headerlink" href="#monday-august-21" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Syllabus Day</p></li>
+<li><p>Lecture: Why should you learn what machine learning is and not just how to use it?</p></li>
+<li><p>Office hours: 12:30pm to 3pm (Bracy 107)</p></li>
+</ul>
+</section>
+<section id="tuesday-august-22">
+<h3>Tuesday (August 22)<a class="headerlink" href="#tuesday-august-22" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Office hours: 3:30pm to 6pm (Bracy 107)</p></li>
+</ul>
+</section>
+<section id="wednesday-august-23">
+<h3>Wednesday (August 23)<a class="headerlink" href="#wednesday-august-23" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Lecture: Introduction to Machine Learning</p></li>
+</ul>
+</section>
+<section id="thursday-august-24">
+<h3>Thursday (August 24)<a class="headerlink" href="#thursday-august-24" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Week 2 Pre-class homework released</p></li>
+</ul>
+</section>
+<section id="friday-august-25">
+<h3>Friday (August 25)<a class="headerlink" href="#friday-august-25" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>In-class Assignment #1: Mathematics of Machine Learning Crash Course</p></li>
+<li><p>In-class Assignment #2: Introduction to Data Science Libraries</p></li>
+<li><p>Week 1 Post-class assignment released</p></li>
+</ul>
+</section>
+</section>
+<section id="syllabus-review-15-minutes">
+<h2>Syllabus Review (~15 minutes)<a class="headerlink" href="#syllabus-review-15-minutes" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>All material is located at <a class="reference external" href="https://www.juliebutler.org/classes/dsc340">juliebutler.org/classes/dsc340</a></p></li>
+<li><p>In small groups or alone:</p>
+<ul>
+<li><p>Review the syllabus</p></li>
+<li><p>Add any questions you have about the syllabus to the “Syllabus Review” thread on the Discord (or email them to me)</p></li>
+</ul>
+</li>
+<li><p>I will answer some of the questions in class and the rest of the questions after class</p></li>
+</ul>
+<section id="what-do-you-know-about-machine-learning-why-are-you-taking-this-class-5-minutes">
+<h3>What do you know about machine learning? Why are you taking this class? (~5 minutes)<a class="headerlink" href="#what-do-you-know-about-machine-learning-why-are-you-taking-this-class-5-minutes" title="Permalink to this headline">#</a></h3>
+<p>Discuss these questions with your group and write (or type) some of your thoughts.  We will have a class discussion after the small group discussions.</p>
+</section>
+</section>
+<section id="why-should-you-learn-what-machine-learning-is-and-not-just-how-to-use-it">
+<h2>Why should you learn what machine learning is and not just how to use it?<a class="headerlink" href="#why-should-you-learn-what-machine-learning-is-and-not-just-how-to-use-it" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Knowing how each machine learning algorithm works will make you a better machine learning engineer</p></li>
+<li><p>If you know how an algorithm works you will know how to best use it and how to improve it</p></li>
+<li><p>You will know what type of machine learning task you are trying to do and which algorithms work best</p></li>
+<li><p>You will learn which machine learning algorithms will work best for different data sets</p></li>
+</ul>
+</section>
+<section id="the-end-goal-of-this-class-is-to-do-a-machine-learning-project-from-coming-up-with-the-idea-to-publishing-and-presenting-the-results">
+<h2>The end goal of this class is to do a machine learning project from coming up with the idea to “publishing” and presenting the results.<a class="headerlink" href="#the-end-goal-of-this-class-is-to-do-a-machine-learning-project-from-coming-up-with-the-idea-to-publishing-and-presenting-the-results" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="final-project-ideas">
+<h2>Final Project Ideas<a class="headerlink" href="#final-project-ideas" title="Permalink to this headline">#</a></h2>
+<p>You can use ChatGTP to generate ideas for this project BUT you cannot use it to complete this project nor can you propose a project based on ChatGTP.</p>
+<section id="science-and-engineering">
+<h3>Science and Engineering<a class="headerlink" href="#science-and-engineering" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Can you classify a type of animal or plant into different subspecies?</p></li>
+<li><p>Can you predict the likelihood a person will develop a disease?</p></li>
+<li><p>Can you use acceleration to predict the position of an object?</p></li>
+<li><p>Can you solve Schrodinger’s equation with machine learning?</p></li>
+<li><p>Can you predict properties of different elements/isotopes/molecules?</p></li>
+<li><p>Can you classify organic molecules based on their chemical structure or their atoms?</p></li>
+<li><p>Can you classify the type of bridge based on an image or building materials?</p></li>
+<li><p>Can you predict the future temperatures of a certain city?</p></li>
+<li><p>Can you use machine learning to solve Navier-Stokes equations?</p></li>
+</ul>
+</section>
+<section id="business-and-finance">
+<h3>Business and Finance<a class="headerlink" href="#business-and-finance" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Can you predict the future values of a certain stock?</p></li>
+<li><p>Can you determine a businesses expected profit at the end of the year given beginning of the year statistics (or a previous years)?</p></li>
+</ul>
+</section>
+<section id="sports">
+<h3>Sports<a class="headerlink" href="#sports" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Can you predict if a college football player will be drafted by the NFL and in what round of the draft?</p></li>
+<li><p>Can you predict a baseball player’s batting average?</p></li>
+<li><p>Can you predict what team a soccer player belongs to?</p></li>
+</ul>
+</section>
+<section id="hobbies">
+<h3>Hobbies<a class="headerlink" href="#hobbies" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Can you predict the type or generation of a Pokemon based on certain stats?</p></li>
+<li><p>Can you predict the color of a Magic the Gathering card based on its stats and keywords?</p></li>
+<li><p>Can you predict the challenge rating of a monster in Dungeons and Dragons 5e?</p></li>
+</ul>
+</section>
+</section>
+<section id="what-is-machine-learning">
+<h2>What is Machine Learning?<a class="headerlink" href="#what-is-machine-learning" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="id1">
+<h2>What is Machine Learning?<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>There has been much recent interest in machine learning and artifical intelligence (ChatGTP, self-driving cars, etc.) but generally not a good explantion of what it is.</p></li>
+<li><p>Machine learning is the field that occurs at artificial intelligence and data science; it is a collection of programs that learn from given data</p></li>
+</ul>
+</section>
+<section id="when-is-machine-learning-useful">
+<h2>When is Machine Learning Useful?<a class="headerlink" href="#when-is-machine-learning-useful" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Large datsets</p></li>
+<li><p>Datasets with unknown patterns</p></li>
+<li><p>Image and video analysis</p></li>
+<li><p>Text processing (Natural Language Processing)</p></li>
+<li><p>Predicting future values</p></li>
+</ul>
+</section>
+<section id="the-machine-learning-workflow">
+<h2>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
+<li><p>Importing your data set and formatting it</p></li>
+<li><p>Splitting the data into a training set and a test set</p></li>
+<li><p>Training your machine learning model with the training set</p></li>
+<li><p>Evaluate the trained model’s performance with the test set</p></li>
+<li><p>(Optional) Make improvements to your model to increase its performance</p></li>
+</ol>
+</section>
+<section id="types-of-machine-learning">
+<h2>Types of Machine Learning<a class="headerlink" href="#types-of-machine-learning" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Machine learning algorithms are classified on what kind of data they take</p></li>
+<li><p>Data sets have two components:</p>
+<ul>
+<li><p>X: the inputs or the independent variables; features</p></li>
+<li><p>y: the outputs or the dependent variables; labels</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="supervised-learning">
+<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Takes labelled data (i.e. both X and y) and learns the pattern between the features and the labels</p></li>
+<li><p>Two types of supervised learning based on the task</p>
+<ul>
+<li><p>Classification</p>
+<ul>
+<li><p>Sorting inputs into a set number of categories</p></li>
+<li><p>Ex: Given a picture, determine if the picture shows a cat or a dog (two categories)</p></li>
+</ul>
+</li>
+<li><p>Regression</p>
+<ul>
+<li><p>Infinite number of possible outputs</p></li>
+<li><p>Approximating a function f such that <span class="math notranslate nohighlight">\(f(X) \approx y\)</span></p></li>
+<li><p>Ex: Given some information on a house, what price should it sale for?</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Examples: k-nearest neighbors, linear regression, support vector machines, neural networks</p></li>
+</ul>
+</section>
+<section id="unsupervised-learning">
+<h2>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Learn patterns from unlabelled data (i.e. its given only X)</p></li>
+<li><p>Can also be roughly split into two categories depending on the task</p>
+<ul>
+<li><p>Clustering</p>
+<ul>
+<li><p>Unsupervised version of classification</p></li>
+<li><p>How many categories can the data be split into?</p></li>
+<li><p>Given information of a bunch of different iris flowers, how many species are present?</p></li>
+</ul>
+</li>
+<li><p>Dimensionality Reduction</p>
+<ul>
+<li><p>Reduces the number of features by combining similar features</p></li>
+<li><p>When trying to determine if a person is at risk for diabetes you are given 8 measures of a person’s health.  Can the total number of features be reduced by combining similar ones?</p></li>
+<li><p>Supervised algorithms may perform better on data sets with many features if dimensionality reduction is preform first</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Ex: principal component analysis (PCA), k-means, and hierarchical cluster analysis (HCA)</p></li>
+</ul>
+</section>
+<section id="semisupervised-learning">
+<h2>Semisupervised Learning<a class="headerlink" href="#semisupervised-learning" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Most data is unlabelled but some is labelled</p></li>
+<li><p>Not always considered a separate type of machine learning</p></li>
+<li><p>Ex: Photo apps will identify and group faces together, you have to provide the names of each person</p></li>
+</ul>
+</section>
+<section id="reinforcement-learning">
+<h2>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Based around an agent that learns to perform a task by maximizing a reward</p></li>
+<li><p>Common in fields such as robotics</p></li>
+</ul>
+</section>
+<section id="offline-vs-online-learning">
+<h2>Offline vs. Online Learning<a class="headerlink" href="#offline-vs-online-learning" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Offline Learning</p>
+<ul>
+<li><p>All training data is given to the algorithm at once to train</p></li>
+<li><p>If new data is added to the training set, need to entirely retrain with the old and the new data</p></li>
+</ul>
+</li>
+<li><p>Online Learning</p>
+<ul>
+<li><p>Training data can be given in batches at any time, online algorithms can improve themselves at any time if given new data</p></li>
+</ul>
+</li>
+<li><p>Most algorithms in this class will use offline learning, but online learning does have advantages when it comes to memory</p></li>
+</ul>
+</section>
+<section id="challenges-of-machine-learning">
+<h2>Challenges of Machine Learning<a class="headerlink" href="#challenges-of-machine-learning" title="Permalink to this headline">#</a></h2>
+<section id="problems-with-data-sets">
+<h3>Problems with Data Sets<a class="headerlink" href="#problems-with-data-sets" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Small training sets</p></li>
+<li><p>Poor quality data</p></li>
+<li><p>Too many features or irrelevant features</p></li>
+<li><p>Overfitting or underfitting</p></li>
+</ul>
+</section>
+<section id="computational-limitations">
+<h3>Computational Limitations<a class="headerlink" href="#computational-limitations" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Memory (RAM)</p></li>
+<li><p>Lack of GPUs and computing clusters</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./.ipynb_checkpoint2s"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-1-slides">DSC 340 Week 1 Slides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plan-for-the-week">Plan for the Week</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monday-august-21">Monday (August 21)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuesday-august-22">Tuesday (August 22)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wednesday-august-23">Wednesday (August 23)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thursday-august-24">Thursday (August 24)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#friday-august-25">Friday (August 25)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syllabus-review-15-minutes">Syllabus Review (~15 minutes)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-do-you-know-about-machine-learning-why-are-you-taking-this-class-5-minutes">What do you know about machine learning? Why are you taking this class? (~5 minutes)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-you-learn-what-machine-learning-is-and-not-just-how-to-use-it">Why should you learn what machine learning is and not just how to use it?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-end-goal-of-this-class-is-to-do-a-machine-learning-project-from-coming-up-with-the-idea-to-publishing-and-presenting-the-results">The end goal of this class is to do a machine learning project from coming up with the idea to “publishing” and presenting the results.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project-ideas">Final Project Ideas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#science-and-engineering">Science and Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-and-finance">Business and Finance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sports">Sports</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hobbies">Hobbies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-machine-learning">What is Machine Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What is Machine Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-is-machine-learning-useful">When is Machine Learning Useful?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semisupervised-learning">Semisupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-vs-online-learning">Offline vs. Online Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-of-machine-learning">Challenges of Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-with-data-sets">Problems with Data Sets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-limitations">Computational Limitations</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
