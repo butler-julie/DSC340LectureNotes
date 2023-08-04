@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'DataGenerator';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    DSC 340: Machine Learning and Neural Network Processing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FDataGenerator.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/DataGenerator.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">radioactive_decay</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">N0</span><span class="p">,</span> <span class="n">half_life</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">N0</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">half_life</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">half_life</span> <span class="o">=</span> <span class="mi">24110</span> <span class="c1"># years</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">half_life</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">amount_remaining</span> <span class="o">=</span> <span class="n">radioactive_decay</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">half_life</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">amount_remaining</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x109a60400&gt;]
+</pre></div>
+</div>
+<img alt="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" src="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">amount_remaining</span> <span class="o">=</span> <span class="n">amount_remaining</span><span class="o">+</span><span class="n">r</span>
+<span class="n">amount_remaining</span> <span class="o">=</span> <span class="n">amount_remaining</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">amount_remaining</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">amount_remaining</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2411
+2411
+(2411,)
+1.0030034162546189 0.0030034162546188903
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">amount_remaining</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x109b682e0&gt;]
+</pre></div>
+</div>
+<img alt="_images/0ef2775767242c30611b86bc118536a9d1ec5d6866f7622798319ed593c5d034.png" src="_images/0ef2775767242c30611b86bc118536a9d1ec5d6866f7622798319ed593c5d034.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;t (years)&#39;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span> <span class="s1">&#39;N_t (g)&#39;</span><span class="p">:</span> <span class="n">amount_remaining</span><span class="p">})</span>
+<span class="n">dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>t (years)</th>
+      <th>N_t (g)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1.003003</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100</td>
+      <td>0.970527</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>200</td>
+      <td>0.938309</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>300</td>
+      <td>0.970053</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>400</td>
+      <td>0.902556</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2406</th>
+      <td>240600</td>
+      <td>-0.038446</td>
+    </tr>
+    <tr>
+      <th>2407</th>
+      <td>240700</td>
+      <td>-0.039000</td>
+    </tr>
+    <tr>
+      <th>2408</th>
+      <td>240800</td>
+      <td>-0.048025</td>
+    </tr>
+    <tr>
+      <th>2409</th>
+      <td>240900</td>
+      <td>-0.080716</td>
+    </tr>
+    <tr>
+      <th>2410</th>
+      <td>241000</td>
+      <td>0.011623</td>
+    </tr>
+  </tbody>
+</table>
+<p>2411 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;week2_slides.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+
+<span class="c1"># Load the diabetes dataset</span>
+<span class="n">diabetes_X</span><span class="p">,</span> <span class="n">diabetes_y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Use only one feature</span>
+<span class="c1">#diabetes_X = diabetes_X[:, np.newaxis, 2]</span>
+
+
+
+<span class="c1"># Split the data into training/testing sets</span>
+<span class="n">diabetes_X_train</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">diabetes_X_test</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+
+<span class="c1"># Split the targets into training/testing sets</span>
+<span class="n">diabetes_y_train</span> <span class="o">=</span> <span class="n">diabetes_y</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">diabetes_y_test</span> <span class="o">=</span> <span class="n">diabetes_y</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+
+<span class="c1"># Create linear regression object</span>
+<span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="c1"># Train the model using the training sets</span>
+<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">diabetes_X_train</span><span class="p">,</span> <span class="n">diabetes_y_train</span><span class="p">)</span>
+
+<span class="c1"># Make predictions using the testing set</span>
+<span class="n">diabetes_y_pred</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">)</span>
+
+<span class="c1"># The coefficients</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="c1"># The mean squared error</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">diabetes_y_test</span><span class="p">,</span> <span class="n">diabetes_y_pred</span><span class="p">))</span>
+<span class="c1"># The coefficient of determination: 1 is perfect prediction</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficient of determination: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">diabetes_y_test</span><span class="p">,</span> <span class="n">diabetes_y_pred</span><span class="p">))</span>
+
+<span class="c1"># Plot outputs</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">diabetes_y_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">diabetes_X_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">diabetes_y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: 
+ [ 3.06094248e-01 -2.37635570e+02  5.10538048e+02  3.27729878e+02
+ -8.14111926e+02  4.92799595e+02  1.02841240e+02  1.84603496e+02
+  7.43509388e+02  7.60966464e+01]
+Mean squared error: 2004.52
+Coefficient of determination: 0.59
+</pre></div>
+</div>
+<img alt="_images/7eb0ae568138a34d8cf1bdea05bd0b5cfaac2c5ca18174bf252fbbe5bf09d3a5.png" src="_images/7eb0ae568138a34d8cf1bdea05bd0b5cfaac2c5ca18174bf252fbbe5bf09d3a5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diabetes_y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([151.,  75., 141., 206., 135.,  97., 138.,  63., 110., 310., 101.,
+        69., 179., 185., 118., 171., 166., 144.,  97., 168.,  68.,  49.,
+        68., 245., 184., 202., 137.,  85., 131., 283., 129.,  59., 341.,
+        87.,  65., 102., 265., 276., 252.,  90., 100.,  55.,  61.,  92.,
+       259.,  53., 190., 142.,  75., 142., 155., 225.,  59., 104., 182.,
+       128.,  52.,  37., 170., 170.,  61., 144.,  52., 128.,  71., 163.,
+       150.,  97., 160., 178.,  48., 270., 202., 111.,  85.,  42., 170.,
+       200., 252., 113., 143.,  51.,  52., 210.,  65., 141.,  55., 134.,
+        42., 111.,  98., 164.,  48.,  96.,  90., 162., 150., 279.,  92.,
+        83., 128., 102., 302., 198.,  95.,  53., 134., 144., 232.,  81.,
+       104.,  59., 246., 297., 258., 229., 275., 281., 179., 200., 200.,
+       173., 180.,  84., 121., 161.,  99., 109., 115., 268., 274., 158.,
+       107.,  83., 103., 272.,  85., 280., 336., 281., 118., 317., 235.,
+        60., 174., 259., 178., 128.,  96., 126., 288.,  88., 292.,  71.,
+       197., 186.,  25.,  84.,  96., 195.,  53., 217., 172., 131., 214.,
+        59.,  70., 220., 268., 152.,  47.,  74., 295., 101., 151., 127.,
+       237., 225.,  81., 151., 107.,  64., 138., 185., 265., 101., 137.,
+       143., 141.,  79., 292., 178.,  91., 116.,  86., 122.,  72., 129.,
+       142.,  90., 158.,  39., 196., 222., 277.,  99., 196., 202., 155.,
+        77., 191.,  70.,  73.,  49.,  65., 263., 248., 296., 214., 185.,
+        78.,  93., 252., 150.,  77., 208.,  77., 108., 160.,  53., 220.,
+       154., 259.,  90., 246., 124.,  67.,  72., 257., 262., 275., 177.,
+        71.,  47., 187., 125.,  78.,  51., 258., 215., 303., 243.,  91.,
+       150., 310., 153., 346.,  63.,  89.,  50.,  39., 103., 308., 116.,
+       145.,  74.,  45., 115., 264.,  87., 202., 127., 182., 241.,  66.,
+        94., 283.,  64., 102., 200., 265.,  94., 230., 181., 156., 233.,
+        60., 219.,  80.,  68., 332., 248.,  84., 200.,  55.,  85.,  89.,
+        31., 129.,  83., 275.,  65., 198., 236., 253., 124.,  44., 172.,
+       114., 142., 109., 180., 144., 163., 147.,  97., 220., 190., 109.,
+       191., 122., 230., 242., 248., 249., 192., 131., 237.,  78., 135.,
+       244., 199., 270., 164.,  72.,  96., 306.,  91., 214.,  95., 216.,
+       263., 178., 113., 200., 139., 139.,  88., 148.,  88., 243.,  71.,
+        77., 109., 272.,  60.,  54., 221.,  90., 311., 281., 182., 321.,
+        58., 262., 206., 233., 242., 123., 167.,  63., 197.,  71., 168.,
+       140., 217., 121., 235., 245.,  40.,  52., 104., 132.,  88.,  69.,
+       219.,  72., 201., 110.,  51., 277.,  63., 118.,  69., 273., 258.,
+        43., 198., 242., 232., 175.,  93., 168., 275., 293., 281.,  72.,
+       140., 189., 181., 209., 136., 261., 113., 131., 174., 257.,  55.,
+        84.,  42., 146., 212., 233.,  91., 111., 152., 120.,  67., 310.,
+        94., 183.,  66., 173.,  72.,  49.,  64.,  48., 178., 104., 132.,
+       220.,  57.])
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

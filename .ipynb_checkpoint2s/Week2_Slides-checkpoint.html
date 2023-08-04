@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Linear Regression and the Machine Learning Workflow &#8212; My sample book</title>
+    <title>Introduction to Machine Learning &#8212; My sample book</title>
   
   
   
@@ -19,53 +19,50 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Week2_Slides';</script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Introduction to Machine Learning" href="Week1_Slides.html" />
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '.ipynb_checkpoint2s/Week2_Slides-checkpoint';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -93,7 +90,7 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="search.html"
+      action="../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -131,7 +128,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="../intro.html">
   
   
   
@@ -141,8 +138,8 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
@@ -151,20 +148,20 @@ const thebe_selector_output = ".output, .cell_output"
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
+                <a class="reference internal" href="../intro.html">
                     DSC 340: Machine Learning and Neural Network Processing
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression and the Machine Learning Workflow</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week1_Slides.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
 
 
 
@@ -239,7 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FWeek2_Slides.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F.ipynb_checkpoint2s/Week2_Slides-checkpoint.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -269,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/Week2_Slides.ipynb" target="_blank"
+      <li><a href="../_sources/.ipynb_checkpoint2s/Week2_Slides-checkpoint.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -351,7 +348,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Linear Regression and the Machine Learning Workflow</h1>
+    <h1>Introduction to Machine Learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -361,8 +358,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Regression and the Machine Learning Workflow</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csc-dsc-340-week-2-slides">CSC/DSC 340 Week 2 Slides</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Machine Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-1-slides">DSC 340 Week 1 Slides</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plans-for-the-week">Plans for the Week</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monday">Monday</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wednesday">Wednesday</a></li>
@@ -372,24 +369,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-linear-regression">Part 1: Linear Regression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">Goal: Find a line which fits the data set and can be used to predict new points from the data set</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-loss-function">Linear Regression Loss Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-optimized-weights">Find Optimized Weights</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-linear-regression-with-sklearn">Implementing Linear Regression with Sklearn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-start-with-linear-regression">Why start with linear regression?</a></li>
-</ul>
-</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-machine-learning-workflow-with-linear-regression">Part 2: The Machine Learning Workflow with Linear Regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data-set-perform-an-initial-analysis">1. Import the data set, perform an initial analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diabetes-dataset-feature-explanations">Diabetes Dataset Feature Explanations</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data-into-a-training-set-and-a-test-set">Split the data into a training set and a test set</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-machine-learning-algorithm-with-the-training-set">Train the machine learning algorithm with the training set</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-performance-of-the-trained-model-with-the-test-set-using-numerical-metrics-and-visual-analysis">Test the performance of the trained model with the test set using numerical metrics and visual analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-improve-the-performance-of-the-algorithm-by-either-reformatting-the-data-or-changing-the-parameters-of-the-machine-learning-algorithm">(Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -404,10 +385,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-and-the-machine-learning-workflow">
-<h1>Linear Regression and the Machine Learning Workflow<a class="headerlink" href="#linear-regression-and-the-machine-learning-workflow" title="Permalink to this headline">#</a></h1>
-<section id="csc-dsc-340-week-2-slides">
-<h2>CSC/DSC 340 Week 2 Slides<a class="headerlink" href="#csc-dsc-340-week-2-slides" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning">
+<h1>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this headline">#</a></h1>
+<section id="dsc-340-week-1-slides">
+<h2>DSC 340 Week 1 Slides<a class="headerlink" href="#dsc-340-week-1-slides" title="Permalink to this headline">#</a></h2>
 <p><span class="xref myst">Dr. Julie Butler</span></p>
 <p>August 28 - September 1, 2023</p>
 </section>
@@ -450,9 +431,9 @@ document.write(`
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
 </pre></div>
 </div>
 </div>
@@ -467,70 +448,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x15ee42be0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x136a62be0&gt;]
 </pre></div>
 </div>
-<img alt="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
+<img alt="../_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="../_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">
-<h1>Goal: Find a line which fits the data set and can be used to predict new points from the data set<a class="headerlink" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set" title="Permalink to this headline">#</a></h1>
-<section id="linear-regression">
-<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h2>
-<div class="math notranslate nohighlight">
-\[\hat{y} = X\theta\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{y}\)</span>: Machine learning predictions</p></li>
-<li><p><span class="math notranslate nohighlight">\(X\)</span>: x-data, input data, features (vector or matrix)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\theta\)</span>: parameters or weights of the algorithm (vector)</p></li>
-</ul>
-<p><strong>Goal</strong>: Find <span class="math notranslate nohighlight">\(\theta\)</span> such that <span class="math notranslate nohighlight">\(\hat{y} \approx y\)</span></p>
-</section>
-<section id="linear-regression-loss-function">
-<h2>Linear Regression Loss Function<a class="headerlink" href="#linear-regression-loss-function" title="Permalink to this headline">#</a></h2>
-<p>Mean-Squared Error Function:</p>
-<div class="math notranslate nohighlight">
-\[J_{MSE}(\theta) = \frac{1}{N}\sum_{i=1}^N (\hat{y}_i - y_i)^2\]</div>
-<p>Re-write using linear regression:</p>
-<div class="math notranslate nohighlight">
-\[J_{MSE}(\theta) = \frac{1}{N}\sum_{i=1}^N (X_i\theta - y_i)^2\]</div>
-<p>Convert to matrix-vector notation:
-$<span class="math notranslate nohighlight">\( J_{MSE}(\theta) = \frac{1}{N}[X\theta - y]^T[X\theta - y]\)</span>$</p>
-</section>
-<section id="find-optimized-weights">
-<h2>Find Optimized Weights<a class="headerlink" href="#find-optimized-weights" title="Permalink to this headline">#</a></h2>
-<p>Loss Function:</p>
-<div class="math notranslate nohighlight">
-\[ J(\theta) = \frac{1}{N}[X\theta - y]^T[X\theta - y]\]</div>
-<p>Optimize with respect to <span class="math notranslate nohighlight">\(\theta\)</span> (minimization problem):</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial J(\theta)}{\partial \theta} = 0 \]</div>
-<p>Apply to the loss function:</p>
-<div class="math notranslate nohighlight">
-\[ \frac{\partial}{\partial \theta} \{\frac{1}{N}[X\theta - y]^T[X\theta-y]\} = 0\]</div>
-<p>Take the derivative:</p>
-<div class="math notranslate nohighlight">
-\[X^T[X\theta - y] = 0\]</div>
-<p>Solve for <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[ \theta = (X^TX)^{-1}X^Ty\]</div>
-<p>Then to find prediction for new y-data points:</p>
-<div class="math notranslate nohighlight">
-\[\hat{y} = X_{new}\theta = X_{new}(X^TX)^{-1}X^Ty\]</div>
-<p>A closed-form solution!</p>
-</section>
-<section id="implementing-linear-regression-with-sklearn">
-<h2>Implementing Linear Regression with Sklearn<a class="headerlink" href="#implementing-linear-regression-with-sklearn" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a linear regression instance using sklearn</span>
-<span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 
-<span class="c1"># If the x-data in 1D, reshape as follows</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Fit the linear regression algoritm using the previously generated data</span>
 <span class="n">linear_regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -540,8 +469,7 @@ $<span class="math notranslate nohighlight">\( J_{MSE}(\theta) = \frac{1}{N}[X\t
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create new data from the same line in order to test its performance</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">X_test</span><span class="o">-</span><span class="mi">3</span>
 
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -553,24 +481,29 @@ $<span class="math notranslate nohighlight">\( J_{MSE}(\theta) = \frac{1}{N}[X\t
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graphically check to see if the true and predicted data are similar</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15ef65430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x136b2abe0&gt;
 </pre></div>
 </div>
-<img alt="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
+<img alt="../_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="../_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check accuracy using traditional error scores (MSE, RMSE, r2-score, percent error, etc.)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MEAN SQUARED ERROR:&quot;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MEAN SQUARED ERROR:&quot;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ROOT MEAN SQUARED ERROR:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -584,9 +517,7 @@ ROOT MEAN SQUARED ERROR: 1.3179408846009966e-14
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the optimized weights and the slope that are fit by the linear regression algorithm</span>
-<span class="c1"># The slope should be 4 and the intercept -3 (set when we created the data)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LINEAR REGRESSION SLOPE:&quot;</span><span class="p">,</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LINEAR REGRESSION SLOPE:&quot;</span><span class="p">,</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LINEAR REGRESSION INTERCEPT:&quot;</span><span class="p">,</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -598,22 +529,6 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 </div>
 </div>
-</section>
-<section id="why-start-with-linear-regression">
-<h2>Why start with linear regression?<a class="headerlink" href="#why-start-with-linear-regression" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Simple machine learning model which has many of the feature of more complicated models</p>
-<ul>
-<li><p>A loss function</p></li>
-<li><p>Weights/parameters to be optimized</p></li>
-<li><p>A “training” process</p></li>
-</ul>
-</li>
-<li><p>Closed-form for optimized weights means same results for the same data</p></li>
-<li><p>Many data sets follow a linear-ish pattern</p></li>
-<li><p>Linear regression can be modified to be more powerful with a design matrix (In-Class Assignment) or with regularization (next week)</p></li>
-</ul>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="part-2-the-machine-learning-workflow-with-linear-regression">
 <h1>Part 2: The Machine Learning Workflow with Linear Regression<a class="headerlink" href="#part-2-the-machine-learning-workflow-with-linear-regression" title="Permalink to this headline">#</a></h1>
@@ -629,214 +544,23 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 <li><p>(Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm</p></li>
 </ul>
 </li>
-<li><p><em>Hands-On Machine Learning</em> Chapter 2 has a detailed walkthrough with the “Boston Housing Market” data set</p></li>
 <li><p>Helpful Checklist: Appendix B</p></li>
 </ul>
-</section>
-<section id="import-the-data-set-perform-an-initial-analysis">
-<h2>1. Import the data set, perform an initial analysis<a class="headerlink" href="#import-the-data-set-perform-an-initial-analysis" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Importing the data set from a file, Python library, or website</p></li>
-<li><p>Determine what the data set contains</p></li>
-<li><p>Determine if any of the data needs to be modified or removed (missing values, non-numeric values, etc.)</p></li>
-<li><p>Perform initial analysis: Print the data, graph the data, modify the data if needed</p></li>
-</ul>
-<p>The data set we will be analyzing is called the “Diabetes Data Set” and it contains data from 442 people. The goal of the data set is to predict a machine learning model that can tell how far diabetes has progressed in the patient given various health information.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The data set is avaliable through Scikit-Learn</span>
-<span class="n">diabetes_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
-<span class="n">diabetes_data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span><span class="o">.</span><span class="n">feature_names</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;data&#39;: array([[ 0.03807591,  0.05068012,  0.06169621, ..., -0.00259226,
-          0.01990749, -0.01764613],
-        [-0.00188202, -0.04464164, -0.05147406, ..., -0.03949338,
-         -0.06833155, -0.09220405],
-        [ 0.08529891,  0.05068012,  0.04445121, ..., -0.00259226,
-          0.00286131, -0.02593034],
-        ...,
-        [ 0.04170844,  0.05068012, -0.01590626, ..., -0.01107952,
-         -0.04688253,  0.01549073],
-        [-0.04547248, -0.04464164,  0.03906215, ...,  0.02655962,
-          0.04452873, -0.02593034],
-        [-0.04547248, -0.04464164, -0.0730303 , ..., -0.03949338,
-         -0.00422151,  0.00306441]]),
- &#39;target&#39;: array([151.,  75., 141., 206., 135.,  97., 138.,  63., 110., 310., 101.,
-         69., 179., 185., 118., 171., 166., 144.,  97., 168.,  68.,  49.,
-         68., 245., 184., 202., 137.,  85., 131., 283., 129.,  59., 341.,
-         87.,  65., 102., 265., 276., 252.,  90., 100.,  55.,  61.,  92.,
-        259.,  53., 190., 142.,  75., 142., 155., 225.,  59., 104., 182.,
-        128.,  52.,  37., 170., 170.,  61., 144.,  52., 128.,  71., 163.,
-        150.,  97., 160., 178.,  48., 270., 202., 111.,  85.,  42., 170.,
-        200., 252., 113., 143.,  51.,  52., 210.,  65., 141.,  55., 134.,
-         42., 111.,  98., 164.,  48.,  96.,  90., 162., 150., 279.,  92.,
-         83., 128., 102., 302., 198.,  95.,  53., 134., 144., 232.,  81.,
-        104.,  59., 246., 297., 258., 229., 275., 281., 179., 200., 200.,
-        173., 180.,  84., 121., 161.,  99., 109., 115., 268., 274., 158.,
-        107.,  83., 103., 272.,  85., 280., 336., 281., 118., 317., 235.,
-         60., 174., 259., 178., 128.,  96., 126., 288.,  88., 292.,  71.,
-        197., 186.,  25.,  84.,  96., 195.,  53., 217., 172., 131., 214.,
-         59.,  70., 220., 268., 152.,  47.,  74., 295., 101., 151., 127.,
-        237., 225.,  81., 151., 107.,  64., 138., 185., 265., 101., 137.,
-        143., 141.,  79., 292., 178.,  91., 116.,  86., 122.,  72., 129.,
-        142.,  90., 158.,  39., 196., 222., 277.,  99., 196., 202., 155.,
-         77., 191.,  70.,  73.,  49.,  65., 263., 248., 296., 214., 185.,
-         78.,  93., 252., 150.,  77., 208.,  77., 108., 160.,  53., 220.,
-        154., 259.,  90., 246., 124.,  67.,  72., 257., 262., 275., 177.,
-         71.,  47., 187., 125.,  78.,  51., 258., 215., 303., 243.,  91.,
-        150., 310., 153., 346.,  63.,  89.,  50.,  39., 103., 308., 116.,
-        145.,  74.,  45., 115., 264.,  87., 202., 127., 182., 241.,  66.,
-         94., 283.,  64., 102., 200., 265.,  94., 230., 181., 156., 233.,
-         60., 219.,  80.,  68., 332., 248.,  84., 200.,  55.,  85.,  89.,
-         31., 129.,  83., 275.,  65., 198., 236., 253., 124.,  44., 172.,
-        114., 142., 109., 180., 144., 163., 147.,  97., 220., 190., 109.,
-        191., 122., 230., 242., 248., 249., 192., 131., 237.,  78., 135.,
-        244., 199., 270., 164.,  72.,  96., 306.,  91., 214.,  95., 216.,
-        263., 178., 113., 200., 139., 139.,  88., 148.,  88., 243.,  71.,
-         77., 109., 272.,  60.,  54., 221.,  90., 311., 281., 182., 321.,
-         58., 262., 206., 233., 242., 123., 167.,  63., 197.,  71., 168.,
-        140., 217., 121., 235., 245.,  40.,  52., 104., 132.,  88.,  69.,
-        219.,  72., 201., 110.,  51., 277.,  63., 118.,  69., 273., 258.,
-         43., 198., 242., 232., 175.,  93., 168., 275., 293., 281.,  72.,
-        140., 189., 181., 209., 136., 261., 113., 131., 174., 257.,  55.,
-         84.,  42., 146., 212., 233.,  91., 111., 152., 120.,  67., 310.,
-         94., 183.,  66., 173.,  72.,  49.,  64.,  48., 178., 104., 132.,
-        220.,  57.]),
- &#39;frame&#39;: None,
- &#39;DESCR&#39;: &#39;.. _diabetes_dataset:\n\nDiabetes dataset\n----------------\n\nTen baseline variables, age, sex, body mass index, average blood\npressure, and six blood serum measurements were obtained for each of n =\n442 diabetes patients, as well as the response of interest, a\nquantitative measure of disease progression one year after baseline.\n\n**Data Set Characteristics:**\n\n  :Number of Instances: 442\n\n  :Number of Attributes: First 10 columns are numeric predictive values\n\n  :Target: Column 11 is a quantitative measure of disease progression one year after baseline\n\n  :Attribute Information:\n      - age     age in years\n      - sex\n      - bmi     body mass index\n      - bp      average blood pressure\n      - s1      tc, total serum cholesterol\n      - s2      ldl, low-density lipoproteins\n      - s3      hdl, high-density lipoproteins\n      - s4      tch, total cholesterol / HDL\n      - s5      ltg, possibly log of serum triglycerides level\n      - s6      glu, blood sugar level\n\nNote: Each of these 10 feature variables have been mean centered and scaled by the standard deviation times the square root of `n_samples` (i.e. the sum of squares of each column totals 1).\n\nSource URL:\nhttps://www4.stat.ncsu.edu/~boos/var.select/diabetes.html\n\nFor more information see:\nBradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) &quot;Least Angle Regression,&quot; Annals of Statistics (with discussion), 407-499.\n(https://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf)\n&#39;,
- &#39;feature_names&#39;: [&#39;age&#39;,
-  &#39;sex&#39;,
-  &#39;bmi&#39;,
-  &#39;bp&#39;,
-  &#39;s1&#39;,
-  &#39;s2&#39;,
-  &#39;s3&#39;,
-  &#39;s4&#39;,
-  &#39;s5&#39;,
-  &#39;s6&#39;],
- &#39;data_filename&#39;: &#39;diabetes_data_raw.csv.gz&#39;,
- &#39;target_filename&#39;: &#39;diabetes_target.csv.gz&#39;,
- &#39;data_module&#39;: &#39;sklearn.datasets.data&#39;}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;age&#39;, &#39;sex&#39;, &#39;bmi&#39;, &#39;bp&#39;, &#39;s1&#39;, &#39;s2&#39;, &#39;s3&#39;, &#39;s4&#39;, &#39;s5&#39;, &#39;s6&#39;]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Features: x-data set</span>
-<span class="c1"># Data on each of the patients in the study</span>
-
-<span class="c1"># How many features and data points?</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">diabetes_data</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="c1"># What are the features?</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">diabetes_data</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(442, 10)
-[&#39;age&#39;, &#39;sex&#39;, &#39;bmi&#39;, &#39;bp&#39;, &#39;s1&#39;, &#39;s2&#39;, &#39;s3&#39;, &#39;s4&#39;, &#39;s5&#39;, &#39;s6&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<section id="diabetes-dataset-feature-explanations">
-<h3>Diabetes Dataset Feature Explanations<a class="headerlink" href="#diabetes-dataset-feature-explanations" title="Permalink to this headline">#</a></h3>
-<p>Note that all features data is mean-centered and scaled so the values do not reflect the actual measurements</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Feature Name</p></th>
-<th class="head"><p>Explanation</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>age</p></td>
-<td><p>Age of patient in years</p></td>
-</tr>
-<tr class="row-odd"><td><p>sex</p></td>
-<td><p>Biological sex of patient (male (0) or female (1)</p></td>
-</tr>
-<tr class="row-even"><td><p>bmi</p></td>
-<td><p>Body mass index</p></td>
-</tr>
-<tr class="row-odd"><td><p>bp</p></td>
-<td><p>Blood pressure</p></td>
-</tr>
-<tr class="row-even"><td><p>s1</p></td>
-<td><p>Total serum cholestrol</p></td>
-</tr>
-<tr class="row-odd"><td><p>s2</p></td>
-<td><p>Low-density lipoproteins</p></td>
-</tr>
-<tr class="row-even"><td><p>s3</p></td>
-<td><p>High-density lipoproteins</p></td>
-</tr>
-<tr class="row-odd"><td><p>s4</p></td>
-<td><p>Total cholestrol</p></td>
-</tr>
-<tr class="row-even"><td><p>s5</p></td>
-<td><p>Log of serum triclyceride levels</p></td>
-</tr>
-<tr class="row-odd"><td><p>s6</p></td>
-<td><p>Blood sugar</p></td>
-</tr>
-</tbody>
-</table>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Targets: y-data set</span>
-<span class="c1"># A quantitative measure of how far the disease has progressed</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">diabetes_data</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------------------------------&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">diabetes_data</span><span class="o">.</span><span class="n">target</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">diabetes_data</span><span class="o">.</span><span class="n">target</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[151.  75. 141. 206. 135.  97. 138.  63. 110. 310. 101.  69. 179. 185.
- 118. 171. 166. 144.  97. 168.  68.  49.  68. 245. 184. 202. 137.  85.
- 131. 283. 129.  59. 341.  87.  65. 102. 265. 276. 252.  90. 100.  55.
-  61.  92. 259.  53. 190. 142.  75. 142. 155. 225.  59. 104. 182. 128.
-  52.  37. 170. 170.  61. 144.  52. 128.  71. 163. 150.  97. 160. 178.
-  48. 270. 202. 111.  85.  42. 170. 200. 252. 113. 143.  51.  52. 210.
-  65. 141.  55. 134.  42. 111.  98. 164.  48.  96.  90. 162. 150. 279.
-  92.  83. 128. 102. 302. 198.  95.  53. 134. 144. 232.  81. 104.  59.
- 246. 297. 258. 229. 275. 281. 179. 200. 200. 173. 180.  84. 121. 161.
-  99. 109. 115. 268. 274. 158. 107.  83. 103. 272.  85. 280. 336. 281.
- 118. 317. 235.  60. 174. 259. 178. 128.  96. 126. 288.  88. 292.  71.
- 197. 186.  25.  84.  96. 195.  53. 217. 172. 131. 214.  59.  70. 220.
- 268. 152.  47.  74. 295. 101. 151. 127. 237. 225.  81. 151. 107.  64.
- 138. 185. 265. 101. 137. 143. 141.  79. 292. 178.  91. 116.  86. 122.
-  72. 129. 142.  90. 158.  39. 196. 222. 277.  99. 196. 202. 155.  77.
- 191.  70.  73.  49.  65. 263. 248. 296. 214. 185.  78.  93. 252. 150.
-  77. 208.  77. 108. 160.  53. 220. 154. 259.  90. 246. 124.  67.  72.
- 257. 262. 275. 177.  71.  47. 187. 125.  78.  51. 258. 215. 303. 243.
-  91. 150. 310. 153. 346.  63.  89.  50.  39. 103. 308. 116. 145.  74.
-  45. 115. 264.  87. 202. 127. 182. 241.  66.  94. 283.  64. 102. 200.
- 265.  94. 230. 181. 156. 233.  60. 219.  80.  68. 332. 248.  84. 200.
-  55.  85.  89.  31. 129.  83. 275.  65. 198. 236. 253. 124.  44. 172.
- 114. 142. 109. 180. 144. 163. 147.  97. 220. 190. 109. 191. 122. 230.
- 242. 248. 249. 192. 131. 237.  78. 135. 244. 199. 270. 164.  72.  96.
- 306.  91. 214.  95. 216. 263. 178. 113. 200. 139. 139.  88. 148.  88.
- 243.  71.  77. 109. 272.  60.  54. 221.  90. 311. 281. 182. 321.  58.
- 262. 206. 233. 242. 123. 167.  63. 197.  71. 168. 140. 217. 121. 235.
- 245.  40.  52. 104. 132.  88.  69. 219.  72. 201. 110.  51. 277.  63.
- 118.  69. 273. 258.  43. 198. 242. 232. 175.  93. 168. 275. 293. 281.
-  72. 140. 189. 181. 209. 136. 261. 113. 131. 174. 257.  55.  84.  42.
- 146. 212. 233.  91. 111. 152. 120.  67. 310.  94. 183.  66. 173.  72.
-  49.  64.  48. 178. 104. 132. 220.  57.]
-------------------------------------
-25.0 346.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the diabetes dataset in a better format for machine learning</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the diabetes dataset</span>
 <span class="n">diabetes_X</span><span class="p">,</span> <span class="n">diabetes_y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -844,8 +568,7 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot each of the features against the target values</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -858,26 +581,18 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/68ed625843451af75ffb76bea18ddf1a686fb722e8a30f28ad6233ed82d62529.png" src="_images/68ed625843451af75ffb76bea18ddf1a686fb722e8a30f28ad6233ed82d62529.png" />
+<img alt="../_images/68ed625843451af75ffb76bea18ddf1a686fb722e8a30f28ad6233ed82d62529.png" src="../_images/68ed625843451af75ffb76bea18ddf1a686fb722e8a30f28ad6233ed82d62529.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Decide which features are useful for predicting the disease progression</span>
-<span class="c1"># Feature engineering</span>
-<span class="n">bp</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">s5</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:,</span><span class="mi">8</span><span class="p">]</span>
-<span class="n">diabetes_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bp</span><span class="p">,</span><span class="n">s5</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bp</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">blood_sugar</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">diabetes_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bp</span><span class="p">,</span><span class="n">blood_sugar</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="split-the-data-into-a-training-set-and-a-test-set">
-<h2>Split the data into a training set and a test set<a class="headerlink" href="#split-the-data-into-a-training-set-and-a-test-set" title="Permalink to this headline">#</a></h2>
-<p>Typically you do not want to train the machine learning model on the entire data set.  Rather, you want to train the model on most of the data but reserve some of the original data set to test the model’s performance.</p>
-<p><code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> from Scikit-Learn is a common way to randomly split a data set into a training set and a test set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">diabetes_X</span><span class="p">,</span> <span class="n">diabetes_y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -885,9 +600,6 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 </div>
 </div>
-</section>
-<section id="train-the-machine-learning-algorithm-with-the-training-set">
-<h2>Train the machine learning algorithm with the training set<a class="headerlink" href="#train-the-machine-learning-algorithm-with-the-training-set" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create linear regression object</span>
@@ -901,9 +613,6 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 <div class="cell_output docutils container">
 <div class="output text_html"><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div>
 </div>
-</section>
-<section id="test-the-performance-of-the-trained-model-with-the-test-set-using-numerical-metrics-and-visual-analysis">
-<h2>Test the performance of the trained model with the test set using numerical metrics and visual analysis<a class="headerlink" href="#test-the-performance-of-the-trained-model-with-the-test-set-using-numerical-metrics-and-visual-analysis" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions using the testing set</span>
@@ -919,19 +628,16 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 <span class="c1"># The mean squared error</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Root mean squared error: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
-<span class="c1"># The coefficient of determination (r2 score): 1 is perfect prediction</span>
+<span class="c1"># The coefficient of determination: 1 is perfect prediction</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2-Score: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="c1"># The mean absolute percent error</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean absolute percent error: </span><span class="si">%2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [435.04590729 767.16919758] 151.08579287170178
-Mean squared error: 4178.58
-Root mean squared error: 64.64
-R2-Score: 0.30
-Mean absolute percent error: 0.459859
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [504.10110293 422.70344938] 153.93187021862562
+Mean squared error: 4594.79
+Root mean squared error: 67.78
+R2-Score: 0.33
 </pre></div>
 </div>
 </div>
@@ -946,21 +652,12 @@ Mean absolute percent error: 0.459859
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15f2aa160&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1376e8100&gt;
 </pre></div>
 </div>
-<img alt="_images/89ac3b1bceba303703f115ebd6d6e03fd867d493a5f777eb5d072e31d1ec3223.png" src="_images/89ac3b1bceba303703f115ebd6d6e03fd867d493a5f777eb5d072e31d1ec3223.png" />
+<img alt="../_images/4cb0cdc9435db7fbf8754709bb175039099e28f050a3999f06d55a3ffcde50b5.png" src="../_images/4cb0cdc9435db7fbf8754709bb175039099e28f050a3999f06d55a3ffcde50b5.png" />
 </div>
 </div>
-</section>
-<section id="optional-improve-the-performance-of-the-algorithm-by-either-reformatting-the-data-or-changing-the-parameters-of-the-machine-learning-algorithm">
-<h2>(Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm<a class="headerlink" href="#optional-improve-the-performance-of-the-algorithm-by-either-reformatting-the-data-or-changing-the-parameters-of-the-machine-learning-algorithm" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Choose different features or a different number of features?</p></li>
-<li><p>Choose a different amount of test data (i.e. train the model with more data)?</p></li>
-<li><p>Use a different machine learning algorithm?</p></li>
-<li><p>Use a design matrix (In-Class Assignment Week 2)?</p></li>
-</ul>
 </section>
 </section>
 
@@ -977,7 +674,7 @@ Mean absolute percent error: 0.459859
         },
         kernelOptions: {
             name: "python3",
-            path: "./."
+            path: "./.ipynb_checkpoint2s"
         },
         predefinedOutput: true
     }
@@ -995,15 +692,6 @@ Mean absolute percent error: 0.459859
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="Week1_Slides.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Machine Learning</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
@@ -1022,8 +710,8 @@ Mean absolute percent error: 0.459859
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Regression and the Machine Learning Workflow</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csc-dsc-340-week-2-slides">CSC/DSC 340 Week 2 Slides</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Machine Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-1-slides">DSC 340 Week 1 Slides</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plans-for-the-week">Plans for the Week</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monday">Monday</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wednesday">Wednesday</a></li>
@@ -1033,24 +721,8 @@ Mean absolute percent error: 0.459859
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-linear-regression">Part 1: Linear Regression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">Goal: Find a line which fits the data set and can be used to predict new points from the data set</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-loss-function">Linear Regression Loss Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-optimized-weights">Find Optimized Weights</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-linear-regression-with-sklearn">Implementing Linear Regression with Sklearn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-start-with-linear-regression">Why start with linear regression?</a></li>
-</ul>
-</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-machine-learning-workflow-with-linear-regression">Part 2: The Machine Learning Workflow with Linear Regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data-set-perform-an-initial-analysis">1. Import the data set, perform an initial analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diabetes-dataset-feature-explanations">Diabetes Dataset Feature Explanations</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-the-data-into-a-training-set-and-a-test-set">Split the data into a training set and a test set</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-machine-learning-algorithm-with-the-training-set">Train the machine learning algorithm with the training set</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-performance-of-the-trained-model-with-the-test-set-using-numerical-metrics-and-visual-analysis">Test the performance of the trained model with the test set using numerical metrics and visual analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-improve-the-performance-of-the-algorithm-by-either-reformatting-the-data-or-changing-the-parameters-of-the-machine-learning-algorithm">(Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -1101,8 +773,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
