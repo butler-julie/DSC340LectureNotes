@@ -1,0 +1,1035 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Machine Learning and the Mathematics of Machine Learning &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '.ipynb_checkpoint2s/Week_1_LectureNotes-checkpoint';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    DSC 340: Machine Learning and Neural Network Processing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture Notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week1_Slides.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F.ipynb_checkpoint2s/Week_1_LectureNotes-checkpoint.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/.ipynb_checkpoint2s/Week_1_LectureNotes-checkpoint.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Machine Learning and the Mathematics of Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-1-lecture-notes">DSC 340 Week 1 Lecture Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-machine-learning">What is Machine Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-is-machine-learning-useful">When is Machine Learning Useful?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-machine-learning">Supervised Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-machine-learning">Unsupervised Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semisupervised-machine-learning">Semisupervised Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-and-online-learning">Offline and Online Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-of-machine-learning">Challenges of Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-with-the-data-sets">Problems with the Data Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-limitations">Computational Limitations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-crash-course-with-python">Mathematical Crash Course with Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra">Linear Algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors">Vectors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices">Matrices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning-and-the-mathematics-of-machine-learning">
+<h1>Introduction to Machine Learning and the Mathematics of Machine Learning<a class="headerlink" href="#introduction-to-machine-learning-and-the-mathematics-of-machine-learning" title="Permalink to this headline">#</a></h1>
+<section id="dsc-340-week-1-lecture-notes">
+<h2>DSC 340 Week 1 Lecture Notes<a class="headerlink" href="#dsc-340-week-1-lecture-notes" title="Permalink to this headline">#</a></h2>
+<p>Dr. <span class="xref myst">Julie Butler</span></p>
+<p>Week of August 21 - August 25, 2023</p>
+</section>
+<section id="what-is-machine-learning">
+<h2>What is Machine Learning?<a class="headerlink" href="#what-is-machine-learning" title="Permalink to this headline">#</a></h2>
+<p>Machine learning is the field that occurs at the intersection of artificial intelligence and data science. It is using computer algorithms that can learn to find patterns in and draw meaningful conclusions from data sets.  The book <em>Hands-On Machine Learning</em> defines machine learning as “the science of programming computers so they can learn from data”.  You can also think of machine learning as a collection of computer programs that solve problems without being programmed with task-specific instructions (i.e. the same algorithm can perform well on many problems without <em>any</em> changes).</p>
+<p>This section will explore when you would want to use machine learning over traditional types of programming and also the different types and classifications of machine learning algorithms.</p>
+<p>There are many great resources on machine learning, but a few for further investigation are listed below.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/"><em>Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition</em></a> by Aurélien Géron</p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/user_guide.html">Scikit-Learn’s User Guide</a></p></li>
+<li><p><a class="reference external" href="https://keras.io/getting_started/">Kera’s User Guide</a></p></li>
+<li><p><a class="reference external" href="https://www.tensorflow.org/overview">Tensorflow’s User Guide</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningmastery.com">Machine Learning Mastery</a> by Jason Brownlee</p></li>
+<li><p><a class="reference external" href="https://wiki.pathmind.com">A.I. Wiki</a></p></li>
+</ul>
+</section>
+<section id="when-is-machine-learning-useful">
+<h2>When is Machine Learning Useful?<a class="headerlink" href="#when-is-machine-learning-useful" title="Permalink to this headline">#</a></h2>
+<p>Machine learning can be applied to many problems, but it is particularly useful in certain context.  Machine learning is typically applied when there are large amounts of data to be analyzed, particularly when the pattern can be hard to find. Additionally, machine learning can perform better than traditional programming when the data is expected to fluctuate or vary over time.  Machine learning can automatically adapt to these changes in the data while traditional programs may require updates to adjust.</p>
+<p>For some examples, image analysis and classification is typically performed by machine learning algorithms, as they can easily find patterns in the images, especially if there are a large amount of images to work with.  A famous image classification example is the <a class="reference external" href="https://www.kaggle.com/general/25292">dog and bagel data set</a>, where the goal is to classify images as “dog” or “bagel”. Machine learning is also typically applied when there are very large data sets where the pattern to be found in the data is unknown or is complex.  Astronomy is a good example of this as the data sets from this field can be terabytes in size and sorting through them by hand is tedious and very time consuming. Additionally machine learning is used when the data sets are known to change over time.  For example, machine learning is used to study and predict future values in the stock market, whose values can change widely and quickly.</p>
+</section>
+<section id="the-machine-learning-workflow">
+<h2>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">#</a></h2>
+<p>Though every machine learning problem will use a different algorithm and data set, the analysis shares the same five steps:</p>
+<ol class="arabic simple">
+<li><p>Importing your data set and formatting it</p></li>
+<li><p>Splitting the data into a training set and a test set</p></li>
+<li><p>Training your machine learning model with the training set</p></li>
+<li><p>Evaluate the trained model’s performance with the test set</p></li>
+<li><p>(Optional) Make improvements to your model to increase its performance</p></li>
+</ol>
+<p>These steps will be investigated further next week, but some of the later discussion will make more sense if you have a basic idea of the steps that are normally involved in a machine learning algorithm.</p>
+</section>
+<section id="types-of-machine-learning">
+<h2>Types of Machine Learning<a class="headerlink" href="#types-of-machine-learning" title="Permalink to this headline">#</a></h2>
+<p>All machine learning algorithms must be given a data set from which to learn.  A data set is made up of a set of independent variables, usually called the inputs or the x data set, and a set of dependent variables, the outputs or the y data set.  Therefore a data set is made up of points of the form (X,y).  In the context of machine learning, the X data are called the features and the y data are called the labels.  If both the X and y data are present, then the data set is considered to be labelled and if only the X component of the data set is present, then the data is called unlabelled. Machine learning algorithms can be split into three (or sometimes four) categories based on how much of the data set they recieve (i.e. whether the data is labelled or unlabelled).</p>
+<section id="supervised-machine-learning">
+<h3>Supervised Machine Learning<a class="headerlink" href="#supervised-machine-learning" title="Permalink to this headline">#</a></h3>
+<p>Supervised machine learning, or simply supervised learning, is machine learning applied to labelled data sets.  By labelled, this means that the data set has both an input (X) component and an output (y) component.  Therfore, the task of supervised learning it to learn how to match a given member of X to the correct value from y. Note that both X and y can be one dimension or multi-dimensional depending on the data set and application.  Also lengths of X and y may be finite or infinite, also depending on the application.</p>
+<p>Broadly speaking, supervised learning tasks can be split into two categories: classification or regression.  The difference between the two is how many unique entries are in the output data set.  In classification, y contains only a finite number of values, corresponding to the number of groups the data set can be classified into.  For example, a famous data set in machine learning is called the iris data set, which provides data on different iris flowers and the specific species that flower belongs to, one of three types of irises.  In this data set the only possible entries in y are 0 (species 1), 1 (species 2), or 2 (species 3).  All other y values are invalid since they do not correspond to a known category.  Classification is quite common when it comes to analyzing image data sets, as the goal typically is to determine what is being shown in the image (i.e. to classify the image).</p>
+<p>Regression, on the other hand, corresponds to problems where the output could be an infinite number of different values.  Most regression problems involve trying to reproduce the function that maps X to y.  Put another way the goal of a regression problems is to find the function f such that f(X) = y for every value of X.  A famous data set often used in regression problems is known as the Boston housing data set, which provides data on houses around the Boston, MA area an the price the house should sale for.  Since house prices do not fall into a finite number of categories (a house could be any numeric price), this data set calls for regression instead of classification.</p>
+<p>Some common supervised learning algorithms are k-nearest neighbors, linear regression, logistic regression, support vector machines (SVMs), decision trees, random forests, and neural networks.</p>
+</section>
+<section id="unsupervised-machine-learning">
+<h3>Unsupervised Machine Learning<a class="headerlink" href="#unsupervised-machine-learning" title="Permalink to this headline">#</a></h3>
+<p>In contrast to supervised machine learning, unsupervised machine learning (or unsupervised learning) is not given labelled data to learn patterns from.  Rather, an unsupervised algorithm is only given X and must draw conclusions about the data without have y.</p>
+<p>Like supervised learning, unsupervised learning can also be split into different categories based on the type of task.  Common unsupervised learning tasks are clustering and dimensionality reduction.  Clustering is the unsupervised learning equivalent of classification in supervised learning.  However, instead of sorting data into one of a set number of classes, clustering algorithms determine how many classes (or clusters) are in the data set.  If you were given the measurements of the iris flowers from the iris data set, but not the species labels, you could still pretty accurately classify the flowers by first using a clustering algorithm to determine that there are three clusters in the data, which would correspond to three different species of iris flowers.</p>
+<p>Examples of unsupervised learning algorithms are principal component analysis (PCA), k-means, and heirarchical cluster analysis (HCA).</p>
+</section>
+<section id="semisupervised-machine-learning">
+<h3>Semisupervised Machine Learning<a class="headerlink" href="#semisupervised-machine-learning" title="Permalink to this headline">#</a></h3>
+<p>Semisupervised machine learning algorithms are a combination of supervised and unsupervised machine learning.  The data that is given to semisupervised machine learning is primarly unlabelled, but does contain some labelled data.  Note that this is not typically considered a class of machine learning in most sources, but it is mentioned in <em>Hands-On Machine Learning</em>.</p>
+</section>
+<section id="reinforcement-learning">
+<h3>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this headline">#</a></h3>
+<p>The final classification of machine learning is reinforcement learning.  In reinforcement learning, an agent learns to perform a set of actions by observing the enviornment it is in and learning how to maximize its rewards.  Reinforcement learning is commonly used in fields like robotics.  Reinforcement learning will not be studied in-depth in this course.  Rather, we will focus in supervised learning primarly with some unsupervised learning added in.</p>
+</section>
+<section id="offline-and-online-learning">
+<h3>Offline and Online Learning<a class="headerlink" href="#offline-and-online-learning" title="Permalink to this headline">#</a></h3>
+<p>If a machine learning alogorithm uses “offline learning”, it is given all of its training data at once, learns from it, and then discards the data.  If changes to the training data are made or if new training data is collected, the algorithm will need to be entirely retrained, using the old training data and the new training data combined.  “Online training”, on the other hand, can be training on an initial data set, and then given new training data points at any time to learn from, without having to start the training from scratch.  Though most algorithms you encounter in this class (and in general) will use offline learning, there are some advantages to online learning.  Mainly, if the training data set you are using is too large to be imported all at once, online learning allows the machine learning algorithm to be trained using smaller chunks of the data set.  This is especially useful performing machine learning on images data sets.</p>
+</section>
+</section>
+<section id="challenges-of-machine-learning">
+<h2>Challenges of Machine Learning<a class="headerlink" href="#challenges-of-machine-learning" title="Permalink to this headline">#</a></h2>
+<p>Despite recent advances in machine learning, it does still experience some challenges.  These can be divided up into two categories: problems with the data set and computational limitations.</p>
+</section>
+<section id="problems-with-the-data-sets">
+<h2>Problems with the Data Sets<a class="headerlink" href="#problems-with-the-data-sets" title="Permalink to this headline">#</a></h2>
+<p>A machine learning algorithm cannot perform well if it is given bad data.  This section will go over common problems that occur in data sets and how they can be fixed so that machine learning algorithms can perform better.</p>
+<p>The first problem that can occur is that there is not enough training data for the machine learning algorithm to sufficiently learn from.  Many machine learning algorithms need a large amount of training data to sufficiently learn, meaning hundreds or thousands of points.  If a data set contains few data points there are two ways to increase the performance of a machine learning algorithm.  First, if possible, obtain more data points to add to the data set to increase its size.  If this is not possible, then the second option is to choose a machine learning algorithm that can perform well on smaller amounts of training data.  For example, if only 50 data points are avaliable for the training data set, a neural network is unlikely to perform well since they require a large amount of training data to prevent overfitting (which is discussed below).  A better choice of machine learning algorithm, for example, would be ridge regression, which can make accurate predictions with only a small amount of training data.</p>
+<p>A second problem that can occur with the data sets is that they are of a poor quality.  This means that the data set contains errors, has outliers, or is noisy.  All of these makes it harder for the machine learning algorithm to pick out the patterns that occur in the data.  These problems can be fixed with “pre-processing”, meaning that the data is altered before being fed into the machine learning algorithm.  Errors can be spotted and removed (for example the inclusion of non-numerical data or missing values) using a library like Pandas in Python, outliers can be identified and removed with statistical analysis.  Noise can sometimes be removed or lessened with statistcal analysis, but this is a harder problem to remove after the data has been collected.  Rather, it is better to try to collect data with as little noise as possible.</p>
+<p>Next, there can be problems with the features that are allowed to be included.  Many data sets will contain several features, but all may not be needed or relevant to train the machine learning algorithm.  For example, when predicting if a football player will be a good quarterback, the player’s height and weight are likely relevant but the player’s hair color is not.  If a feature in the data set can be identified as irrelevant, it can be removed before the data is given to the machine learing algorithm.  Several features can be combined into one, using dimensionality reduction (an unsupervised machine learning algorithm), before the data is given to a supervised machine learning algorithm.  Reducing the number of features the algorithm has to consider can reduce its accuracy. The process of removing irrelevant features and combining other features is called feature engineering.</p>
+<p>Finally, the last problem in this category more caused by the choice of machine learing algorithm than the data set.  If a complex model is chosen be applied to data sets that are small or noisy, this can result in overfitting.  Overfitting means that the model can very accurately reproduce the training data but does not perform will when giving new data.  If a model can only perform well on its training data but not new data, it is a useless model.  Overfitting can be fixed by choosing a simplier model, or by constraining the complex model using a process called regularization.  Overfitting is a major problem in neural networks, and this will be explored in the second half of the course.  The opposite of overfitting is underfitting, which occurs when the model selected to too simple to be applied to the data set.  Underfitting can be fixed by choosing a more complex model or reducing the number of features (thus reducing the complexity of the data).</p>
+<section id="computational-limitations">
+<h3>Computational Limitations<a class="headerlink" href="#computational-limitations" title="Permalink to this headline">#</a></h3>
+<p>The other drawback of machine learning are due to computational limitations.  Many machine learning algorithms require a large amount of time to train, and often require large computers and/or GPUs in order to get the best performance.  Though the examples of machine learning we will see in this class can easily run on your average laptop, not that this is not neccessarily true for most modern machine learning applications.  Note that training a machine learning algorithm and running a trained algorithm have different requirements.  This is why you can get ChatGTP and AI art generation programs to run on your computer, but they were trained on much larger systems.</p>
+</section>
+</section>
+<section id="mathematical-crash-course-with-python">
+<h2>Mathematical Crash Course with Python<a class="headerlink" href="#mathematical-crash-course-with-python" title="Permalink to this headline">#</a></h2>
+<section id="linear-algebra">
+<h3>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">#</a></h3>
+<p>Linear algebra is the field of mathematics that deals with matrices and vectors.  Both of these quantities are the basis of many machine learning algorithms, and thus a basic understanding of linear algebra is neccessary to fully understand machine learning.  This section of these lecture notes will discuss basic linear algebra operations and how they can be performed computationally. In Python, the easiest way to perform linear algebra calculations is with the common library, NumPy.  The most common way to import the library is with the following line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="vectors">
+<h4>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">#</a></h4>
+<p>A vector is a one dimensional string of numbers.  Vectors can be of any length but generally vectors need to be of the same length for mathematical operations to be performed. We can represent a vector of length n generally as:</p>
+<div class="math notranslate nohighlight">
+\[\textbf{a} = \vec{a} = \langle a_0, a_1, a_2, ..., a_{n-1} \rangle, \]</div>
+<p>where <span class="math notranslate nohighlight">\(a_i\)</span> are numbers, either real or complex depending on the application.  Note that we will start indexing the elements of a vector with 0 to align with the way Python indexes vectors (which will be discussed later in this section).</p>
+<p>In Python vectors can most easily be represented with NumPy arrays.  A one dimensional NumPy array can be defined using the following code.  Generally (but not always) vectors are represented with lowercase letters, usually from the end of the alphabet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that NumPy arrays are similar to the basic Python data type lists.  Though in many cases lists and Numpy arrays can be interchanged, it is better, when thinking about machine learning, to stick with using NumPy arrays for machine learning applications.</p>
+<p>Let’s define two arrays of length 3 to be used for the rest of this section.  Typically, vectors will be defined with lowercase letters.  In this case, we will call the vectors a and b.  The below code defines two NumPy arrays (vectors) of length three called a and b and then prints both arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two arrays of length 3</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3]
+[4 5 6]
+</pre></div>
+</div>
+</div>
+</div>
+<p>A vector can be multiplied or divided by a scalar (a number) by simply multiplying or dividing every element in the vector by the scalar.  In equation form we have for the multiplications of a scalar</p>
+<div class="math notranslate nohighlight">
+\[ c\textbf{a} = \langle ca_0, ca_1, ca_2, ...., ca_{n-1} \rangle, \]</div>
+<p>and for the division of a scalar:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\textbf{a}}{c} = \langle \frac{a_0}{c}, \frac{a_1}{c}, \frac{a_2}{c}, ..., 
+frac{a_{n-1}}{c}\rangle, \]</div>
+<p>Computationally, we have:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">c_times_a</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="n">a</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c_times_a</span><span class="p">)</span>
+<span class="n">a_divide_c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_divide_c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 5 10 15]
+[0.2 0.4 0.6]
+</pre></div>
+</div>
+</div>
+</div>
+<p>An important feature of a vector is that it has both a size and a direction.  The magnitude of a vector (its size or its length) can be calculated using the following formula, which is similar to Pythagorean’s theorem. Note that the magnitude of a vector is a scalar.</p>
+<div class="math notranslate nohighlight">
+\[|\textbf{a}| = a = \sqrt{a_0^2 + a_1^2 + a_2^2 + ... + a_{n-1}^2}\]</div>
+<p>The direction of a vector is given by its unit vector, which is a vector that points in the same direction as the original vector, but that has a magnitude of 1.  The unit vector of vector <strong>a</strong> can be calculated using the following formula.</p>
+<div class="math notranslate nohighlight">
+\[\hat{a} = \frac{\textbf{a}}{|\textbf{a}|} = \langle \frac{a_0}{|\textbf{a}|}, \frac{a_1}{|\textbf{a}|}, \frac{a_2}{|\textbf{a}|}, ..., \frac{a_{n-1}}{|\textbf{a}|} \rangle\]</div>
+<p>Computationally, the magnitude of a vector can be found using the function <code class="docutils literal notranslate"><span class="pre">np.linalg.norm</span></code> and the unit vector can be found by dividing the original vector by the magnitude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find magnitude and unit vector</span>
+<span class="n">a_magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_magnitude</span><span class="p">)</span>
+<span class="n">a_unit_vector</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">a_magnitude</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_unit_vector</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.7416573867739413
+[0.26726124 0.53452248 0.80178373]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vectors can be added or subtracted (if they are the same length) by adding or subtracting the corresponding elements.  The result of adding or subtracting vectors is a vector.</p>
+<div class="math notranslate nohighlight">
+\[ \textbf{a} \pm \textbf{b} = \langle a_0 \pm b_0, a_1 \pm b_1, a_2 \pm b_2, ..., a_{n-1} \pm b_{n-1} \rangle \]</div>
+<p>Computationally, we can add and subtract vectors uisng <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vector addition and subtraction</span>
+<span class="n">a_plus_b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_plus_b</span><span class="p">)</span>
+<span class="n">a_minus_b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_minus_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5 7 9]
+[-3 -3 -3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, there are two ways to “multiply” vectors that are the same length: the dot (or scalar) product and the cross product.</p>
+<p>A dot product (also known as a scalar product) is one way to “multiply” two vectors together.  Finding a dot product is quite easy; you simply multiply the numbers if the same position together and then add everything together.  The formula to find the dot product is:</p>
+<div class="math notranslate nohighlight">
+\[ \textbf{a} \cdot \textbf{b} = a_0b_0 + a_1b_1 + a_2b_2 + ... + a_{n-1}b_{n-1} \]</div>
+<p><strong>The result of performing a dot product is always a scalar.</strong> A dot product is a measure of how closely two vectors point in the same direction.</p>
+<p>The cross product is the second way to “multiply” two vectors.  It is a bit harder to calcualte than the dot product.  The formula for finding the cross product between two vectors of lenght three is:</p>
+<div class="math notranslate nohighlight">
+\[ \textbf{a} x \textbf{b} = \langle a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x \rangle.\]</div>
+<p>Note that this equation only works for vectors of length 3. <strong>The results of performing a cross product is always a vector.</strong> The cross product produces a vector that is perpendicular to both of the vectors used to calculate it.</p>
+<p>In Python, the dot product of two arrays can be calculated using <code class="docutils literal notranslate"><span class="pre">np.dot</span></code> and the cross product of two arrays can be calculated using <code class="docutils literal notranslate"><span class="pre">np.cross</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dot and cross products</span>
+<span class="n">a_dot_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_dot_b</span><span class="p">)</span>
+<span class="n">a_cross_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_cross_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
+[-3  6 -3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Specific elements of an array an be accessed using <em>array indexing</em>.  Each element in an array corresponds to a unique index.  The first element in the array has an index of 0, the second element has an index of 1, and so on.  This means that the last elment in the array has an index of n-1, where n is the number of elements in the array.  By adding the index in square brackets after the name of the array, the element corresponding to that index is returned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrices">
+<h4>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline">#</a></h4>
+<p>Matrices are two dimensional structures, and can therefore be represented with a two dimension NumPy array.  Generally (but not always) a matrix is represented with a capital letter, generally from the beginning of the alphabet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 0 5]
+ [2 1 6]
+ [3 4 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us also define another matrix, B, and a vector, <strong>x</strong>.  The matrix needs to be the same size as A and the vector needs to have the same number of elements as A has rows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Matrices can be multiplied or divided by a scalar using the same rules as for vectors (multiply or divide each element in the matrix by the scalar) and matrices of the same size can be added or subtracted also using the vector rules (add or subtract each of the corresponding elements).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}cA = \begin{bmatrix}
+        ca_{00} &amp; ca_{01} &amp; ca_{02} ... ca_{0m}\\
+        ca_{10} &amp; ca_{11} &amp; ca_{12} ... ca_{1m}\\
+        ca_{20} &amp; ca_{21} &amp; ca_{22} ... ca_{2m}\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        ca_{n0} &amp; ca_{n1} &amp; ca_{n2} ... ca_{nm}\\       
+        \end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{A}{c} = \begin{bmatrix}
+        \frac{a_{00}}{c} &amp; \frac{a_{01}}{c} &amp; \frac{a_{02}}{c} ... \frac{a_{0m}}{c}\\
+        \frac{a_{10}}{c} &amp; \frac{a_{11}}{c} &amp; \frac{a_{12}}{c} ... \frac{a_{1m}}{c}\\
+        \frac{a_{20}}{c} &amp; \frac{a_{21}}{c} &amp; \frac{a_{22}}{c} ... \frac{a_{2m}}{c}\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        \frac{a_{n0}}{c} &amp; \frac{a_{n1}}{c} &amp; \frac{a_{n2}}{c} ... \frac{a_{nm}}{c}\\       
+        \end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}A\pm B = \begin{bmatrix}
+        a_{00}\pm b_{00} &amp; a_{01}\pm b_{01} &amp; a_{02}\pm b_{02} ... a_{0m}\pm b_{0m}\\
+        a_{10}\pm b_{10} &amp; a_{11}\pm b_{11} &amp; a_{12}\pm n_{12} ... a_{1m}\pm b_{1m}\\
+        a_{20}\pm b_{20} &amp; a_{21}\pm b_{21} &amp; a_{22}\pm b_{22} ... a_{2m}\pm b_{2m}\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        a_{n0}\pm b_{n0} &amp; a_{n1}\pm b_{n1} &amp; a_{n2}\pm b_{n2} ... a_{nm}\pm b_{nm}\\       
+        \end{bmatrix}\end{split}\]</div>
+<p>Computationally, we can perform all of these operations using the following lines of code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">A_times_c</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="n">A</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_times_c</span><span class="p">)</span>
+<span class="n">A_divide_by_c</span> <span class="o">=</span> <span class="n">A</span><span class="o">/</span><span class="n">c</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_divide_by_c</span><span class="p">)</span>
+<span class="n">A_plus_B</span> <span class="o">=</span> <span class="n">A</span><span class="o">+</span><span class="n">B</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_plus_B</span><span class="p">)</span>
+<span class="n">A_minus_B</span> <span class="o">=</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_minus_B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 5  0 25]
+ [10  5 30]
+ [15 20  0]]
+[[0.2 0.  1. ]
+ [0.4 0.2 1.2]
+ [0.6 0.8 0. ]]
+[[10  8 12]
+ [ 8  6 10]
+ [ 6  6  1]]
+[[-8 -8 -2]
+ [-4 -4  2]
+ [ 0  2 -1]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another operator that can be performed on a matrix is called a tranpose, where the rows and the columns of the matrix are exchanged.  We can calculate the transpose of a two dimensional array using <code class="docutils literal notranslate"><span class="pre">.T</span></code> after the name of the array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_transpose</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_transpose</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 0 5]
+ [2 1 6]
+ [3 4 0]]
+[[1 2 3]
+ [0 1 4]
+ [5 6 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>A vector can be multiplied by a matrix if the number of elements in the vector is the same as the number of rows in the matrix.  The result will be a vector with the same length as the number of columns in A.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\textbf{x}A = \langle x_0, x_1, x_2, ..., x_n\rangle \begin{bmatrix}
+        a_{00} &amp; a_{01} &amp; a_{02} ... a_{0m}\\
+        a_{10} &amp; a_{11} &amp; a_{12} ... a_{1m}\\
+        a_{20} &amp; a_{21} &amp; a_{22} ... a_{2m}\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        a_{n0} &amp; a_{n1} &amp; a_{n2} ... a_{nm}\\       
+        \end{bmatrix} = \langle x_0a_{00}+x_1a_{10}+x_2a_{20} + ... + x_na_{n0}, x_0a_{01}+x_1a_{11}+x_2a_{21} + ... + x_na_{n1}, x_0a_{02}+x_1a_{12}+x_2a_{22} + ... + x_na_{n2}, ..., x_0a_{0m}+x_1a_{1m}+x_2a_{2m} + ... + x_na_{nm} \rangle\end{split}\]</div>
+<p>In Python, we can multiply a vector with a matrix using the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol, not the <code class="docutils literal notranslate"><span class="pre">*</span></code> symbol.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_times_A</span> <span class="o">=</span> <span class="n">x</span><span class="nd">@A</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_times_A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[26 24 39]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two matrices can also be multiplied if the number of rows in the first matrix is the same as the number of columns in the second matrix.  Two matrices can be multiplied using the following formula:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}AB = \begin{bmatrix}
+        a_{00} &amp; a_{01} &amp; a_{02} ... a_{0m}\\
+        a_{10} &amp; a_{11} &amp; a_{12} ... a_{1m}\\
+        a_{20} &amp; a_{21} &amp; a_{22} ... a_{2m}\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        a_{n0} &amp; a_{n1} &amp; a_{n2} ... a_{nm}\\       
+        \end{bmatrix}
+        \begin{bmatrix}
+        b_{00} &amp; b_{01} &amp; b_{02} ... a_{0n}\\
+        b_{10} &amp; b_{11} &amp; b_{12} ... a_{1n}\\
+        b_{20} &amp; b_{21} &amp; b_{22} ... a_{2n}\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        . &amp; . &amp; . ... .\\
+        b_{m0} &amp; b_{m1} &amp; b_{m2} ... a_{mn}\\       
+        \end{bmatrix} = \begin{bmatrix}
+        a_{00}b_{00}+a_{01}b_{10}+a_{02}b_{20}+...+a_{0m}b_{m0} &amp; ... &amp; a_{00}b_{0n}+a_{01}b_{1n}+a_{02}b_{2n}+...+a_{0m}b_{mn} \\
+        a_{10}b_{00}+a_{11}b_{10}+a_{12}b_{20}+...+a_{1m}b_{m0}&amp; ... &amp; a_{10}b_{0n}+a_{11}b_{1n}+a_{12}b_{2n}+...+a_{1m}b_{mn}\\
+        a_{20}b_{00}+a_{21}b_{10}+a_{22}b_{20}+...+a_{2m}b_{m0}&amp; ... &amp; a_{20}b_{0n}+a_{21}b_{1n}+a_{22}b_{2n}+...+a_{2m}b_{mn}\\
+        . &amp; ... &amp; . \\
+        . &amp; ... &amp; . \\
+        . &amp; ... &amp; . \\
+        . &amp; ... &amp; . \\
+        a_{n0}b_{00}+a_{n1}b_{10}+a_{n2}b_{20}+...+a_{nm}b_{m0}&amp; ... &amp; a_{n0}b_{0n}+a_{n1}b_{1n}+a_{n2}b_{2n}+...+a_{nm}b_{mn}\\
+        \end{bmatrix}.\end{split}\]</div>
+<p>Note that in general AB <span class="math notranslate nohighlight">\(\neq\)</span> BA.  In Python, two two-dimensional NumPy arrays can be multiplied again using the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_times_B</span> <span class="o">=</span> <span class="n">A</span><span class="nd">@B</span>
+<span class="n">B_times_A</span> <span class="o">=</span> <span class="n">B</span><span class="nd">@A</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_times_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B_times_A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[24 18 12]
+ [42 33 24]
+ [51 44 37]]
+[[46 36 93]
+ [28 21 60]
+ [10  6 27]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is another way to multiply matrices and vectors instead of the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol using the function <code class="docutils literal notranslate"><span class="pre">np.matmul</span></code>.  Note you have to add the arguments in the order you want the multiplications to take place (i.e. AB <span class="math notranslate nohighlight">\(\longrightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">np.matmul(A,B)</span></code> but BA <span class="math notranslate nohighlight">\(\longrightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">np.matmul(B,A)</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_times_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_times_B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[24 18 12]
+ [42 33 24]
+ [51 44 37]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>An important operation that can be performed on only square matrices is called the inverse.  For a matrix, A, its inverse, <span class="math notranslate nohighlight">\(A^{-1}\)</span> is defined such that <span class="math notranslate nohighlight">\(AA^{-1} = \textbf{I}\)</span>, where <strong>I</strong> is the identity matrix (a matrix where there are ones on the diagonal of the matrix and zeros everywhere else).  In Python, the function <code class="docutils literal notranslate"><span class="pre">np.linalg.inv</span></code> calculates the inverse of the matrix.  Note that due to rounding the off-diagonal terms may not be exactly zero, but they should be very close.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_inverse</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="nd">@A_inverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-24.  20.  -5.]
+ [ 18. -15.   4.]
+ [  5.  -4.   1.]]
+[[ 1.00000000e+00 -2.66453526e-15 -2.22044605e-16]
+ [ 0.00000000e+00  1.00000000e+00 -4.44089210e-16]
+ [ 0.00000000e+00 -7.10542736e-15  1.00000000e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get an identity matrix of a given size using NumPy using the <code class="docutils literal notranslate"><span class="pre">np.eye</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">identity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can calculate the eigenvectors and eigenvalues of a square matrix.  The eigenvalues are known as the “characteristic values” of a matrix and eigenvectors are the vectors that when multiplied to the matrix repreduce the eigenvalue times the eigenvector.  There are as many eigenvalue-eigenvector pairs for a matrix as there are rows.  These eigenvalues and eigenvectors have different interpretations depending on the context.  In Python, we can calculated the eigenvalues and eigenvectors with one function, <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code> that returns both the eigenvalues and the eigenvectors.  Note that the eigenvectors are given in a matrix where each column of the matrix is an eigenvector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eigenvectors</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.256022422687388
+[-0.45291192 -0.68828659 -0.56668542]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./.ipynb_checkpoint2s"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-1-lecture-notes">DSC 340 Week 1 Lecture Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-machine-learning">What is Machine Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-is-machine-learning-useful">When is Machine Learning Useful?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-machine-learning">Supervised Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-machine-learning">Unsupervised Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semisupervised-machine-learning">Semisupervised Machine Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-and-online-learning">Offline and Online Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-of-machine-learning">Challenges of Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-with-the-data-sets">Problems with the Data Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-limitations">Computational Limitations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-crash-course-with-python">Mathematical Crash Course with Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra">Linear Algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors">Vectors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices">Matrices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
