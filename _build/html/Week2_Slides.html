@@ -165,9 +165,6 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression and the Machine Learning Workflow</a></li>
-
-
-
 </ul>
 
     </div>
@@ -361,26 +358,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Regression and the Machine Learning Workflow</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csc-dsc-340-week-2-slides">CSC/DSC 340 Week 2 Slides</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plans-for-the-week">Plans for the Week</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monday">Monday</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wednesday">Wednesday</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thursday">Thursday</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#friday">Friday</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-linear-regression">Part 1: Linear Regression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">Goal: Find a line which fits the data set and can be used to predict new points from the data set</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-linear-regression">Part 1: Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">Goal: Find a line which fits the data set and can be used to predict new points from the data set</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-loss-function">Linear Regression Loss Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-optimized-weights">Find Optimized Weights</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-linear-regression-with-sklearn">Implementing Linear Regression with Sklearn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-start-with-linear-regression">Why start with linear regression?</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-machine-learning-workflow-with-linear-regression">Part 2: The Machine Learning Workflow with Linear Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-machine-learning-workflow-with-linear-regression">Part 2: The Machine Learning Workflow with Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data-set-perform-an-initial-analysis">1. Import the data set, perform an initial analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diabetes-dataset-feature-explanations">Diabetes Dataset Feature Explanations</a></li>
@@ -391,9 +384,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-performance-of-the-trained-model-with-the-test-set-using-numerical-metrics-and-visual-analysis">Test the performance of the trained model with the test set using numerical metrics and visual analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-improve-the-performance-of-the-algorithm-by-either-reformatting-the-data-or-changing-the-parameters-of-the-machine-learning-algorithm">(Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -419,6 +409,7 @@ document.write(`
 <li><p>Lecture: “Linear Regression and the Machine Learning Workflow”</p></li>
 <li><p>Week 1 In-Class Assignment and Week 2 Pre-Class Due</p></li>
 <li><p>Suggested Reading: Hands-On Chapter 2 and Chapter 4 (only about linear regression)</p></li>
+<li><p>Office hours: 1pm to 3pm</p></li>
 </ul>
 </section>
 <section id="wednesday">
@@ -428,6 +419,13 @@ document.write(`
 <li><p>Start In-Class Assignment: Revisting Nuclear Binding Energies with Linear Regression</p></li>
 <li><p>Week 1 Post-Class Due</p></li>
 <li><p>Suggested Reading: Hands-On Chapter 2 and Chapter 4 (only about linear regression)</p></li>
+<li><p>Office hours: 4pm tp 6pm</p></li>
+</ul>
+</section>
+<section id="thursday">
+<h3>Thursday<a class="headerlink" href="#thursday" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Office hours: 11am to 1pm</p></li>
 </ul>
 </section>
 <section id="friday">
@@ -438,9 +436,8 @@ document.write(`
 </ul>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="part-1-linear-regression">
-<h1>Part 1: Linear Regression<a class="headerlink" href="#part-1-linear-regression" title="Permalink to this headline">#</a></h1>
+<section id="part-1-linear-regression">
+<h2>Part 1: Linear Regression<a class="headerlink" href="#part-1-linear-regression" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##############################</span>
@@ -467,15 +464,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x15ee42be0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x15e001be0&gt;]
 </pre></div>
 </div>
 <img alt="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">
-<h1>Goal: Find a line which fits the data set and can be used to predict new points from the data set<a class="headerlink" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set" title="Permalink to this headline">#</a></h1>
+<section id="goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">
+<h2>Goal: Find a line which fits the data set and can be used to predict new points from the data set<a class="headerlink" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set" title="Permalink to this headline">#</a></h2>
+</section>
 <section id="linear-regression">
 <h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h2>
 <div class="math notranslate nohighlight">
@@ -561,7 +559,7 @@ $<span class="math notranslate nohighlight">\( J_{MSE}(\theta) = \frac{1}{N}[X\t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15ef65430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15e123460&gt;
 </pre></div>
 </div>
 <img alt="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
@@ -614,9 +612,9 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 <li><p>Linear regression can be modified to be more powerful with a design matrix (In-Class Assignment) or with regularization (next week)</p></li>
 </ul>
 </section>
+<section id="part-2-the-machine-learning-workflow-with-linear-regression">
+<h2>Part 2: The Machine Learning Workflow with Linear Regression<a class="headerlink" href="#part-2-the-machine-learning-workflow-with-linear-regression" title="Permalink to this headline">#</a></h2>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="part-2-the-machine-learning-workflow-with-linear-regression">
-<h1>Part 2: The Machine Learning Workflow with Linear Regression<a class="headerlink" href="#part-2-the-machine-learning-workflow-with-linear-regression" title="Permalink to this headline">#</a></h1>
 <section id="the-machine-learning-workflow">
 <h2>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -927,11 +925,11 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [435.04590729 767.16919758] 151.08579287170178
-Mean squared error: 4178.58
-Root mean squared error: 64.64
-R2-Score: 0.30
-Mean absolute percent error: 0.459859
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [414.78464137 710.72992176] 153.3253806244692
+Mean squared error: 3584.95
+Root mean squared error: 59.87
+R2-Score: 0.42
+Mean absolute percent error: 0.460285
 </pre></div>
 </div>
 </div>
@@ -946,10 +944,10 @@ Mean absolute percent error: 0.459859
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15f2aa160&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15e46a160&gt;
 </pre></div>
 </div>
-<img alt="_images/89ac3b1bceba303703f115ebd6d6e03fd867d493a5f777eb5d072e31d1ec3223.png" src="_images/89ac3b1bceba303703f115ebd6d6e03fd867d493a5f777eb5d072e31d1ec3223.png" />
+<img alt="_images/38cf80e34c94e8175c2d76cb7f1f61afc9a8e9b8cec8e491dbc51f41a138476a.png" src="_images/38cf80e34c94e8175c2d76cb7f1f61afc9a8e9b8cec8e491dbc51f41a138476a.png" />
 </div>
 </div>
 </section>
@@ -1022,26 +1020,22 @@ Mean absolute percent error: 0.459859
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Regression and the Machine Learning Workflow</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csc-dsc-340-week-2-slides">CSC/DSC 340 Week 2 Slides</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plans-for-the-week">Plans for the Week</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monday">Monday</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wednesday">Wednesday</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thursday">Thursday</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#friday">Friday</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-linear-regression">Part 1: Linear Regression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">Goal: Find a line which fits the data set and can be used to predict new points from the data set</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-linear-regression">Part 1: Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-find-a-line-which-fits-the-data-set-and-can-be-used-to-predict-new-points-from-the-data-set">Goal: Find a line which fits the data set and can be used to predict new points from the data set</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-loss-function">Linear Regression Loss Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-optimized-weights">Find Optimized Weights</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-linear-regression-with-sklearn">Implementing Linear Regression with Sklearn</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-start-with-linear-regression">Why start with linear regression?</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-machine-learning-workflow-with-linear-regression">Part 2: The Machine Learning Workflow with Linear Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-machine-learning-workflow-with-linear-regression">Part 2: The Machine Learning Workflow with Linear Regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-data-set-perform-an-initial-analysis">1. Import the data set, perform an initial analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diabetes-dataset-feature-explanations">Diabetes Dataset Feature Explanations</a></li>
@@ -1052,9 +1046,6 @@ Mean absolute percent error: 0.459859
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-performance-of-the-trained-model-with-the-test-set-using-numerical-metrics-and-visual-analysis">Test the performance of the trained model with the test set using numerical metrics and visual analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-improve-the-performance-of-the-algorithm-by-either-reformatting-the-data-or-changing-the-parameters-of-the-machine-learning-algorithm">(Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
