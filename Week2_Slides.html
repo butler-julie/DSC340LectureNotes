@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Linear Regression and the Machine Learning Workflow &#8212; My sample book</title>
+    <title>Linear Regression and the Machine Learning Workflow &#8212; Machine Learning and Neural Networks</title>
   
   
   
@@ -152,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    DSC 340: Machine Learning and Neural Network Processing
+                    DSC 340: Machine Learning and Neural Networks
                 </a>
             </li>
         </ul>
@@ -160,6 +160,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -464,7 +466,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x15e001be0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x13eea9be0&gt;]
 </pre></div>
 </div>
 <img alt="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
@@ -559,7 +561,7 @@ $<span class="math notranslate nohighlight">\( J_{MSE}(\theta) = \frac{1}{N}[X\t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15e123460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x13eb39af0&gt;
 </pre></div>
 </div>
 <img alt="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
@@ -925,11 +927,11 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [414.78464137 710.72992176] 153.3253806244692
-Mean squared error: 3584.95
-Root mean squared error: 59.87
-R2-Score: 0.42
-Mean absolute percent error: 0.460285
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [413.997353   732.54949632] 151.49137191099925
+Mean squared error: 3665.70
+Root mean squared error: 60.55
+R2-Score: 0.43
+Mean absolute percent error: 0.445576
 </pre></div>
 </div>
 </div>
@@ -944,10 +946,10 @@ Mean absolute percent error: 0.460285
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x15e46a160&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x13f313100&gt;
 </pre></div>
 </div>
-<img alt="_images/38cf80e34c94e8175c2d76cb7f1f61afc9a8e9b8cec8e491dbc51f41a138476a.png" src="_images/38cf80e34c94e8175c2d76cb7f1f61afc9a8e9b8cec8e491dbc51f41a138476a.png" />
+<img alt="_images/3724e0699dda1c269b7f70ec03c5bcf55195f1e38476788a26f1b362efff6aae.png" src="_images/3724e0699dda1c269b7f70ec03c5bcf55195f1e38476788a26f1b362efff6aae.png" />
 </div>
 </div>
 </section>
@@ -1059,7 +1061,7 @@ Mean absolute percent error: 0.460285
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Dr. Julie Butler
 </p>
 
   </div>
