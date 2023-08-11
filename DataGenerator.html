@@ -157,14 +157,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
-
-
-
 </ul>
 
     </div>
@@ -396,7 +394,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x109a60400&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x116c5f400&gt;]
 </pre></div>
 </div>
 <img alt="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" src="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" />
@@ -422,7 +420,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2411
 2411
 (2411,)
-1.0030034162546189 0.0030034162546188903
+1.0921715534022478 0.09217155340224775
 </pre></div>
 </div>
 </div>
@@ -435,10 +433,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x109b682e0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x116d683d0&gt;]
 </pre></div>
 </div>
-<img alt="_images/0ef2775767242c30611b86bc118536a9d1ec5d6866f7622798319ed593c5d034.png" src="_images/0ef2775767242c30611b86bc118536a9d1ec5d6866f7622798319ed593c5d034.png" />
+<img alt="_images/d1455f76cd0dac102f0ff5b63481efb30175c25cf1d1ca21f77cb16e2c91836a.png" src="_images/d1455f76cd0dac102f0ff5b63481efb30175c25cf1d1ca21f77cb16e2c91836a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -476,27 +474,27 @@ document.write(`
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>1.003003</td>
+      <td>1.092172</td>
     </tr>
     <tr>
       <th>1</th>
       <td>100</td>
-      <td>0.970527</td>
+      <td>0.935178</td>
     </tr>
     <tr>
       <th>2</th>
       <td>200</td>
-      <td>0.938309</td>
+      <td>1.085364</td>
     </tr>
     <tr>
       <th>3</th>
       <td>300</td>
-      <td>0.970053</td>
+      <td>1.000788</td>
     </tr>
     <tr>
       <th>4</th>
       <td>400</td>
-      <td>0.902556</td>
+      <td>1.078176</td>
     </tr>
     <tr>
       <th>...</th>
@@ -506,27 +504,27 @@ document.write(`
     <tr>
       <th>2406</th>
       <td>240600</td>
-      <td>-0.038446</td>
+      <td>0.055409</td>
     </tr>
     <tr>
       <th>2407</th>
       <td>240700</td>
-      <td>-0.039000</td>
+      <td>-0.055125</td>
     </tr>
     <tr>
       <th>2408</th>
       <td>240800</td>
-      <td>-0.048025</td>
+      <td>-0.032654</td>
     </tr>
     <tr>
       <th>2409</th>
       <td>240900</td>
-      <td>-0.080716</td>
+      <td>0.001314</td>
     </tr>
     <tr>
       <th>2410</th>
       <td>241000</td>
-      <td>0.011623</td>
+      <td>-0.059504</td>
     </tr>
   </tbody>
 </table>
@@ -645,6 +643,52 @@ Coefficient of determination: 0.59
         84.,  42., 146., 212., 233.,  91., 111., 152., 120.,  67., 310.,
         94., 183.,  66., 173.,  72.,  49.,  64.,  48., 178., 104., 132.,
        220.,  57.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.69e-19</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">q1</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">9e9</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="mf">1e-11</span><span class="p">)</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="n">q1</span><span class="o">*</span><span class="n">q2</span><span class="o">/</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;r&#39;</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="n">F</span><span class="p">})</span>
+<span class="n">dataset</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;week2_slides.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14cceeb80&gt;]
+</pre></div>
+</div>
+<img alt="_images/c38e40c536ea0ecc21d4fa65dc29b017caf0303301d7f8368711623c2b7ffe7e.png" src="_images/c38e40c536ea0ecc21d4fa65dc29b017caf0303301d7f8368711623c2b7ffe7e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>91
 </pre></div>
 </div>
 </div>
