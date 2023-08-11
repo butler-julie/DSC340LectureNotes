@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week2_LectureNotes';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -159,14 +161,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression and the Machine Learning Workflow</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
-
-
-
 </ul>
 
     </div>
@@ -360,9 +360,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-2-lecture-notes">DSC 340 Week 2 Lecture Notes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Regression and the Machine Learning Workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csc-dsc-340-week-2-lecture-notes">CSC/DSC 340 Week 2 Lecture Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-equations-for-linear-regression">Deriving the Equations for Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">Optimization</a></li>
 </ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">Linear Regression with Scikit-Learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-design-matrix-to-extend-the-applications-of-linear-regression">Using a Design Matrix to Extend the Applications of Linear Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unmodified-linear-regression">Unmodified Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-non-linear-curves">Fitting non-linear curves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-example">Real World Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -375,14 +395,628 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-and-the-machine-learning-workflow">
 <h1>Linear Regression and the Machine Learning Workflow<a class="headerlink" href="#linear-regression-and-the-machine-learning-workflow" title="Permalink to this headline">#</a></h1>
-<section id="dsc-340-week-2-lecture-notes">
-<h2>DSC 340 Week 2 Lecture Notes<a class="headerlink" href="#dsc-340-week-2-lecture-notes" title="Permalink to this headline">#</a></h2>
+<section id="csc-dsc-340-week-2-lecture-notes">
+<h2>CSC/DSC 340 Week 2 Lecture Notes<a class="headerlink" href="#csc-dsc-340-week-2-lecture-notes" title="Permalink to this headline">#</a></h2>
 <p>Dr. <span class="xref myst">Julie Butler</span></p>
 <p>Week of August 28 - September 1, 2023</p>
 </section>
 <section id="linear-regression">
 <h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">#</a></h2>
+<p>Linear regression is one of the simplest machine learning algorithms we will study in this course. However, we will learn how to make it a powerful predictor that can be applied to a wide range of problems.</p>
+<p>Many machine learning textbooks and courses begin with linear regression, and there are a few reasons for this. First, though it is a simple algorithm, linear regression contains many of the same components as more complicated types of machine learning. These components, such as trained parameters, an optimization procedure, and a functional form for the output, will be discussed in the context of linear regression this week but will be applied to many of the machine learning algorithms we will study this semester, including neural networks. The second reason machine learning is important is that it has a closed-form solution for its optimized parameters, meaning that we can derive and write a single equation that explains how a linear regression algorithm is trained. We will derive this equation later in these notes. This closed-form solution means that given the same training and prediction data, a linear regression algorithm will always produce the same results.  This is in contrast to other types of machine learning, such as neural networks, where the same training process will always result in different predictions (we will discuss why later this semester). The final reason we will be studying linear regression as our first machine learning algorithm is that, while it is common in machine learning, it is also widely used in many fields of science, statistics, and business, so it maybe familar to you from other courses.</p>
+<section id="deriving-the-equations-for-linear-regression">
+<h3>Deriving the Equations for Linear Regression<a class="headerlink" href="#deriving-the-equations-for-linear-regression" title="Permalink to this headline">#</a></h3>
+<p>Due to the simplicity of linear regression, we are able to take a deep dive into its equations and derive the relevant equations, including the loss function and the equation for the optimized parameters.</p>
+<section id="output">
+<h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">#</a></h4>
+<p>Given a data set (<strong>X</strong>, <span class="math notranslate nohighlight">\(\vec{y}\)</span>), we want to create a linear regression algorithm which will take the input data, <strong>X</strong>, and produce a prediction of the outputs that is as close to <span class="math notranslate nohighlight">\(\vec{y}\)</span> as we can get. Producing the output for a linear regression algorithm is deceptively simple:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = \textbf{X}\theta,\]</div>
+<p>where <strong>X</strong> is the inputs or x-data for the data set we wish to model (and is either a vector or a matrix depending on if it is one dimensional or two dimensional), <span class="math notranslate nohighlight">\(\hat{y}\)</span> are the linear regression predictions of the y-data or the outputs of the data set (and is a vector), and <span class="math notranslate nohighlight">\(\theta\)</span> are known as the parameters or weights of the linear regression algorithm and are a vector if <strong>X</strong> is two dimensional and are a scalar if <strong>X</strong> are one dimensional. The value of <span class="math notranslate nohighlight">\(\theta\)</span> are what we are trying to “learn” when we use linear regression because we are trying to find values for the parameters such that <span class="math notranslate nohighlight">\(\vec{y} \approx \hat{y}\)</span>.</p>
+<p>Note that <span class="math notranslate nohighlight">\(\hat{y}\)</span> is a very common way to represent the outputs from any machine learning algorithm, but some resources may use <span class="math notranslate nohighlight">\(y_{pred}\)</span> instead.</p>
 </section>
+<section id="loss-function">
+<h4>Loss Function<a class="headerlink" href="#loss-function" title="Permalink to this headline">#</a></h4>
+<p>A loss function, in general, is a quantitative measure of how close our machine learning predictions are to the true data.  There are many different loss functions used in the field of machine learning, but for linear regression we will be using the mean-squared error function (MSE).  For to vectors of the same length N, <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span>, we can define the MSE between them as:</p>
+<div class="math notranslate nohighlight">
+\[MSE = \frac{1}{N}\sum_{i=1}^N(\vec{a}_i - \vec{b}_i)^2.\]</div>
+<p>A smaller MSE means that the two vectors are closer to each other and a MSE of zero means that the two vectors are identical.  Therefore, for linear regression, we want the value of our loss function to be as close to zero as possible to ensure that our linear regression algorithm is accurately predicting the values of our data set.</p>
+<p>Now, we can define the loss function for linear regression as:</p>
+<div class="math notranslate nohighlight">
+\[J(\theta) = \frac{1}{N}\sum_{i=1}^N(\hat{y}_i - \vec{y}_i)^2.\]</div>
+<p>Since each of the quantities in the above equation are vectors, we can remove the summation notation and instead write the loss function in terms of vectors:</p>
+<div class="math notranslate nohighlight">
+\[J(\theta) = \frac{1}{N}[\hat{y} - \vec{y}]^T[\hat{y} - \vec{y}].\]</div>
+<p>Finally, since <span class="math notranslate nohighlight">\(\hat{y} = \textbf{X}\theta\)</span>, we can rewrite the loss function in its final form as:</p>
+<div class="math notranslate nohighlight">
+\[J(\theta) = \frac{1}{N}[\textbf{X}\theta - \vec{y}]^T[\textbf{X}\theta - \vec{y}].\]</div>
+</section>
+<section id="optimization">
+<h4>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">#</a></h4>
+<p>We want to our linear regression algorithm to make accurate predictions, so therefore we need to find values of <span class="math notranslate nohighlight">\(\theta\)</span> which minimize the loss function (because a smaller MSE means the data sets closely match).  If we consider the simplest minimization possible, the loss function is minimized where its first derivative is zero.  Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial J(\theta)}{\partial \theta} = 0.\]</div>
+<p>We can plug in the loss function to get:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial \theta} \{\frac{1}{N}[\textbf{X}\theta - \vec{y}]^T[\textbf{X}\theta - \vec{y}]\} = 0,\]</div>
+<p>and take the partial derivative to get:</p>
+<div class="math notranslate nohighlight">
+\[X^T[X\theta - y] = 0.\]</div>
+<p>Now that we have found the location of the minimum of the loss function, we can solve the above equation for <span class="math notranslate nohighlight">\(\theta\)</span> to yield the value of the parameters that minimizes the loss function.  Therefore, :</p>
+<div class="math notranslate nohighlight">
+\[\theta = (X^TX)^{-1}X^Ty.\]</div>
+<p>Therefore, given a data set, we can find the optimized values of a linear regression algorithm using the above equation that will allow us to predic the values of new inputs.</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = \textbf{X}_{new}\theta = \textbf{X}_{new}(X^TX)^{-1}X^Ty\]</div>
+<p>Note that in this course you will not have to do any derivations like this without guidance, but it is important to know how machine learning algorithms work and that sometimes requires deriving them from equations.</p>
+</section>
+</section>
+<section id="linear-regression-with-scikit-learn">
+<h3>Linear Regression with Scikit-Learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Permalink to this headline">#</a></h3>
+<p>Scikit-Learn is a common machine learning library with easy implementations which allows us to easily switch the machine learning algorithm we are using. <a class="reference external" href="https://scikit-learn.org/stable/">Scikit-Learn’s website</a> has many useful tutorials and examples on how to use the library.  For this example we only need the linear regression implementation, which we can import using:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will also need NumPy and matplotlib, so let’s import those as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s create a linear data set that we can use to explore linear regression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">X</span><span class="o">-</span><span class="mi">3</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1484d4610&gt;]
+</pre></div>
+</div>
+<img alt="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
+</div>
+</div>
+<p>When using Scikit-Learn machine learning algorithms, they require the input data to have specific dimensionality. Since our input data is one-dimensional, we need to reshape it using the following code before we can use the linear regression implementation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If the x-data in 1D, reshape as follows</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can define an instance of the linear regression implementation and fit it using the linear data we generated above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a linear regression instance using sklearn</span>
+<span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="c1"># Fit the linear regression algoritm using the previously generated data</span>
+<span class="n">linear_regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div>
+</div>
+<p>The above code “trains” the linear regression algorithm using the data we gave it to find the optimized values of the parameters, <span class="math notranslate nohighlight">\(\theta\)</span>. We can now used the trained linear regression instance to predict new points on the same line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create new data from the same line in order to test its performance</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">X_test</span><span class="o">-</span><span class="mi">3</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have our predicted data set, we can analyze its accuracy.  We will typically do this two ways: analyzing the data graphically compared to the expected results, and quantifying the error in the data compared to the expected values using error metrics. First, let’s graphically analyze the predictions by plotting the predicted data and the expected values on the same plot.  Remember to add a key to determine which plot corresponds to which data set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graphically check to see if the true and predicted data are similar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1485d7af0&gt;
+</pre></div>
+</div>
+<img alt="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
+</div>
+</div>
+<p>The two plots look very similar but a graphical match is rarely enough evidence to convince other people that your machine learning algorithm can make accurate predictions. You also need to include the results from error metrics which can quantify how diffferent your predictions are from the expected data.  A very common error metric is the MSE, which we defined when talking about the loss function. It is very common to report the MSE between the machine learning predictions and the expected results.  We can do this easily using Scikit-Learn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MEAN SQUARED ERROR:&quot;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MEAN SQUARED ERROR: 1.7369681753028576e-28
+</pre></div>
+</div>
+</div>
+</div>
+<p>To interpret this result, this means that each data point differs from the true result by the square root of the MSE on average.  This may be hard to think about, so therefore we can define the root mean-squared error (RMSE) as the square root of the MSE score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ROOT MEAN SQUARED ERROR:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROOT MEAN SQUARED ERROR: 1.3179408846009966e-14
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can interpret a RMSE as the average error on each prediction, so this is a bit easier to see that our linear regression predictions are very close to the true or expected results.  There are a couple of other error metrics we can look at as well.  First is the R2-score, which is a measure of how linear a data set is. A perfect line as a score of 1, the further from 1 the less linear the data set is. If a data set is plotted against itself it will make a perfect line, and thus will have an r2-score of 1.  Therefore, we can calculate the R2-score between our predicted and expected data sets and see how close the results is to 1.  The closer to 1 the closer the two data sets are to being identical.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2-SCORE:&quot;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R2-SCORE: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, the r2-score indicates that these data sets are identical, so our machine learning algorithm is doing a good job of matching the data set.  As a final error metric we can look at the mean absolute percentage error, which tells, as a percentage, how much the data sets differ.  Here 0% means the data sets are identical and larger numbers mean there are differences in the data sets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_percentage_error</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MEAN ABSOLUTE PERCENTAGE ERROR:&quot;</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="s2">&quot;%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MEAN ABSOLUTE PERCENTAGE ERROR: 7.656495376191392e-16 %
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, if we have a model we know to be true (in this case the equation of the line, y = 4x-3), we can extract the trained parameters from the linear regression model and see if they are correct.  In this case, the one trained weight should be the slope of the line (in this case 4). The Scikit-Learn linear regression algorithm also fits the y-intercept of the data by default so we can also extract that and see if it is correct (in this case it should be -3).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the optimized weights and the slope that are fit by the linear regression algorithm</span>
+<span class="c1"># The slope should be 4 and the intercept -3 (set when we created the data)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LINEAR REGRESSION SLOPE:&quot;</span><span class="p">,</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LINEAR REGRESSION INTERCEPT:&quot;</span><span class="p">,</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LINEAR REGRESSION SLOPE: [4.]
+LINEAR REGRESSION INTERCEPT: -3.000000000000001
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-a-design-matrix-to-extend-the-applications-of-linear-regression">
+<h3>Using a Design Matrix to Extend the Applications of Linear Regression<a class="headerlink" href="#using-a-design-matrix-to-extend-the-applications-of-linear-regression" title="Permalink to this headline">#</a></h3>
+<p>Linear regression, as it has been defined thus far, can only model patterns where the output is a linear combination of any inputs.  This simple pattern covers a suprising number of data sets, but not all of them. In situations where we want to model a data set that does not have a strictly linear pattern, we can still use linear regression, but we will have to make some modifications.</p>
+</section>
+</section>
+<section id="unmodified-linear-regression">
+<h2>Unmodified Linear Regression<a class="headerlink" href="#unmodified-linear-regression" title="Permalink to this headline">#</a></h2>
+<p>Assume that we have a data set (<strong>X</strong>, <span class="math notranslate nohighlight">\(\vec{y}\)</span>) which contains N data points.  Futhermore, assume that each data point in <strong>X</strong> contains m values (thus <strong>X</strong> is a two dimensional data set and can be represented as a matrix).  If we start with the output of a standard linear regression algorithm:</p>
+<div class="math notranslate nohighlight">
+\[$\hat{y} = \textbf{X}\theta,\]</div>
+<p>we can plug in the forms of <strong>X</strong> and <span class="math notranslate nohighlight">\(\hat{y}\)</span> we have to yield:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{bmatrix}
+    \hat{y}_0 \\
+    \hat{y}_1 \\
+    \hat{y}_2 \\
+    . \\
+    . \\
+    . \\
+    \hat{y}_m
+\end{bmatrix} = \begin{bmatrix}
+X_{00} &amp; X_{01} &amp; X_{02} &amp; . &amp; . &amp; . &amp; X_{0m} \\
+X_{10} &amp; X_{11} &amp; X_{12} &amp; . &amp; . &amp; . &amp; X_{1m} \\
+X_{20} &amp; X_{21} &amp; X_{22} &amp; . &amp; . &amp; . &amp; X_{2m} \\
+. &amp; . &amp; . &amp; . &amp; . &amp; . &amp; . \\
+. &amp; . &amp; . &amp; . &amp; . &amp; . &amp; . \\
+. &amp; . &amp; . &amp; . &amp; . &amp; . &amp; . \\
+X_{N0} &amp; X_{N1} &amp; X_{N2} &amp; . &amp; . &amp; . &amp; X_{Nm} \\
+\end{bmatrix}\begin{bmatrix}
+\theta_0 \\
+\theta _1 \\
+\theta _2\\
+. \\
+. \\
+. \\
+\theta_m
+\end{bmatrix}
+\end{split}\]</div>
+<p>We can use vector-matrix multiplication to expand the above and get an equation for each value in the <span class="math notranslate nohighlight">\(\hat{y}\)</span> vector:
+$<span class="math notranslate nohighlight">\(\hat{y}_i = X_{i0}\theta_0 + X_{i1}\theta_1 + X_{i2}\theta_2 + ... + X_{im}\theta_m\)</span>$</p>
+<p>Thus, every linear regression prediction is a linear combination of the inputs, modified by the optimized paramters.  While this works well for data sets with linear patterms, many data sets we come across will not have such simple patterns.  Thus, we need to find a way to extend the types of problems linear regression can be applied to in order to make it a useful machine learning algorithm.</p>
+<section id="fitting-non-linear-curves">
+<h3>Fitting non-linear curves<a class="headerlink" href="#fitting-non-linear-curves" title="Permalink to this headline">#</a></h3>
+<p>Consider the following data set:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1499986a0&gt;]
+</pre></div>
+</div>
+<img alt="_images/938441a0c46ed890e36b9a7bbd2b520d13550c3929268248da19d5b90feb3b42.png" src="_images/938441a0c46ed890e36b9a7bbd2b520d13550c3929268248da19d5b90feb3b42.png" />
+</div>
+</div>
+<p>If we tried to fit this data set with linear regression, the only way it can model the data is with a straight line, which is not a good model for this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">linear_regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">X_test</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">X_test</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 116.7218917769919
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1499ec370&gt;
+</pre></div>
+</div>
+<img alt="_images/39b914779b13f9e5d484861ac0dc26f682a09b90f63979f2cfcbf3bc0884041c.png" src="_images/39b914779b13f9e5d484861ac0dc26f682a09b90f63979f2cfcbf3bc0884041c.png" />
+</div>
+</div>
+<p>We need a way to force the linear regression algorithm to fit non-linear data sets, and we will do this with something called a design matrix. Instead of passing the linear regression algorithm <strong>X</strong>, we will instead pass it a matrix with three columns–<strong>X</strong><span class="math notranslate nohighlight">\(^2\)</span>, <strong>X</strong>, and 1–so that the results of the trained linear regression algorithm will be:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}_i = \textbf{X}_i^2\theta_0 + \textbf{X}_i\theta_1 + 1\theta_2,\]</div>
+<p>which is the equation for a quadratic curve.  Since we created the curve and know what the coefficients should be then we know that <span class="math notranslate nohighlight">\(\theta_0\)</span> should be 3, <span class="math notranslate nohighlight">\(\theta_1\)</span> should be 2, and <span class="math notranslate nohighlight">\(\theta_2\)</span> should be -1.  We can create our design matrix using the below code cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">column_one</span> <span class="o">=</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">column_two</span> <span class="o">=</span> <span class="n">X</span>
+<span class="n">column_three</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="n">X_design_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">column_one</span><span class="p">,</span> <span class="n">column_two</span><span class="p">,</span> <span class="n">column_three</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we want to train a linear regression algorithm with the new design matrix.  Since we are already fitting the intercept of the data with the design matrix (using the column of ones), we need to set the argument <code class="docutils literal notranslate"><span class="pre">fit_intercept</span></code> to False.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">linear_regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_design_matrix</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression(fit_intercept=False)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression(fit_intercept=False)</pre></div></div></div></div></div></div></div>
+</div>
+<p>Now to test the new method, we also need to format the test data set in the same manner before doing the predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">column_one</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">column_two</span> <span class="o">=</span> <span class="n">X_test</span>
+<span class="n">column_three</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="n">X_test_design_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">column_one</span><span class="p">,</span> <span class="n">column_two</span><span class="p">,</span> <span class="n">column_three</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_design_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we see that our predictions are now an exact match for the expected data set.  Thus by using a design matrix we have extended the range of problems linear regression can be applied to past just simple linear relationships.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 8.290028596924758e-14
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14ba89c10&gt;
+</pre></div>
+</div>
+<img alt="_images/16326126fe127ece8c1b234581fd29ec7f5464576450a791381b23f767211603.png" src="_images/16326126fe127ece8c1b234581fd29ec7f5464576450a791381b23f767211603.png" />
+</div>
+</div>
+<p>Finally, we can confirm that the trained parameters of the linear regression algorithm are exactly what is expected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linear_regression</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 3.,  2., -1.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Design matrices are very powerful extensions to linear regression and the do not require you to know a functional form of your data.  If a theoretical model exists for the data (as in the above and below examples) this makes the process easier, but a <a class="reference external" href="https://en.wikipedia.org/wiki/Vandermonde_matrix">Vandermonde matrix</a> can also be used as a design matrix when no theoretical model is known.</p>
+</section>
+<section id="real-world-example">
+<h3>Real World Example<a class="headerlink" href="#real-world-example" title="Permalink to this headline">#</a></h3>
+<p>The force between two electrons can be modeled using the following equation:</p>
+<div class="math notranslate nohighlight">
+\[F = \frac{kq^2}{r^2},\]</div>
+<p>where q is the charge of an electron (-1.69e-19 C), r is the separation between the two electrons in meters, and k is a scaling constant. The goal of this problem is to determine the value of k using linear regression and measurements of the force and separation between two electrons.</p>
+<p>First we import the data set from the web using Pandas and save it as a Dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">force_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/butler-julie/DSC340LectureNotes/main/week2_slides.csv&#39;</span><span class="p">)</span>
+<span class="n">force_dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>r</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1.000000e-10</td>
+      <td>2.570490e-08</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1.100000e-10</td>
+      <td>2.124372e-08</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>1.200000e-10</td>
+      <td>1.785062e-08</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>1.300000e-10</td>
+      <td>1.521000e-08</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1.400000e-10</td>
+      <td>1.311474e-08</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>86</td>
+      <td>9.600000e-10</td>
+      <td>2.789160e-10</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>87</td>
+      <td>9.700000e-10</td>
+      <td>2.731948e-10</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>88</td>
+      <td>9.800000e-10</td>
+      <td>2.676479e-10</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>89</td>
+      <td>9.900000e-10</td>
+      <td>2.622681e-10</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>90</td>
+      <td>1.000000e-09</td>
+      <td>2.570490e-10</td>
+    </tr>
+  </tbody>
+</table>
+<p>91 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>Next we extract the data we need and plot it to ensure it resembles the expected 1/r<span class="math notranslate nohighlight">\(^2\)</span> curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">force_dataset</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">])</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">force_dataset</span><span class="p">[</span><span class="s1">&#39;F)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Separation (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Force Between Charges (C)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/pandas/core/indexes/base.py:3803,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3802</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3803</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3804</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/pandas/_libs/index.pyx:138,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/pandas/_libs/index.pyx:165,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:5745,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:5753,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;F)&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">force_dataset</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">force_dataset</span><span class="p">[</span><span class="s1">&#39;F)&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Separation (m)&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/pandas/core/frame.py:3804,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3802</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3803</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3804</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3805</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3806</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/pandas/core/indexes/base.py:3805,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key, method, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3803</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3804</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3805</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3806</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3807</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3808</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3809</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3810</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;F)&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can rewrite the force equation slightly to better see our approach:</p>
+<div class="math notranslate nohighlight">
+\[ F = \frac{kq^2}{r^2} = kq^2\frac{1}{r^2}.\]</div>
+<p><span class="math notranslate nohighlight">\(kq^2\)</span> is a constant, the constant we are going to try to predict with linear regression, making it the parameter, <span class="math notranslate nohighlight">\(\theta\)</span>.  This means that the <strong>X</strong> data will be <span class="math notranslate nohighlight">\(\frac{1}{r^2}\)</span>.  So let’s train a linear regression algorithm with the inputs being <span class="math notranslate nohighlight">\(\frac{1}{r^2}\)</span> and the outputs being the force data.  Then we can extract the trained coefficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_squared</span> <span class="o">=</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">r_squared_inverse</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">r_squared</span>
+
+<span class="n">r_squared_inverse</span> <span class="o">=</span> <span class="n">r_squared_inverse</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">linear_regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">r_squared_inverse</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+<span class="n">coef</span> <span class="o">=</span> <span class="n">linear_regression</span><span class="o">.</span><span class="n">coef_</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coef</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2.57049e-28]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This trained coeffiecient is <span class="math notranslate nohighlight">\(kq^2\)</span>, so if we want to extract just k we will need to divide twice by the charge of the electron to find the expected value of k being <span class="math notranslate nohighlight">\(9e9 \frac{Nm^2}{C^2}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">charge_electron</span> <span class="o">=</span> <span class="mf">1.69e-19</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">coef</span><span class="o">/</span><span class="n">charge_electron</span><span class="o">/</span><span class="n">charge_electron</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Constant:&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constant: [9.e+09]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This was a simple example of using a design matrix to extract physical constants from data sets. In the in-class assignment this week we will look at a more complicated example involving the binding energies data set from the week 1 in-class assignment.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-machine-learning-workflow">
+<h1>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">#</a></h1>
+<p>The machine learning workflow describes the process of taking a data set, formatting it, training a machine learning model, and using that trained machine learning model to make predictions. The steps involved in most machine learning workflows are as follows:
+* Import the data set, perform an initial analysis
+* Split the data into a training set and a test set
+* Train the machine learning algorithm with the training set
+* Test the performance of the trained model with the test set using numerical metrics and visual analysis
+* (Optional) Improve the performance of the algorithm by either reformatting the data OR changing the parameters of the machine learning algorithm</p>
+<p>The first step involves importing the data set from a file, a Python library, or from the web and making it useable. This includes removing some of the data that does not fit the required format, changing parts of the data set from non-numeric to numeric entries, changing the units on the data, etc. We went through some of this process in the week 1 in-class assignment and will see many more examples throughout this course.</p>
+<p>The second step in the machine learning workflow is to split the data set into a training set and a test set. The training set, which is usually 70% - 80% of the total data, is used to train the machine learning model and the test set, the remaining 20%-30% of the data, is used to test the performance and accuracy of the model. It is important that the machine learning model is never trained using the test set so that you get an accurate measure of how the trained model performs on data it has never seen before. The most common way to create the two data sets is to randomly split up the data, usually done with the Scikit-Learn function <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>, but it is possible to do other data splits depending on the goal of the machine learning. Towards the end of this course when we cover recurrent neural networks, we will split out data into two sequentially instead of randomly because we are interested in extrapolation and future predictions. Note that somtimes the training data set is further split into a validation data set and we will cover this in more detail next week when we discuss hyperparamter tuning.</p>
+<p>After the data set is split, the training set is used to to train the machine learning model (i.e. used to find the optimized values of the model’s parameters). After the model is trained, the test data set (which the model has never seen before) is used to test its performance. The input component of the test set is passed to the trained model to generate a predicted data set.  This predicted data set is then compared to the true test data set using both graphs (for visually analysis) and numerical error metrics such as the mean-squared error or the R2-score.</p>
+<p>Finally, if you are unhappy with the results from your machine learning model you can make changes and retry. Some things you can do is reformat the data, perform feature engineering on the data (only passing selected parts of the input data instead of the entire input data set), changing the parameters of the model (discussed next week as well), or even changing the entire machine learning algorithm to a different algorithm that may work better with the data set.</p>
+<p>Chapter 2 of the textbook <em>Hands-On Machine Learning</em> has a detailed walkthrough to the machine learning workflow using a famous machine learning data set called the “Boston Housing Market” data set. The slides for this week walk through the machine learning workflow with another famous data set called the “Diabetes” data set. Finally, appendix B of <em>Hands-On Machine Learning</em> has a checklist for all of the steps in the machine learning workflow, broken down into small pieces. This checklist will be helpful for you has you start thinking about the data set and problem you want to use for your final project.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -452,9 +1086,29 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dsc-340-week-2-lecture-notes">DSC 340 Week 2 Lecture Notes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Regression and the Machine Learning Workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csc-dsc-340-week-2-lecture-notes">CSC/DSC 340 Week 2 Lecture Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-the-equations-for-linear-regression">Deriving the Equations for Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">Optimization</a></li>
 </ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">Linear Regression with Scikit-Learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-design-matrix-to-extend-the-applications-of-linear-regression">Using a Design Matrix to Extend the Applications of Linear Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unmodified-linear-regression">Unmodified Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-non-linear-curves">Fitting non-linear curves</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-example">Real World Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
