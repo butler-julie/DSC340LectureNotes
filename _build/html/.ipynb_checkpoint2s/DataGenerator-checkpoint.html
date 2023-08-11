@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; My sample book</title>
+    <title>&lt;no title&gt; &#8212; Machine Learning and Neural Networks</title>
   
   
   
@@ -149,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    DSC 340: Machine Learning and Neural Network Processing
+                    DSC 340: Machine Learning and Neural Networks
                 </a>
             </li>
         </ul>
@@ -157,14 +157,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week3_LectureNotes.html">Regularized Linear Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
-
-
-
 </ul>
 
     </div>
@@ -396,7 +395,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x12225f400&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11a422400&gt;]
 </pre></div>
 </div>
 <img alt="../_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" src="../_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" />
@@ -422,7 +421,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2411
 2411
 (2411,)
-1.0671549749980664 0.0671549749980665
+0.9253286273553637 -0.07467137264463629
 </pre></div>
 </div>
 </div>
@@ -435,10 +434,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x122369370&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11a52e2e0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/e73bac2cca208d3396a7c5e4f6cd7a5447f054e24e39a2ccb1121de404577bab.png" src="../_images/e73bac2cca208d3396a7c5e4f6cd7a5447f054e24e39a2ccb1121de404577bab.png" />
+<img alt="../_images/7f5442534297dc61a0ddb364e2e5d3b13060681266205e2955d414bf2943d4b1.png" src="../_images/7f5442534297dc61a0ddb364e2e5d3b13060681266205e2955d414bf2943d4b1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -476,27 +475,27 @@ document.write(`
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>1.067155</td>
+      <td>0.925329</td>
     </tr>
     <tr>
       <th>1</th>
       <td>100</td>
-      <td>1.032059</td>
+      <td>0.993570</td>
     </tr>
     <tr>
       <th>2</th>
       <td>200</td>
-      <td>0.905357</td>
+      <td>1.024534</td>
     </tr>
     <tr>
       <th>3</th>
       <td>300</td>
-      <td>0.935651</td>
+      <td>0.920843</td>
     </tr>
     <tr>
       <th>4</th>
       <td>400</td>
-      <td>0.967513</td>
+      <td>0.906982</td>
     </tr>
     <tr>
       <th>...</th>
@@ -506,27 +505,27 @@ document.write(`
     <tr>
       <th>2406</th>
       <td>240600</td>
-      <td>-0.072309</td>
+      <td>-0.008833</td>
     </tr>
     <tr>
       <th>2407</th>
       <td>240700</td>
-      <td>0.085180</td>
+      <td>-0.085335</td>
     </tr>
     <tr>
       <th>2408</th>
       <td>240800</td>
-      <td>0.012017</td>
+      <td>-0.030842</td>
     </tr>
     <tr>
       <th>2409</th>
       <td>240900</td>
-      <td>-0.017903</td>
+      <td>-0.057687</td>
     </tr>
     <tr>
       <th>2410</th>
       <td>241000</td>
-      <td>0.068239</td>
+      <td>-0.040348</td>
     </tr>
   </tbody>
 </table>
@@ -714,7 +713,7 @@ Coefficient of determination: 0.59
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Dr. Julie Butler
 </p>
 
   </div>

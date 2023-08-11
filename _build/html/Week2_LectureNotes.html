@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Linear Regression and the Machine Learning Workflow &#8212; My sample book</title>
+    <title>Linear Regression and the Machine Learning Workflow &#8212; Machine Learning and Neural Networks</title>
   
   
   
@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week2_LectureNotes';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction to Machine Learning" href="Week1_Slides.html" />
+    <link rel="next" title="Regularized Linear Models" href="Week3_LectureNotes.html" />
     <link rel="prev" title="Introduction to Machine Learning and the Mathematics of Machine Learning" href="Week_1_LectureNotes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -153,7 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    DSC 340: Machine Learning and Neural Network Processing
+                    DSC 340: Machine Learning and Neural Networks
                 </a>
             </li>
         </ul>
@@ -162,6 +162,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression and the Machine Learning Workflow</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
@@ -481,7 +482,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1484d4610&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x137ad3610&gt;]
 </pre></div>
 </div>
 <img alt="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
@@ -535,7 +536,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1485d7af0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x137be9a90&gt;
 </pre></div>
 </div>
 <img alt="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
@@ -671,7 +672,7 @@ $<span class="math notranslate nohighlight">\(\hat{y}_i = X_{i0}\theta_0 + X_{i1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1499986a0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x137c976d0&gt;]
 </pre></div>
 </div>
 <img alt="_images/938441a0c46ed890e36b9a7bbd2b520d13550c3929268248da19d5b90feb3b42.png" src="_images/938441a0c46ed890e36b9a7bbd2b520d13550c3929268248da19d5b90feb3b42.png" />
@@ -704,7 +705,7 @@ $<span class="math notranslate nohighlight">\(\hat{y}_i = X_{i0}\theta_0 + X_{i1
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 116.7218917769919
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1499ec370&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x137cec370&gt;
 </pre></div>
 </div>
 <img alt="_images/39b914779b13f9e5d484861ac0dc26f682a09b90f63979f2cfcbf3bc0884041c.png" src="_images/39b914779b13f9e5d484861ac0dc26f682a09b90f63979f2cfcbf3bc0884041c.png" />
@@ -769,7 +770,7 @@ $<span class="math notranslate nohighlight">\(\hat{y}_i = X_{i0}\theta_0 + X_{i1
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 8.290028596924758e-14
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14ba89c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x137e88c70&gt;
 </pre></div>
 </div>
 <img alt="_images/16326126fe127ece8c1b234581fd29ec7f5464576450a791381b23f767211603.png" src="_images/16326126fe127ece8c1b234581fd29ec7f5464576450a791381b23f767211603.png" />
@@ -1060,11 +1061,11 @@ $<span class="math notranslate nohighlight">\(\hat{y}_i = X_{i0}\theta_0 + X_{i1
       </div>
     </a>
     <a class="right-next"
-       href="Week1_Slides.html"
+       href="Week3_LectureNotes.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Machine Learning</p>
+        <p class="prev-next-title">Regularized Linear Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1122,7 +1123,7 @@ $<span class="math notranslate nohighlight">\(\hat{y}_i = X_{i0}\theta_0 + X_{i1
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Dr. Julie Butler
 </p>
 
   </div>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction to Machine Learning &#8212; My sample book</title>
+    <title>Introduction to Machine Learning &#8212; Machine Learning and Neural Networks</title>
   
   
   
@@ -149,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    DSC 340: Machine Learning and Neural Network Processing
+                    DSC 340: Machine Learning and Neural Networks
                 </a>
             </li>
         </ul>
@@ -157,14 +157,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Week_1_LectureNotes.html">Introduction to Machine Learning and the Mathematics of Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week3_LectureNotes.html">Regularized Linear Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
-
-
-
 </ul>
 
     </div>
@@ -448,7 +447,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x136a62be0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1750cfbe0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" src="../_images/5690c6633782f75abe852a0341dadda54a9fbed3cc0d8b0fcdce01e7c99f4047.png" />
@@ -488,7 +487,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x136b2abe0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1751131c0&gt;
 </pre></div>
 </div>
 <img alt="../_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" src="../_images/6a369233f44e775816e77a8910deb95fd7995863afc7d88b89f0b20ffcace012.png" />
@@ -634,10 +633,10 @@ LINEAR REGRESSION INTERCEPT: -3.000000000000001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [504.10110293 422.70344938] 153.93187021862562
-Mean squared error: 4594.79
-Root mean squared error: 67.78
-R2-Score: 0.33
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: [578.26970731 365.38027612] 150.04365525147082
+Mean squared error: 5695.70
+Root mean squared error: 75.47
+R2-Score: 0.23
 </pre></div>
 </div>
 </div>
@@ -652,10 +651,10 @@ R2-Score: 0.33
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1376e8100&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x175828130&gt;
 </pre></div>
 </div>
-<img alt="../_images/4cb0cdc9435db7fbf8754709bb175039099e28f050a3999f06d55a3ffcde50b5.png" src="../_images/4cb0cdc9435db7fbf8754709bb175039099e28f050a3999f06d55a3ffcde50b5.png" />
+<img alt="../_images/277b0a52e096e338546ba56cd18b5901c0663fedd47a8ca6c172cde0e1b4742c.png" src="../_images/277b0a52e096e338546ba56cd18b5901c0663fedd47a8ca6c172cde0e1b4742c.png" />
 </div>
 </div>
 </section>
@@ -740,7 +739,7 @@ R2-Score: 0.33
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Dr. Julie Butler
 </p>
 
   </div>
