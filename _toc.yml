@@ -9,7 +9,9 @@ parts:
     - file: Week_1_LectureNotes
     - file: Week2_LectureNotes
     - file: Week3_LectureNotes
+    - file: Week4_LectureNotes
   - caption: Slides
     chapters:
     - file: Week1_Slides
     - file: Week2_Slides
+    - file: Week4_Slides
