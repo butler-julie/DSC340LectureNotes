@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week4_Slides';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -160,6 +162,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week2_LectureNotes.html">Linear Regression and the Machine Learning Workflow</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -360,7 +363,19 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-classification-problems">What are Classification Problems?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-examples">Classification Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-classification-problems">Types of Classification Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifiers">Classifiers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-classifier">Ridge Classifier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-metrics">Error Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-score">Accuracy Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-iris-data-set-and-the-ridge-classifier">Example: The Iris Data Set and the Ridge Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-problems-with-classification-data-sets">Potential Problems with Classification Data Sets</a></li>
 </ul>
             </nav>
         </div>
@@ -377,7 +392,7 @@ document.write(`
 <p>CSC/DSC 340 Week 4 Slides</p>
 <p>Author: Dr. Julie Butler</p>
 <p>Date Created: August 13, 2023</p>
-<p>Last Modified: August 13, 2023</p>
+<p>Last Modified: August 14, 2023</p>
 <section id="what-are-classification-problems">
 <h2>What are Classification Problems?<a class="headerlink" href="#what-are-classification-problems" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
@@ -386,8 +401,93 @@ document.write(`
 <li><p>Classification: output can only be taken from finite and discrete set</p></li>
 </ul>
 </section>
+<section id="classification-examples">
+<h2>Classification Examples<a class="headerlink" href="#classification-examples" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Can the condition of a car be determined from its price and odometer reading?</p></li>
+<li><p>Can the species of a plant or animal be determined from various measurements?</p></li>
+<li><p>Can the sex of an animal be determined from various measurements?</p></li>
+<li><p>Can handwritten numbers be converted to text (MNIST Data Set)?</p></li>
+<li><p>Can pictures of clothes be identified?</p></li>
+<li><p>Can pictures be determined to contain dogs or cats?</p></li>
+</ul>
+</section>
+<section id="types-of-classification-problems">
+<h2>Types of Classification Problems<a class="headerlink" href="#types-of-classification-problems" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Binimal Classifier: data is sorted into one of two categories</p></li>
+<li><p>Multiclass Classifier: data is sorted into one of three or more categories</p></li>
+<li><p>Multilabel Classifier: data can belong to more than one category</p></li>
+</ul>
+</section>
+<section id="classifiers">
+<h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Ridge Classifier (this week)</p></li>
+<li><p>Stochastic Gradient Descent (<em>Hands-On</em> Chapter 3)</p></li>
+<li><p>Support Vector Machines (not covered)</p></li>
+<li><p>Neural Networks/Convolutional Neural Networks (covered later)</p></li>
+</ul>
+<section id="ridge-classifier">
+<h3>Ridge Classifier<a class="headerlink" href="#ridge-classifier" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Scikit-Learn implementation</p></li>
+<li><p>Using ridge regression but converts it into a classification problem</p></li>
+<li><p>Binomial classification</p>
+<ul>
+<li><p>Inputs are mapped to outputs between -1 and 1</p></li>
+<li><p>Class 0 corresponds to a negative output and class 1 corresponds to a positive output</p></li>
+</ul>
+</li>
+<li><p>Multiclass classification</p>
+<ul>
+<li><p>Treat as multi-output regression problem and output with higest value is the category</p></li>
+</ul>
+</li>
+<li><p>Simple classification algorithm but computationally effecient</p></li>
+</ul>
+</section>
+</section>
+<section id="error-metrics">
+<h2>Error Metrics<a class="headerlink" href="#error-metrics" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The error metrics we have mean using are not suitable to determine the performance of a classifier</p></li>
+<li><p>New error metrics</p>
+<ul>
+<li><p>Accuracy Score</p></li>
+<li><p>Confusion Matrix</p></li>
+<li><p>Other error metrics are covered in Chapter 3 of <em>Hands-On Machine Learning</em></p></li>
+</ul>
+</li>
+</ul>
+<section id="accuracy-score">
+<h3>Accuracy Score<a class="headerlink" href="#accuracy-score" title="Permalink to this headline">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ Score = \frac{Number\ of\ Correct\ Predictions}{Total\ Number\ of\ Data\ Points}\]</div>
+<ul class="simple">
+<li><p>A score of 1.0 means 100% of the predictions are classified correctly</p></li>
+<li><p>A score of 0.0 means 0% of the predictions are classified correctly</p></li>
+</ul>
+</section>
+<section id="confusion-matrix">
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Each row represents an actual class, each column represents a predicted class</p></li>
+<li><p>Numbers of the main diagonal are correct predictions and numbers on the off diagonal elements are in correct predictions
+<img alt="image.png" src="attachment:8b9e3982-c1ff-4deb-a6bf-f8b222a7c4cf.png" />
+<a class="reference external" href="https://www.researchgate.net/figure/Confusion-matrix-for-the-MNIST-dataset-with-the-best-ensemble_fig3_328816477">Image Source</a></p></li>
+</ul>
+</section>
+</section>
 <section id="example-the-iris-data-set-and-the-ridge-classifier">
 <h2>Example: The Iris Data Set and the Ridge Classifier<a class="headerlink" href="#example-the-iris-data-set-and-the-ridge-classifier" title="Permalink to this headline">#</a></h2>
+<p><img alt="image.png" src="attachment:99cab304-5c03-4eb3-8d71-b297dbaf366e.png" /></p>
+<ul class="simple">
+<li><p>The Iris Data Set is a famous classification data set</p></li>
+<li><p>Each point contains measurements of different parts of the flower and the specific variety of iris it belongs to</p></li>
+<li><p>Goal is to predict what type of iris each flower is</p></li>
+<li><p><a class="reference external" href="https://www.gardenersworld.com/how-to/grow-plants/how-to-grow-iris/">Image Source</a></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##############################</span>
@@ -422,7 +522,8 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris_data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine what data the iris data set contains</span>
+<span class="n">iris_data</span>
 </pre></div>
 </div>
 </div>
@@ -548,7 +649,8 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a pairplot with the color of each dot corresponding to the type of iris</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -557,7 +659,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x15d104700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x12aa9c700&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -565,7 +667,10 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">iris_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Features are the inputs/X-data</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">iris_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+
+<span class="c1"># labels are the outputs/y-data/targets</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">iris_data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -573,14 +678,16 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Splot the data into training and test data sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridge_classifier</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define, train, and predict with a ridge classifier</span>
+<span class="n">ridge_classifier</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">()</span>
 <span class="n">ridge_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
@@ -589,63 +696,57 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ridge_classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the accuracy score, where 1.0 means 100% of predictions are correct</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ridge_classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7333333333333333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out a confusion matrix</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 6,  1,  0],
-       [ 0,  6,  5],
-       [ 0,  2, 10]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[10,  0,  0],
+       [ 0,  8,  3],
+       [ 0,  1,  8]])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confusion</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">confusion</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display the confusion matrix in a better way with matshow</span>
+<span class="n">confusion</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">confusion</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;summer&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x15d8d8b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16a1c1d30&gt;
 </pre></div>
 </div>
-<img alt="_images/b40af1cf5ad5fa918ca3311b07d1c2c41e76c54acee2d1dbf21f6881f0b46149.png" src="_images/b40af1cf5ad5fa918ca3311b07d1c2c41e76c54acee2d1dbf21f6881f0b46149.png" />
+<img alt="_images/8ee3d4422bf1e9f9a255c93e4adbfc75b8852b78f47fcd9f4140f54680afb731.png" src="_images/8ee3d4422bf1e9f9a255c93e4adbfc75b8852b78f47fcd9f4140f54680afb731.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since RidgeClassifier is a regularized method, attempt to improve performance</span>
+<span class="c1"># by scaling the results</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
 <span class="n">features_Z</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features_Z</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features_Z</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
 <span class="n">ridge_classifier</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">()</span>
 <span class="n">ridge_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -661,15 +762,50 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x15d83a220&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16a1315e0&gt;
 </pre></div>
 </div>
-<img alt="_images/13f18b954dfa9d11a030ee95588d4ae6af9c74c97fa39559ca0b2c894eb0f239.png" src="_images/13f18b954dfa9d11a030ee95588d4ae6af9c74c97fa39559ca0b2c894eb0f239.png" />
+<img alt="_images/8957766c473c546637c6c8ea4ac1109eb4ac64c7aa5aa598049dc8328901a790.png" src="_images/8957766c473c546637c6c8ea4ac1109eb4ac64c7aa5aa598049dc8328901a790.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Attempt to improve the performance with hyperparameter tuning</span>
+<span class="n">best_score</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">best_alpha</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5000</span><span class="p">):</span>
+    <span class="n">ridge_classifier</span> <span class="o">=</span> <span class="n">RidgeClassifier</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">ridge_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="n">score</span> <span class="o">=</span> <span class="n">ridge_classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
+        <span class="n">best_alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BEST ALPHA:&#39;</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BEST SCORE:&#39;</span><span class="p">,</span> <span class="n">best_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1e-05
+BEST SCORE: 0.8333333333333334
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="potential-problems-with-classification-data-sets">
+<h2>Potential Problems with Classification Data Sets<a class="headerlink" href="#potential-problems-with-classification-data-sets" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>There may not be clear differences between the different categories; may need a powerful classification algorithm</p></li>
+<li><p>Data sets may represent categorical data as text (LabelEncoder)</p></li>
+</ul>
 </section>
 </section>
 
@@ -732,7 +868,19 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-classification-problems">What are Classification Problems?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-examples">Classification Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-classification-problems">Types of Classification Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classifiers">Classifiers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-classifier">Ridge Classifier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-metrics">Error Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-score">Accuracy Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-iris-data-set-and-the-ridge-classifier">Example: The Iris Data Set and the Ridge Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-problems-with-classification-data-sets">Potential Problems with Classification Data Sets</a></li>
 </ul>
   </nav></div>
 
