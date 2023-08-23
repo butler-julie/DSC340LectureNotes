@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Classification Problems &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,6 +44,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -65,9 +66,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week4_Slides';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Model Optimization and Nonlinear Models" href="Week5_Slides.html" />
     <link rel="prev" title="Linear Regression and the Machine Learning Workflow" href="Week2_Slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -163,12 +165,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Classification Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5_Slides.html">Model Optimization and Nonlinear Models</a></li>
 </ul>
 
     </div>
@@ -388,13 +392,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classification-problems">
-<h1>Classification Problems<a class="headerlink" href="#classification-problems" title="Permalink to this headline">#</a></h1>
+<h1>Classification Problems<a class="headerlink" href="#classification-problems" title="Permalink to this heading">#</a></h1>
 <p>CSC/DSC 340 Week 4 Slides</p>
 <p>Author: Dr. Julie Butler</p>
 <p>Date Created: August 13, 2023</p>
 <p>Last Modified: August 14, 2023</p>
 <section id="what-are-classification-problems">
-<h2>What are Classification Problems?<a class="headerlink" href="#what-are-classification-problems" title="Permalink to this headline">#</a></h2>
+<h2>What are Classification Problems?<a class="headerlink" href="#what-are-classification-problems" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Goal: Determine what “class” a data point belongs to</p></li>
 <li><p>Regression: output can be any real number</p></li>
@@ -402,7 +406,7 @@ document.write(`
 </ul>
 </section>
 <section id="classification-examples">
-<h2>Classification Examples<a class="headerlink" href="#classification-examples" title="Permalink to this headline">#</a></h2>
+<h2>Classification Examples<a class="headerlink" href="#classification-examples" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Can the condition of a car be determined from its price and odometer reading?</p></li>
 <li><p>Can the species of a plant or animal be determined from various measurements?</p></li>
@@ -413,7 +417,7 @@ document.write(`
 </ul>
 </section>
 <section id="types-of-classification-problems">
-<h2>Types of Classification Problems<a class="headerlink" href="#types-of-classification-problems" title="Permalink to this headline">#</a></h2>
+<h2>Types of Classification Problems<a class="headerlink" href="#types-of-classification-problems" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Binimal Classifier: data is sorted into one of two categories</p></li>
 <li><p>Multiclass Classifier: data is sorted into one of three or more categories</p></li>
@@ -421,7 +425,7 @@ document.write(`
 </ul>
 </section>
 <section id="classifiers">
-<h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this headline">#</a></h2>
+<h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Ridge Classifier (this week)</p></li>
 <li><p>Stochastic Gradient Descent (<em>Hands-On</em> Chapter 3)</p></li>
@@ -429,7 +433,7 @@ document.write(`
 <li><p>Neural Networks/Convolutional Neural Networks (covered later)</p></li>
 </ul>
 <section id="ridge-classifier">
-<h3>Ridge Classifier<a class="headerlink" href="#ridge-classifier" title="Permalink to this headline">#</a></h3>
+<h3>Ridge Classifier<a class="headerlink" href="#ridge-classifier" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Scikit-Learn implementation</p></li>
 <li><p>Using ridge regression but converts it into a classification problem</p></li>
@@ -449,7 +453,7 @@ document.write(`
 </section>
 </section>
 <section id="error-metrics">
-<h2>Error Metrics<a class="headerlink" href="#error-metrics" title="Permalink to this headline">#</a></h2>
+<h2>Error Metrics<a class="headerlink" href="#error-metrics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The error metrics we have mean using are not suitable to determine the performance of a classifier</p></li>
 <li><p>New error metrics</p>
@@ -461,7 +465,7 @@ document.write(`
 </li>
 </ul>
 <section id="accuracy-score">
-<h3>Accuracy Score<a class="headerlink" href="#accuracy-score" title="Permalink to this headline">#</a></h3>
+<h3>Accuracy Score<a class="headerlink" href="#accuracy-score" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Score = \frac{Number\ of\ Correct\ Predictions}{Total\ Number\ of\ Data\ Points}\]</div>
 <ul class="simple">
@@ -470,7 +474,7 @@ document.write(`
 </ul>
 </section>
 <section id="confusion-matrix">
-<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">#</a></h3>
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Each row represents an actual class, each column represents a predicted class</p></li>
 <li><p>Numbers of the main diagonal are correct predictions and numbers on the off diagonal elements are in correct predictions
@@ -480,7 +484,7 @@ document.write(`
 </section>
 </section>
 <section id="example-the-iris-data-set-and-the-ridge-classifier">
-<h2>Example: The Iris Data Set and the Ridge Classifier<a class="headerlink" href="#example-the-iris-data-set-and-the-ridge-classifier" title="Permalink to this headline">#</a></h2>
+<h2>Example: The Iris Data Set and the Ridge Classifier<a class="headerlink" href="#example-the-iris-data-set-and-the-ridge-classifier" title="Permalink to this heading">#</a></h2>
 <p><img alt="image.png" src="attachment:99cab304-5c03-4eb3-8d71-b297dbaf366e.png" /></p>
 <ul class="simple">
 <li><p>The Iris Data Set is a famous classification data set</p></li>
@@ -502,6 +506,20 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
 </pre></div>
 </div>
 </div>
@@ -655,11 +673,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x12aa9c700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x20c96a35510&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -715,9 +733,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[10,  0,  0],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 6,  0,  0],
        [ 0,  8,  3],
-       [ 0,  1,  8]])
+       [ 0,  1, 12]], dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -732,10 +750,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16a1c1d30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x20c9b748a10&gt;
 </pre></div>
 </div>
-<img alt="_images/8ee3d4422bf1e9f9a255c93e4adbfc75b8852b78f47fcd9f4140f54680afb731.png" src="_images/8ee3d4422bf1e9f9a255c93e4adbfc75b8852b78f47fcd9f4140f54680afb731.png" />
+<img alt="_images/1ed6ca1869b5155dfca2d05b05cf6a2007e8e57854867adb2bbeb03ad534a269.png" src="_images/1ed6ca1869b5155dfca2d05b05cf6a2007e8e57854867adb2bbeb03ad534a269.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -762,13 +780,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7666666666666667
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16a1315e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x20c9b691ed0&gt;
 </pre></div>
 </div>
-<img alt="_images/8957766c473c546637c6c8ea4ac1109eb4ac64c7aa5aa598049dc8328901a790.png" src="_images/8957766c473c546637c6c8ea4ac1109eb4ac64c7aa5aa598049dc8328901a790.png" />
+<img alt="_images/1e2e6fd5b8dda2c39ca4acc94471872814fcbe9ac3479b1d27ee84d1ed907bb0.png" src="_images/1e2e6fd5b8dda2c39ca4acc94471872814fcbe9ac3479b1d27ee84d1ed907bb0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -793,15 +811,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1e-05
-BEST SCORE: 0.8333333333333334
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1.7039085778543699
+BEST SCORE: 0.8
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="potential-problems-with-classification-data-sets">
-<h2>Potential Problems with Classification Data Sets<a class="headerlink" href="#potential-problems-with-classification-data-sets" title="Permalink to this headline">#</a></h2>
+<h2>Potential Problems with Classification Data Sets<a class="headerlink" href="#potential-problems-with-classification-data-sets" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>There may not be clear differences between the different categories; may need a powerful classification algorithm</p></li>
 <li><p>Data sets may represent categorical data as text (LabelEncoder)</p></li>
@@ -848,6 +866,15 @@ BEST SCORE: 0.8333333333333334
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Linear Regression and the Machine Learning Workflow</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Week5_Slides.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Model Optimization and Nonlinear Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
