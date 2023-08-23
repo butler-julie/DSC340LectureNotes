@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Using Machine Learning to Solve Classification Problems &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,6 +44,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -65,10 +66,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week4_LectureNotes';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction to Machine Learning" href="Week1_Slides.html" />
+    <link rel="next" title="Model Optimization and Nonlinear Models" href="Week5_LectureNotes.html" />
     <link rel="prev" title="Regularized Linear Models" href="Week3_LectureNotes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -164,12 +165,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Machine Learning to Solve Classification Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Week1_Slides.html">Introduction to Machine Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_Slides.html">Classification Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week5_Slides.html">Model Optimization and Nonlinear Models</a></li>
 </ul>
 
     </div>
@@ -389,17 +392,17 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-machine-learning-to-solve-classification-problems">
-<h1>Using Machine Learning to Solve Classification Problems<a class="headerlink" href="#using-machine-learning-to-solve-classification-problems" title="Permalink to this headline">#</a></h1>
+<h1>Using Machine Learning to Solve Classification Problems<a class="headerlink" href="#using-machine-learning-to-solve-classification-problems" title="Permalink to this heading">#</a></h1>
 <p>CSC/DSC 340 Week 4 Lecture Notes</p>
 <p>Author: Dr. Julie Butler</p>
 <p>Date Created: August 13, 2023</p>
 <p>Last Modified: August 14, 2023</p>
 <section id="what-are-classification-problems">
-<h2>What are Classification Problems?<a class="headerlink" href="#what-are-classification-problems" title="Permalink to this headline">#</a></h2>
+<h2>What are Classification Problems?<a class="headerlink" href="#what-are-classification-problems" title="Permalink to this heading">#</a></h2>
 <p>The goal of a classification problem is to determine what grouo (or class) a data point belongs to.  A requirement of classification problems is that the number of possible groups has to be finite. This is what makes classification different from regression. In a regression problem, the output of the machine learning model can be any real number, making the number of possible outputs infinite. The machine learning problems we have done thus far in this course are regression. In a classification problem, the outputs have to be taken from a finite and discrete set of values, with each value corresponding to one of the groups.</p>
 </section>
 <section id="classification-examples">
-<h2>Classification Examples<a class="headerlink" href="#classification-examples" title="Permalink to this headline">#</a></h2>
+<h2>Classification Examples<a class="headerlink" href="#classification-examples" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>In the pre-class homework for this week, you determined in the condition of a car (i.e like new, good, poor, etc.) could be determined by looking at its price and odometer reading.</p></li>
 <li><p>In these lecture notes and in the in-class assignment for this week we will be determining if we can tell the exact species of a plant or animal by looking at various measurements.</p></li>
@@ -410,29 +413,29 @@ document.write(`
 </ol>
 </section>
 <section id="types-of-clasification-problems">
-<h2>Types of Clasification Problems<a class="headerlink" href="#types-of-clasification-problems" title="Permalink to this headline">#</a></h2>
+<h2>Types of Clasification Problems<a class="headerlink" href="#types-of-clasification-problems" title="Permalink to this heading">#</a></h2>
 <p>There are several different types of classification problems, and we will discuss two of them here. A binomial classification problem means that the data can be split up into only two groups. If there are more than two groups the data can be divided into then the problem is a multiclass classification problem. And finally, if a data point can belong to more than one category the the classification problem is called multilabel classification. As an example of this type of classification, when you phone is classifying your photos based on who is in the picture, it is possible for a photo to contain more than one person, and this be classified into more than one category.</p>
 </section>
 <section id="classifiers">
-<h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this headline">#</a></h2>
+<h2>Classifiers<a class="headerlink" href="#classifiers" title="Permalink to this heading">#</a></h2>
 <p>We will only be looking at one classifier this week, ridge classifier, which is an implementation of ridge regression specifically for classification. However, there are other classification algorithms as well. Stochastic Gradient Descent is the classification algorithm used in the examples of Chapter 3 of <em>Hands-On Machine Learning</em>.  Support vector machines are also commonly used for more complicated classification problems. As hinted in the classification examples section, neural networks and convolutional neural networks can also be used for classification.  We will cover neural networks and convolutional neural networks later in this course, but we will not cover stochastic gradient descent or support vector machines.  However, these algorithms are still valid machine learning tools to use on your final project if you are attempting to answer a question that can be framed as a classification problem.</p>
 <section id="ridge-classifer">
-<h3>Ridge Classifer<a class="headerlink" href="#ridge-classifer" title="Permalink to this headline">#</a></h3>
+<h3>Ridge Classifer<a class="headerlink" href="#ridge-classifer" title="Permalink to this heading">#</a></h3>
 <p>We will be using Scikit-Learn’s implementation of ridge classifier to perform classifications this week. Ridge classifier is simply ridge regression, modified to perform classification instead of regression. If the problem is a binomial classification, then the ridge regression algorithm is trained to produce outputs between -1 and 1. If the output is negative then the data point belongs to the first class and if the output is positive then the output belongs to the second class. For multiclass classfication, the ridge regression will produce an output with more than one number (called multi-output regression). Whichever output has the highest value determines the class the data point belongs too.  For example, if the classification problem has four categories, the ridge classifier will output four numbers.  For a specific data point, if the third number of the output is the largest, then that data point belongs to the third class.</p>
 </section>
 </section>
 <section id="error-metrics">
-<h2>Error Metrics<a class="headerlink" href="#error-metrics" title="Permalink to this headline">#</a></h2>
+<h2>Error Metrics<a class="headerlink" href="#error-metrics" title="Permalink to this heading">#</a></h2>
 <p>Previously, when using machine learning for regression problems, we have have used error metrics such as the mean-squared error to determine the accuracy of our models. When we move to classification problems, we will have to change our error metrics to better reflect a classification problem.  Several different error metrics are discussed in Chatper 3 of <em>Hands-On Machine Learning</em>, and we will cover two of the more common ones here: accuracy score and confusion matrix.</p>
 <section id="accuracy-score">
-<h3>Accuracy Score<a class="headerlink" href="#accuracy-score" title="Permalink to this headline">#</a></h3>
+<h3>Accuracy Score<a class="headerlink" href="#accuracy-score" title="Permalink to this heading">#</a></h3>
 <p>The accuracy score is a measure of how many classifications the trained algorithm got correct compared to the total number of classification it attempted.  It is simply calculated as:</p>
 <div class="math notranslate nohighlight">
 \[ Score = \frac{Number\ of\ Correct\ Predictions}{Total\ Number\ of\ Data\ Points}.\]</div>
 <p>An accuracy score of 1.0 means that 100% of the attempted classifications were correct and an accuracy score of 0.0 means that 0% of the attempt classifications were correct. Therefore in the case of the accuracy score (like the R2-score) a result closer to 1.0 is better.</p>
 </section>
 <section id="confusion-matrix">
-<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">#</a></h3>
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
 <p><img alt="image.png" src="attachment:547a1576-8210-473c-aa22-6ebb06b23dc8.png" />
 <a class="reference external" href="https://www.researchgate.net/figure/Confusion-matrix-for-the-MNIST-dataset-with-the-best-ensemble_fig3_328816477">Image Source</a></p>
 <p>A confusion matrix is a way to visualize how many predictions the trained algorithm got correct but also what predictions it got wrong. Confusions matrices can look complicated, but with a little practice they are easy to read. Each row represents an actual class and each column represent a predicted class. An element in row A of column B of a confusion matrix is the number of times an A was predicted to be a B.  This means that accurate predictions are the numbers on the main diagonal of teh matrix and incorrect predictions are the other numbers.</p>
@@ -441,7 +444,7 @@ document.write(`
 </section>
 </section>
 <section id="example-the-iris-data-set-and-the-ridge-classifier">
-<h2>Example: The Iris Data Set and the Ridge Classifier<a class="headerlink" href="#example-the-iris-data-set-and-the-ridge-classifier" title="Permalink to this headline">#</a></h2>
+<h2>Example: The Iris Data Set and the Ridge Classifier<a class="headerlink" href="#example-the-iris-data-set-and-the-ridge-classifier" title="Permalink to this heading">#</a></h2>
 <p>A famous example used in classification is called the iris data set. The iris data set contains measurements of different iris flowers, along with the specific type of iris flower that is being measured (one of three types). Therefore the goal of the iris data set is to determine what type of iris is being measured.</p>
 <p>First we have our imports.</p>
 <div class="cell docutils container">
@@ -459,6 +462,20 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">RidgeClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
 </pre></div>
 </div>
 </div>
@@ -613,11 +630,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x179681700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x24d190d4ed0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -653,7 +670,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
 </pre></div>
 </div>
 </div>
@@ -666,9 +683,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 0, 0],
-       [0, 6, 4],
-       [0, 3, 8]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[15,  0,  0],
+       [ 0,  4,  4],
+       [ 0,  0,  7]], dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -683,10 +700,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x179ad5790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x24d1df34910&gt;
 </pre></div>
 </div>
-<img alt="_images/7a8072c402887e6f977bf3304d3f5cc50f941f70e2e5fd5ea19030c739430866.png" src="_images/7a8072c402887e6f977bf3304d3f5cc50f941f70e2e5fd5ea19030c739430866.png" />
+<img alt="_images/02af663e1afe20de81b70acf5537a2e2ba1ced754bc35754e6518404bc96d823.png" src="_images/02af663e1afe20de81b70acf5537a2e2ba1ced754bc35754e6518404bc96d823.png" />
 </div>
 </div>
 <p>There are a couple of ways we can attempt to improve our results while still using the ridge classifier algorithm. First, since ridge classifier is a regularized algorithm, we can try applying the standard scaler to the data to change its scale.</p>
@@ -712,13 +729,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9333333333333333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x178d19ca0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x24d1e281ed0&gt;
 </pre></div>
 </div>
-<img alt="_images/34cb16bb07044c4884cf70dc993f838417bdb35e635ccc8948abff5eb954756b.png" src="_images/34cb16bb07044c4884cf70dc993f838417bdb35e635ccc8948abff5eb954756b.png" />
+<img alt="_images/833a0047096a6b3b0775cf72bae7503f2a858dc7ff09999d0dc39e1e06127572.png" src="_images/833a0047096a6b3b0775cf72bae7503f2a858dc7ff09999d0dc39e1e06127572.png" />
 </div>
 </div>
 <p>Second, the ridge classifier, like ridge regression, has a hyperparameter, <span class="math notranslate nohighlight">\(\alpha\)</span>. We can attempt to perform hyperparameter tuning to see if there is a value of <span class="math notranslate nohighlight">\(\alpha\)</span> which will give us a better accuracy score.</p>
@@ -742,15 +759,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 17.809434517387206
-BEST SCORE: 0.9666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.0001
+BEST SCORE: 0.8666666666666667
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="potential-problems-with-classification-data-sets">
-<h2>Potential Problems with Classification Data Sets<a class="headerlink" href="#potential-problems-with-classification-data-sets" title="Permalink to this headline">#</a></h2>
+<h2>Potential Problems with Classification Data Sets<a class="headerlink" href="#potential-problems-with-classification-data-sets" title="Permalink to this heading">#</a></h2>
 <p>Finally, we need to discuss some potential problems that can occur when performing classification problems on real world data sets. First, it is possible that there is not a large distinction between the different classes. This does not mean that you cannot perform classification on the data set, but it may mean that you need a more complex classifier that can pick out more nuanced features in the data. Secondly, your data set may have a large number of features, too large for patterns between the classes to easily be picked out. You can handle these problems by either performing feature engineering using prior knowledge of the data set or with trial and error or perform dimsionality reduction on the data set (covered in a couple of weeks). Finally, many times when you find a data set online that has categorical data, that data will be listed as words instead of numbers. Luckily, there are many ways to covert this type of data into numerical data, such as the <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> function of Scikit-Learn used in the pre-class assignment for this week.</p>
 </section>
 </section>
@@ -796,11 +813,11 @@ BEST SCORE: 0.9666666666666667
       </div>
     </a>
     <a class="right-next"
-       href="Week1_Slides.html"
+       href="Week5_LectureNotes.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Machine Learning</p>
+        <p class="prev-next-title">Model Optimization and Nonlinear Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
