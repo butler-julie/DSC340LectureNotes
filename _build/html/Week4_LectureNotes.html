@@ -173,6 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_Slides.html">Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_Slides.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_Slides.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
 </ul>
 
     </div>
@@ -465,20 +466,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Next we load the iris data set from Scikit-Learn and convert it to Pandas Dataframe for easy display</p>
 <div class="cell docutils container">
@@ -630,11 +617,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x24d190d4ed0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x16b257d30&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -683,9 +670,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[15,  0,  0],
-       [ 0,  4,  4],
-       [ 0,  0,  7]], dtype=int64)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[13,  0,  0],
+       [ 0,  5,  2],
+       [ 0,  2,  8]])
 </pre></div>
 </div>
 </div>
@@ -700,10 +687,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x24d1df34910&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16c9342b0&gt;
 </pre></div>
 </div>
-<img alt="_images/02af663e1afe20de81b70acf5537a2e2ba1ced754bc35754e6518404bc96d823.png" src="_images/02af663e1afe20de81b70acf5537a2e2ba1ced754bc35754e6518404bc96d823.png" />
+<img alt="_images/96be06254b3803e195bbbb2f98af5d382b2d8fae9719354d31b40d9330e1129f.png" src="_images/96be06254b3803e195bbbb2f98af5d382b2d8fae9719354d31b40d9330e1129f.png" />
 </div>
 </div>
 <p>There are a couple of ways we can attempt to improve our results while still using the ridge classifier algorithm. First, since ridge classifier is a regularized algorithm, we can try applying the standard scaler to the data to change its scale.</p>
@@ -732,10 +719,10 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x24d1e281ed0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16c971910&gt;
 </pre></div>
 </div>
-<img alt="_images/833a0047096a6b3b0775cf72bae7503f2a858dc7ff09999d0dc39e1e06127572.png" src="_images/833a0047096a6b3b0775cf72bae7503f2a858dc7ff09999d0dc39e1e06127572.png" />
+<img alt="_images/31b7a189010d91f7d79df0f019547a2557854cc962fff403c320b0247d1b1abd.png" src="_images/31b7a189010d91f7d79df0f019547a2557854cc962fff403c320b0247d1b1abd.png" />
 </div>
 </div>
 <p>Second, the ridge classifier, like ridge regression, has a hyperparameter, <span class="math notranslate nohighlight">\(\alpha\)</span>. We can attempt to perform hyperparameter tuning to see if there is a value of <span class="math notranslate nohighlight">\(\alpha\)</span> which will give us a better accuracy score.</p>
@@ -759,7 +746,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.0001
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 11.962324054942298
 BEST SCORE: 0.8666666666666667
 </pre></div>
 </div>
