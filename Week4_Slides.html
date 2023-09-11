@@ -166,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -664,7 +665,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x149743fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1698d23a0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -720,9 +721,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 8,  0,  0],
-       [ 0, 11,  3],
-       [ 0,  1,  7]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[11,  0,  0],
+       [ 0,  4,  4],
+       [ 0,  0, 11]])
 </pre></div>
 </div>
 </div>
@@ -737,10 +738,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x14f573a00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x102ebc610&gt;
 </pre></div>
 </div>
-<img alt="_images/51c449bcc6332b63550f0808fbe160db0e013a203890a82e006288bd2518ecea.png" src="_images/51c449bcc6332b63550f0808fbe160db0e013a203890a82e006288bd2518ecea.png" />
+<img alt="_images/c09d861bea9274a8d3fe778abd2ed76684f6837f34862f9f5e3f3a3570f5e1f9.png" src="_images/c09d861bea9274a8d3fe778abd2ed76684f6837f34862f9f5e3f3a3570f5e1f9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -767,13 +768,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x14f692430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1699252b0&gt;
 </pre></div>
 </div>
-<img alt="_images/9f081351db3027a02de419b2eaa10503e8408deef78acb470de824cfbbebd693.png" src="_images/9f081351db3027a02de419b2eaa10503e8408deef78acb470de824cfbbebd693.png" />
+<img alt="_images/a656bbc16edc52ea4db48f5e1b9dd45f4c4698a9adf9593275e22d94cadd1a55.png" src="_images/a656bbc16edc52ea4db48f5e1b9dd45f4c4698a9adf9593275e22d94cadd1a55.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -798,7 +799,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.43704696190490894
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1e-05
 BEST SCORE: 0.8666666666666667
 </pre></div>
 </div>

@@ -166,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
@@ -621,7 +622,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x16b257d30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x146b288b0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -657,7 +658,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9333333333333333
 </pre></div>
 </div>
 </div>
@@ -670,9 +671,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[13,  0,  0],
-       [ 0,  5,  2],
-       [ 0,  2,  8]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[10,  0,  0],
+       [ 0,  5,  1],
+       [ 0,  1, 13]])
 </pre></div>
 </div>
 </div>
@@ -687,10 +688,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16c9342b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1474bed60&gt;
 </pre></div>
 </div>
-<img alt="_images/96be06254b3803e195bbbb2f98af5d382b2d8fae9719354d31b40d9330e1129f.png" src="_images/96be06254b3803e195bbbb2f98af5d382b2d8fae9719354d31b40d9330e1129f.png" />
+<img alt="_images/da09f760c3897d1d0272584833dc1171f934f3fe168d2df11c5d4b29765e09d5.png" src="_images/da09f760c3897d1d0272584833dc1171f934f3fe168d2df11c5d4b29765e09d5.png" />
 </div>
 </div>
 <p>There are a couple of ways we can attempt to improve our results while still using the ridge classifier algorithm. First, since ridge classifier is a regularized algorithm, we can try applying the standard scaler to the data to change its scale.</p>
@@ -716,13 +717,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9333333333333333
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16c971910&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1474e1b50&gt;
 </pre></div>
 </div>
-<img alt="_images/31b7a189010d91f7d79df0f019547a2557854cc962fff403c320b0247d1b1abd.png" src="_images/31b7a189010d91f7d79df0f019547a2557854cc962fff403c320b0247d1b1abd.png" />
+<img alt="_images/c567695b15ab83a31b0df0e658dbbc03af340a95d149bb85a5b1bdd9fa46f299.png" src="_images/c567695b15ab83a31b0df0e658dbbc03af340a95d149bb85a5b1bdd9fa46f299.png" />
 </div>
 </div>
 <p>Second, the ridge classifier, like ridge regression, has a hyperparameter, <span class="math notranslate nohighlight">\(\alpha\)</span>. We can attempt to perform hyperparameter tuning to see if there is a value of <span class="math notranslate nohighlight">\(\alpha\)</span> which will give us a better accuracy score.</p>
@@ -746,8 +747,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 11.962324054942298
-BEST SCORE: 0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.0001
+BEST SCORE: 0.9333333333333333
 </pre></div>
 </div>
 </div>

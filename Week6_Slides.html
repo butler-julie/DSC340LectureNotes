@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -377,8 +378,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assuming-we-know-the-number-of-clusters">Assuming We Know the Number of Clusters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-predicted-clusters">Plot the predicted clusters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-to-the-true-clusters">Compare to the True Clusters</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-scaled-data-improve-accuracy">Does Scaled Data Improve Accuracy?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-we-do-not-know-the-number-of-clusters">What is We Do Not Know the Number of Clusters?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-we-do-not-know-the-number-of-clusters">What if We Do Not Know the Number of Clusters?</a></li>
 </ul>
 </li>
 </ul>
@@ -407,7 +407,7 @@ document.write(`
 <p>CSC/DSC 340 Week 6 Slides</p>
 <p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
 <p>Date Created: August 24, 2023</p>
-<p>Last Modified: August 24, 2023</p>
+<p>Last Modified: August 29, 2023</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##############################</span>
@@ -690,7 +690,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x107647310&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x103cda370&gt;
 </pre></div>
 </div>
 <img alt="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" src="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" />
@@ -791,7 +791,6 @@ document.write(`
 <ul>
 <li><p>The sum of the squared distances between each data point and the centroid of its cluster</p></li>
 <li><p>Measure of the compactness of each cluster</p></li>
-<li><p>The objective function seeks to minimize the number of clusters</p></li>
 </ul>
 </li>
 </ul>
@@ -830,10 +829,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17f6710a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1656e1130&gt;
 </pre></div>
 </div>
-<img alt="_images/69787e6188c8c6e47820b0e757a35b8955051d6f3374a1c90107819d8ccb185d.png" src="_images/69787e6188c8c6e47820b0e757a35b8955051d6f3374a1c90107819d8ccb185d.png" />
+<img alt="_images/3d2f1fbe7b46fbc873b8bfa586bb5cbc6b2af4107e96d2ad8bbeab52a19fc59c.png" src="_images/3d2f1fbe7b46fbc873b8bfa586bb5cbc6b2af4107e96d2ad8bbeab52a19fc59c.png" />
 </div>
 </div>
 </section>
@@ -849,8 +848,8 @@ document.write(`
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]):</span>
     <span class="n">true_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
     <span class="n">predicted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cluster_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">true_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">true_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;True </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">predicted_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">predicted_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Predicted </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> (Cluster </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">true_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">true_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;True </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>  <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">predicted_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">predicted_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Predicted </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> (Cluster </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -861,51 +860,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2878c75a98ffa258303d79f06c625efdd512e37baad3fd0d5e66c8b49711dc38.png" src="_images/2878c75a98ffa258303d79f06c625efdd512e37baad3fd0d5e66c8b49711dc38.png" />
+<img alt="_images/534a9aa942e19744950da3dbd914d8ec97db7296569a8c177e63fa5c3c2b570e.png" src="_images/534a9aa942e19744950da3dbd914d8ec97db7296569a8c177e63fa5c3c2b570e.png" />
 </div>
 </div>
 </section>
-<section id="does-scaled-data-improve-accuracy">
-<h4>Does Scaled Data Improve Accuracy?<a class="headerlink" href="#does-scaled-data-improve-accuracy" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
-
-<span class="c1"># Fit the KMeans model</span>
-<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
-
-<span class="c1"># Predict the clusters</span>
-<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the clusters</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]):</span>
-    <span class="n">true_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
-    <span class="n">predicted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cluster_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">true_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">true_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;True </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">predicted_indices</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">predicted_indices</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Predicted </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> (Cluster </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;KMeans Clustering of Wine Dataset&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/a73d2b97289f17f37032effbd05ccb230954e22f5306370a49e255b6d4c7ffb1.png" src="_images/a73d2b97289f17f37032effbd05ccb230954e22f5306370a49e255b6d4c7ffb1.png" />
-</div>
-</div>
-</section>
-<section id="what-is-we-do-not-know-the-number-of-clusters">
-<h4>What is We Do Not Know the Number of Clusters?<a class="headerlink" href="#what-is-we-do-not-know-the-number-of-clusters" title="Permalink to this heading">#</a></h4>
+<section id="what-if-we-do-not-know-the-number-of-clusters">
+<h4>What if We Do Not Know the Number of Clusters?<a class="headerlink" href="#what-if-we-do-not-know-the-number-of-clusters" title="Permalink to this heading">#</a></h4>
 <p>Method 1: Elbow Plot</p>
 <ul class="simple">
 <li><p>Plot of WCSS vs. the number of clusters</p></li>
@@ -932,24 +892,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0afb1000e8ac3bfe4c337f6d3e1b7d03218d77f1a3c847a089140772c08c42d6.png" src="_images/0afb1000e8ac3bfe4c337f6d3e1b7d03218d77f1a3c847a089140772c08c42d6.png" />
-</div>
-</div>
-<p>We can also plot the difference in inertia values to see if this gives a clearer picture.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inertia_values</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">inertia_values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Clusters&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Inertia(i+1) - Inertia(i)&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Inertia(i+1) - Inertia(i)&#39;)
-</pre></div>
-</div>
-<img alt="_images/b8a1ba046b42ac017c862ee277cf6bb652ecb75b2444a6209796d788f391ed6d.png" src="_images/b8a1ba046b42ac017c862ee277cf6bb652ecb75b2444a6209796d788f391ed6d.png" />
+<img alt="_images/ae625c437d41c241d27b73495802f19d810c20da491f5ec48f890b8d11cf3b94.png" src="_images/ae625c437d41c241d27b73495802f19d810c20da491f5ec48f890b8d11cf3b94.png" />
 </div>
 </div>
 <p>Method 2: Silhouette Scores</p>
@@ -982,15 +925,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e2c8f2d8602492b2b9fe32470f27ae6096650c6562015286cb506335a49da6c9.png" src="_images/e2c8f2d8602492b2b9fe32470f27ae6096650c6562015286cb506335a49da6c9.png" />
+<img alt="_images/7f8dd8a6a844dc353e84291c2b3e08e2d0542e622f6301c81b92f9198ce80b2b.png" src="_images/7f8dd8a6a844dc353e84291c2b3e08e2d0542e622f6301c81b92f9198ce80b2b.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>Need to set initialization and convergence criteria for Kmeans algorithms</p>
 <ul>
 <li><p>Scikit-Learn does provide defaults</p></li>
-<li><p>Random initialization: initial centroids are randomly placed, can suffer from poor convergence</p></li>
-<li><p>KMeans++ selectric centroids more intelligently with probability</p></li>
+<li><p>Random initialization: Initial centroids are randomly placed, and can suffer from poor convergence</p></li>
+<li><p>KMeans++ selects centroids more intelligently with probability</p></li>
 </ul>
 </li>
 <li><p>Challenges of KMeans: sensitivity to initialization, handling outliers, determining the optimal number of clusters</p></li>
@@ -1002,9 +945,9 @@ document.write(`
 <h2>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Reducing the number of dimensions in the data set while preserving the essential information needed to train a model</p></li>
-<li><p>High dimensional data can lead to overfitting, increased complexity, and computational effeciencies</p></li>
+<li><p>High dimensional data can lead to overfitting, increased complexity, and poorcomputational efficiency</p></li>
 <li><p>Two main ways to reduce dimensions: feature selection selects a subset of original features, while feature extraction creates new features</p></li>
-<li><p>General machine learning workflow will involve peformin dimensionality reduction of the features of the data set (unsupervised learning) and the using those reduced features and the data set labels to train a classification or regression model (supervised learning)</p></li>
+<li><p>General machine learning workflow will involve peforming dimensionality reduction of the features of the data set (unsupervised learning) and the use of those reduced features and the data set labels to train a classification or regression model (supervised learning)</p></li>
 </ul>
 <section id="principal-component-analysis-pca">
 <h3>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this heading">#</a></h3>
@@ -1012,6 +955,7 @@ document.write(`
 <li><p>A dimensionality reduction technique used to transform high-dimensional data into lower-dimensional data while retaining as much variance as possible</p></li>
 <li><p>Benefits: reduced noise and complexity, improved visualization and computational effiecency</p></li>
 </ul>
+<p><img alt="PCA" src="https://raw.githubusercontent.com/Akramz/Hands-on-Machine-Learning-with-Scikit-Learn-Keras-and-TensorFlow/63b8d7a91ff1ca2fdc35947a6a390c5a81085bd2//static/imgs/2D_variance_projection.png" /></p>
 <section id="how-does-pca-work">
 <h4>How does PCA Work?<a class="headerlink" href="#how-does-pca-work" title="Permalink to this heading">#</a></h4>
 <ol class="arabic simple">
@@ -1025,7 +969,7 @@ document.write(`
 <li><p>Calculate the eigenvectors and eigenvalues of the covariance matrix</p></li>
 <li><p>Select principal components based on eigenvalues</p>
 <ul class="simple">
-<li><p>largest eigenvalye of the covariance matrix has the eigenvector (principal component) that captures the most variance</p></li>
+<li><p>largest eigenvalue of the covariance matrix has the eigenvector (principal component) that captures the most variance</p></li>
 </ul>
 </li>
 <li><p>Transform the data to lower dimension</p>
@@ -1040,7 +984,7 @@ document.write(`
 <section id="interpretability-and-challenges">
 <h2>Interpretability and Challenges<a class="headerlink" href="#interpretability-and-challenges" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The principal components can be interpreted as linear combinations of the original features <strong>but</strong> tthey have no direct physical meaning</p></li>
+<li><p>The principal components can be interpreted as linear combinations of the original features <strong>but</strong> the lower dimensional data has no physical interpretation.</p></li>
 <li><p>Limitations</p>
 <ul>
 <li><p>Dimensionality reduction can lead to a potential loss of information</p></li>
@@ -1077,7 +1021,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.94
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 1.00
 </pre></div>
 </div>
 </div>
@@ -1107,18 +1051,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.92
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.83
 Number of Components: 2 Accuracy: 0.97
-Number of Components: 3 Accuracy: 0.89
-Number of Components: 4 Accuracy: 0.97
-Number of Components: 5 Accuracy: 0.94
-Number of Components: 6 Accuracy: 0.94
-Number of Components: 7 Accuracy: 0.94
-Number of Components: 8 Accuracy: 0.94
-Number of Components: 9 Accuracy: 0.94
-Number of Components: 10 Accuracy: 0.94
-Number of Components: 11 Accuracy: 0.94
-Number of Components: 12 Accuracy: 0.94
+Number of Components: 3 Accuracy: 1.00
+Number of Components: 4 Accuracy: 1.00
+Number of Components: 5 Accuracy: 0.97
+Number of Components: 6 Accuracy: 1.00
+Number of Components: 7 Accuracy: 1.00
+Number of Components: 8 Accuracy: 1.00
+Number of Components: 9 Accuracy: 1.00
+Number of Components: 10 Accuracy: 1.00
+Number of Components: 11 Accuracy: 1.00
+Number of Components: 12 Accuracy: 1.00
 </pre></div>
 </div>
 </div>
@@ -1145,7 +1089,7 @@ Number of Components: 12 Accuracy: 0.94
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.94
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 1.00
 </pre></div>
 </div>
 </div>
@@ -1189,8 +1133,8 @@ Number of Components: 12 Accuracy: 0.94
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 0.9292644783619163, &#39;svc__kernel&#39;: &#39;rbf&#39;}
-Accuracy: 0.97
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 0.8021543896469628, &#39;svc__kernel&#39;: &#39;rbf&#39;}
+Accuracy: 1.00
 </pre></div>
 </div>
 </div>
@@ -1262,7 +1206,7 @@ Accuracy: 0.97
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;See Legend&#39;)
 </pre></div>
 </div>
-<img alt="_images/7108f8ef425233d3c5bdb450313e9be168a75ac37f32578a95ef6c76f8d2a25e.png" src="_images/7108f8ef425233d3c5bdb450313e9be168a75ac37f32578a95ef6c76f8d2a25e.png" />
+<img alt="_images/2d2b8d4ce9d3add73673f8c25abe17d0e927f681dcc231834e881fd80050f1df.png" src="_images/2d2b8d4ce9d3add73673f8c25abe17d0e927f681dcc231834e881fd80050f1df.png" />
 </div>
 </div>
 <p>PCA may not seem very useful for the data sets we encounter in this class, but many real world data sets can have hundreds or thousands of different features, and not all of them will be relevant.</p>
@@ -1340,8 +1284,7 @@ Accuracy: 0.97
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#assuming-we-know-the-number-of-clusters">Assuming We Know the Number of Clusters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-predicted-clusters">Plot the predicted clusters</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-to-the-true-clusters">Compare to the True Clusters</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#does-scaled-data-improve-accuracy">Does Scaled Data Improve Accuracy?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-we-do-not-know-the-number-of-clusters">What is We Do Not Know the Number of Clusters?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-we-do-not-know-the-number-of-clusters">What if We Do Not Know the Number of Clusters?</a></li>
 </ul>
 </li>
 </ul>
