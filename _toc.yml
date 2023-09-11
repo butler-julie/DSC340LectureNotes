@@ -11,6 +11,7 @@ parts:
     - file: Week3_LectureNotes
     - file: Week4_LectureNotes
     - file: Week5_LectureNotes
+    - file: Week6_LectureNotes
   - caption: Slides
     chapters:
     - file: Week1_Slides
