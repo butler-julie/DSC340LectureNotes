@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week5_Slides';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Unsupervised Machine Learning: Clustering and Dimensionality Reduction" href="Week6_Slides.html" />
     <link rel="prev" title="Classification Problems" href="Week4_Slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -165,6 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_LectureNotes.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_LectureNotes.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -172,6 +178,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_Slides.html">Classification Problems</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_Slides.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 
     </div>
@@ -424,12 +435,13 @@ document.write(`
 <p>CSC/DSC 340 Week 5 Slides</p>
 <p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
 <p>Date Created: August 19, 2023</p>
-<p>Last Modified: August 19, 2023</p>
+<p>Last Modified: September 18, 2023</p>
 <section id="plan-for-the-week">
 <h2>Plan for the Week<a class="headerlink" href="#plan-for-the-week" title="Permalink to this heading">#</a></h2>
 <p><strong>Monday</strong></p>
 <p>Week 5 Pre-Class Homework and Week 4 In-Class Assignment Due</p>
 <p>Lecture: Model Optimization and Nonlinear Models</p>
+<p>Office Hours: 1pm - 3pm</p>
 <p><strong>Tuesday</strong></p>
 <p>Office Hours: 4pm - 6pm</p>
 <p><strong>Wednesday</strong></p>
@@ -437,9 +449,10 @@ document.write(`
 <p>Start Week 5 In-Class Assignment</p>
 <p>Week 4 Post-Class Homework Due</p>
 <p><strong>Thursday</strong></p>
-<p>Office Hours: 11am - 1pm</p>
+<p>Office Hours: 12:30 - 2pm</p>
 <p><strong>Friday</strong></p>
 <p>In-Class Assignment Week 5</p>
+<p>Problem Analysis Due Before Class (~1 page)</p>
 </section>
 <section id="part-1-hyperparameter-tuning">
 <h2>Part 1: Hyperparameter Tuning<a class="headerlink" href="#part-1-hyperparameter-tuning" title="Permalink to this heading">#</a></h2>
@@ -462,20 +475,6 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span> <span class="k">as</span> <span class="n">MSE</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_california_housing</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">Ridge</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
 </pre></div>
 </div>
 </div>
@@ -561,13 +560,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.5092222700374358
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.5339181463854598
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1ca67fbdcd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1798fddf0&gt;
 </pre></div>
 </div>
-<img alt="_images/f32067e89eda9a65d8980ba707f9f7dc0f6d6b029913c918e3ca946774be7b0b.png" src="_images/f32067e89eda9a65d8980ba707f9f7dc0f6d6b029913c918e3ca946774be7b0b.png" />
+<img alt="_images/c1a17f0183e9bedc7f268baef20777ce89f038f0b4cce4862995cf7aa8170dec.png" src="_images/c1a17f0183e9bedc7f268baef20777ce89f038f0b4cce4862995cf7aa8170dec.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -590,13 +589,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 1.3243939059095313
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 1.3128478550719027
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1ca68083e50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x179a99a90&gt;
 </pre></div>
 </div>
-<img alt="_images/c77f605c2b975c6ccad1e0e14dbca1e15adea24f90ccaef720514c79c1328da8.png" src="_images/c77f605c2b975c6ccad1e0e14dbca1e15adea24f90ccaef720514c79c1328da8.png" />
+<img alt="_images/fd41468a2b3be4bd3668a50a82eddcb44d7d4e03ddf1851fb97947059e755005.png" src="_images/fd41468a2b3be4bd3668a50a82eddcb44d7d4e03ddf1851fb97947059e755005.png" />
 </div>
 </div>
 </section>
@@ -630,8 +629,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 0 ns
-Wall time: 1e+03 µs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.72 ms, sys: 7.04 ms, total: 9.76 ms
+Wall time: 1.26 ms
 </pre></div>
 </div>
 </div>
@@ -649,13 +648,13 @@ Wall time: 1e+03 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.21051424465105423
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.264010238579889
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1ca6d62d390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1799ecac0&gt;
 </pre></div>
 </div>
-<img alt="_images/9c090c9e1dff20b1ba8e73908c61739989ebcac9f4c56115d6e0d653d726c27d.png" src="_images/9c090c9e1dff20b1ba8e73908c61739989ebcac9f4c56115d6e0d653d726c27d.png" />
+<img alt="_images/a1df38b0e6396a357d17a32b9d1fe3e9964391663d341167afacd94478a83252.png" src="_images/a1df38b0e6396a357d17a32b9d1fe3e9964391663d341167afacd94478a83252.png" />
 </div>
 </div>
 <section id="pros">
@@ -696,8 +695,8 @@ Wall time: 1e+03 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 625 ms
-Wall time: 628 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 729 ms, sys: 1.48 ms, total: 730 ms
+Wall time: 357 ms
 </pre></div>
 </div>
 </div>
@@ -720,14 +719,14 @@ Wall time: 628 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.2070867887631969
-CHOSEN ALPHA: 3.6104185971733447
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.2599548778728778
+CHOSEN ALPHA: 263.88908144575294
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1ca6d6ad490&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x17ac6fcd0&gt;
 </pre></div>
 </div>
-<img alt="_images/da35644f508183c292cbf799085a848ab8bfeabafc8cb64b8514ac7fe6231aac.png" src="_images/da35644f508183c292cbf799085a848ab8bfeabafc8cb64b8514ac7fe6231aac.png" />
+<img alt="_images/a040391b212ffe2311be22150d1992e66bd6e26c5b12a429cf10eefee4d70fb7.png" src="_images/a040391b212ffe2311be22150d1992e66bd6e26c5b12a429cf10eefee4d70fb7.png" />
 </div>
 </div>
 <section id="id1">
@@ -775,9 +774,9 @@ CHOSEN ALPHA: 3.6104185971733447
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alpha&#39;: 0.28966256925535433}
-CPU times: total: 20 s
-Wall time: 20 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alpha&#39;: 0.014395662170943558}
+CPU times: user 11.8 s, sys: 27.2 ms, total: 11.8 s
+Wall time: 11.4 s
 </pre></div>
 </div>
 </div>
@@ -800,14 +799,14 @@ Wall time: 20 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.2167862778568034
-CHOSEN ALPHA: 0.28966256925535433
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.2656103239326501
+CHOSEN ALPHA: 0.014395662170943558
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1ca6d861890&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x17acacc40&gt;
 </pre></div>
 </div>
-<img alt="_images/519f815c156008d4b8d2eb7e749c1c613fef26e5b1a67607dc7ba5e4e826f896.png" src="_images/519f815c156008d4b8d2eb7e749c1c613fef26e5b1a67607dc7ba5e4e826f896.png" />
+<img alt="_images/62ab167164c942b12d755269cb8314c87f2523af3c764a70868c13971f0983b6.png" src="_images/62ab167164c942b12d755269cb8314c87f2523af3c764a70868c13971f0983b6.png" />
 </div>
 </div>
 <section id="id3">
@@ -849,9 +848,9 @@ CHOSEN ALPHA: 0.28966256925535433
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alpha&#39;: 0.2894503404237785} -0.32083916467421225
-CPU times: total: 20 s
-Wall time: 20 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alpha&#39;: 0.013960454505147268} -0.3093026718132764
+CPU times: user 11.8 s, sys: 70.8 ms, total: 11.9 s
+Wall time: 11.5 s
 </pre></div>
 </div>
 </div>
@@ -874,14 +873,14 @@ Wall time: 20 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.21678949380155416
-CHOSEN ALPHA: 0.2894503404237785
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.26561194390532417
+CHOSEN ALPHA: 0.013960454505147268
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1ca6d7e8750&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x17b415b50&gt;
 </pre></div>
 </div>
-<img alt="_images/519f815c156008d4b8d2eb7e749c1c613fef26e5b1a67607dc7ba5e4e826f896.png" src="_images/519f815c156008d4b8d2eb7e749c1c613fef26e5b1a67607dc7ba5e4e826f896.png" />
+<img alt="_images/62ab167164c942b12d755269cb8314c87f2523af3c764a70868c13971f0983b6.png" src="_images/62ab167164c942b12d755269cb8314c87f2523af3c764a70868c13971f0983b6.png" />
 </div>
 </div>
 <section id="id5">
@@ -919,9 +918,9 @@ CHOSEN ALPHA: 0.2894503404237785
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2662073961103295
-CPU times: total: 0 ns
-Wall time: 3 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.389084346528441
+CPU times: user 11.4 ms, sys: 981 µs, total: 12.3 ms
+Wall time: 4.44 ms
 </pre></div>
 </div>
 </div>
@@ -944,14 +943,14 @@ Wall time: 3 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.21495950326574317
-CHOSEN ALPHA: 3.2662073961103295
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.2643275849097962
+CHOSEN ALPHA: 3.389084346528441
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1ca6db0f810&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x17b8485b0&gt;
 </pre></div>
 </div>
-<img alt="_images/6d92c676041fe427d7eaaaff0e1ddc35b3b7b18232be779d4b4a7997e9e52fee.png" src="_images/6d92c676041fe427d7eaaaff0e1ddc35b3b7b18232be779d4b4a7997e9e52fee.png" />
+<img alt="_images/e40181cd4908cff8ab7dcf49cf41644ff23aa08f7e69fc7815c613d7a6ed1ca7.png" src="_images/e40181cd4908cff8ab7dcf49cf41644ff23aa08f7e69fc7815c613d7a6ed1ca7.png" />
 </div>
 </div>
 <section id="id7">
@@ -978,7 +977,7 @@ CHOSEN ALPHA: 3.2662073961103295
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;for loops&#39;</span><span class="p">,</span> <span class="s1">&#39;GridSearchCV&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomizedSearchCV&#39;</span><span class="p">,</span> <span class="s1">&#39;Bayesian&#39;</span><span class="p">]</span>
 <span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1e-15</span><span class="p">,</span> <span class="mf">769.79</span><span class="p">,</span> <span class="mf">3.99</span><span class="p">,</span> <span class="mf">1.90</span><span class="p">]</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.522</span><span class="p">,</span> <span class="mf">0.522</span><span class="p">,</span> <span class="mf">0.544</span><span class="p">,</span> <span class="mf">0.522</span><span class="p">,</span> <span class="mf">0.522</span><span class="p">]</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.23461613368850237</span><span class="p">,</span> <span class="mf">0.2343672966024232</span><span class="p">,</span> <span class="mf">0.23546465060931623</span><span class="p">,</span> <span class="mf">0.23546192678932165</span><span class="p">,</span> <span class="mf">0.23439940455100014</span><span class="p">]</span>
 <span class="n">run_times</span> <span class="o">=</span> <span class="p">[</span><span class="mf">20.8</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="mf">57.7</span><span class="p">,</span> <span class="mi">7</span><span class="o">*</span><span class="mi">60</span><span class="o">+</span><span class="mi">40</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">]</span> <span class="c1">#ms</span>
 </pre></div>
 </div>
@@ -1014,7 +1013,7 @@ CHOSEN ALPHA: 3.2662073961103295
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Hyperparameter Tuning Method&#39;)
 </pre></div>
 </div>
-<img alt="_images/250e5cd7638ddce826bf2b3eb2dfc5b1b207118385dacabc3881407995d407b4.png" src="_images/250e5cd7638ddce826bf2b3eb2dfc5b1b207118385dacabc3881407995d407b4.png" />
+<img alt="_images/c569609b03b2b8cd2958ff13526a5371972b26bb99fe955c13411ce0675694cf.png" src="_images/c569609b03b2b8cd2958ff13526a5371972b26bb99fe955c13411ce0675694cf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1064,14 +1063,14 @@ CHOSEN ALPHA: 3.2662073961103295
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1ca6dc02610&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x17b1ebc40&gt;
 </pre></div>
 </div>
-<img alt="_images/ed4d730e08407096f578021557b4dbb6e9849e88b71f7963408d42a722e0bf97.png" src="_images/ed4d730e08407096f578021557b4dbb6e9849e88b71f7963408d42a722e0bf97.png" />
+<img alt="_images/29e1911ab88806df1cefd2eb1c2db9c06b601abbcf39edf4493ade0e7bbed693.png" src="_images/29e1911ab88806df1cefd2eb1c2db9c06b601abbcf39edf4493ade0e7bbed693.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1087,14 +1086,14 @@ CHOSEN ALPHA: 3.2662073961103295
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1ca78f390d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1799af040&gt;
 </pre></div>
 </div>
-<img alt="_images/caa26b9c18e11eeb04467ad5ef3ec572adc047f7ba27af4e1d40f36534dd8de8.png" src="_images/caa26b9c18e11eeb04467ad5ef3ec572adc047f7ba27af4e1d40f36534dd8de8.png" />
+<img alt="_images/68274e887d44cf0a0803e14fc940d61275c62e51054971d8cdb74650fcc7cdf5.png" src="_images/68274e887d44cf0a0803e14fc940d61275c62e51054971d8cdb74650fcc7cdf5.png" />
 </div>
 </div>
 </section>
@@ -1145,109 +1144,109 @@ CHOSEN ALPHA: 3.2662073961103295
     <tr>
       <th>MedInc</th>
       <td>1.000000</td>
-      <td>-0.112005</td>
-      <td>0.631367</td>
-      <td>-0.224834</td>
-      <td>0.039017</td>
-      <td>-0.058359</td>
-      <td>-0.073645</td>
-      <td>-0.035493</td>
-      <td>0.634589</td>
+      <td>-0.158525</td>
+      <td>0.657997</td>
+      <td>-0.161880</td>
+      <td>0.051620</td>
+      <td>-0.077685</td>
+      <td>-0.063036</td>
+      <td>-0.030648</td>
+      <td>0.634470</td>
     </tr>
     <tr>
       <th>HouseAge</th>
-      <td>-0.112005</td>
+      <td>-0.158525</td>
       <td>1.000000</td>
-      <td>-0.187494</td>
-      <td>-0.141478</td>
-      <td>-0.345641</td>
-      <td>-0.031877</td>
-      <td>-0.006767</td>
-      <td>-0.072361</td>
-      <td>0.130204</td>
+      <td>-0.262977</td>
+      <td>-0.145891</td>
+      <td>-0.315792</td>
+      <td>-0.040345</td>
+      <td>0.020747</td>
+      <td>-0.102341</td>
+      <td>0.109545</td>
     </tr>
     <tr>
       <th>AveRooms</th>
-      <td>0.631367</td>
-      <td>-0.187494</td>
+      <td>0.657997</td>
+      <td>-0.262977</td>
       <td>1.000000</td>
-      <td>0.266857</td>
-      <td>-0.036939</td>
-      <td>-0.010092</td>
-      <td>0.149356</td>
-      <td>-0.112851</td>
-      <td>0.228032</td>
+      <td>0.283448</td>
+      <td>-0.027409</td>
+      <td>0.008438</td>
+      <td>0.130680</td>
+      <td>-0.075080</td>
+      <td>0.234197</td>
     </tr>
     <tr>
       <th>AveBedrms</th>
-      <td>-0.224834</td>
-      <td>-0.141478</td>
-      <td>0.266857</td>
+      <td>-0.161880</td>
+      <td>-0.145891</td>
+      <td>0.283448</td>
       <td>1.000000</td>
-      <td>-0.034818</td>
-      <td>-0.147259</td>
-      <td>0.065357</td>
-      <td>-0.014019</td>
-      <td>-0.091087</td>
+      <td>-0.035038</td>
+      <td>-0.080797</td>
+      <td>0.050771</td>
+      <td>0.008101</td>
+      <td>-0.051021</td>
     </tr>
     <tr>
       <th>Population</th>
-      <td>0.039017</td>
-      <td>-0.345641</td>
-      <td>-0.036939</td>
-      <td>-0.034818</td>
+      <td>0.051620</td>
+      <td>-0.315792</td>
+      <td>-0.027409</td>
+      <td>-0.035038</td>
       <td>1.000000</td>
-      <td>0.219505</td>
-      <td>-0.098055</td>
-      <td>0.088908</td>
-      <td>-0.001405</td>
+      <td>0.198044</td>
+      <td>-0.112937</td>
+      <td>0.116462</td>
+      <td>-0.021513</td>
     </tr>
     <tr>
       <th>AveOccup</th>
-      <td>-0.058359</td>
-      <td>-0.031877</td>
-      <td>-0.010092</td>
-      <td>-0.147259</td>
-      <td>0.219505</td>
+      <td>-0.077685</td>
+      <td>-0.040345</td>
+      <td>0.008438</td>
+      <td>-0.080797</td>
+      <td>0.198044</td>
       <td>1.000000</td>
-      <td>-0.152587</td>
-      <td>0.168939</td>
-      <td>-0.280118</td>
+      <td>-0.194549</td>
+      <td>0.209353</td>
+      <td>-0.346774</td>
     </tr>
     <tr>
       <th>Latitude</th>
-      <td>-0.073645</td>
-      <td>-0.006767</td>
-      <td>0.149356</td>
-      <td>0.065357</td>
-      <td>-0.098055</td>
-      <td>-0.152587</td>
+      <td>-0.063036</td>
+      <td>0.020747</td>
+      <td>0.130680</td>
+      <td>0.050771</td>
+      <td>-0.112937</td>
+      <td>-0.194549</td>
       <td>1.000000</td>
-      <td>-0.927224</td>
-      <td>-0.147919</td>
+      <td>-0.929462</td>
+      <td>-0.148525</td>
     </tr>
     <tr>
       <th>Longitude</th>
-      <td>-0.035493</td>
-      <td>-0.072361</td>
-      <td>-0.112851</td>
-      <td>-0.014019</td>
-      <td>0.088908</td>
-      <td>0.168939</td>
-      <td>-0.927224</td>
+      <td>-0.030648</td>
+      <td>-0.102341</td>
+      <td>-0.075080</td>
+      <td>0.008101</td>
+      <td>0.116462</td>
+      <td>0.209353</td>
+      <td>-0.929462</td>
       <td>1.000000</td>
-      <td>-0.061421</td>
+      <td>-0.043875</td>
     </tr>
     <tr>
       <th>target</th>
-      <td>0.634589</td>
-      <td>0.130204</td>
-      <td>0.228032</td>
-      <td>-0.091087</td>
-      <td>-0.001405</td>
-      <td>-0.280118</td>
-      <td>-0.147919</td>
-      <td>-0.061421</td>
+      <td>0.634470</td>
+      <td>0.109545</td>
+      <td>0.234197</td>
+      <td>-0.051021</td>
+      <td>-0.021513</td>
+      <td>-0.346774</td>
+      <td>-0.148525</td>
+      <td>-0.043875</td>
       <td>1.000000</td>
     </tr>
   </tbody>
@@ -1262,10 +1261,10 @@ CHOSEN ALPHA: 3.2662073961103295
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1ca7e6e76d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x2899cfcd0&gt;
 </pre></div>
 </div>
-<img alt="_images/2bc80e5635d255ddc586ddfa006c763ddf5076d74f32accbf43f896eb357f3d7.png" src="_images/2bc80e5635d255ddc586ddfa006c763ddf5076d74f32accbf43f896eb357f3d7.png" />
+<img alt="_images/4b08e9aa682c6cebabfe7b13923180dd447afccf2d7959b5981aa0e43df16fd7.png" src="_images/4b08e9aa682c6cebabfe7b13923180dd447afccf2d7959b5981aa0e43df16fd7.png" />
 </div>
 </div>
 </section>
@@ -1273,25 +1272,20 @@ CHOSEN ALPHA: 3.2662073961103295
 <h2>LASSO Regression for Feature Selection<a class="headerlink" href="#lasso-regression-for-feature-selection" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">housing_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">housing_data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">Z</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">()</span>
-<span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MSE</span><span class="p">(</span><span class="n">ypred</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
 <span class="n">lasso</span><span class="o">.</span><span class="n">coef_</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.,  0.,  0., -0., -0., -0., -0., -0.])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.638471842835069
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.06161184, -0.        ,  0.        , -0.        ,  0.00011673,
+       -0.        ,  0.        ,  0.        ])
 </pre></div>
 </div>
 </div>
@@ -1319,7 +1313,7 @@ CHOSEN ALPHA: 3.2662073961103295
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.41449198151190914
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.34121307212670055
 </pre></div>
 </div>
 </div>
@@ -1347,11 +1341,14 @@ CHOSEN ALPHA: 3.2662073961103295
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.5499925521765495
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.6573139991400708
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Automate the dimensionality reduction with unsupervised learning (next week!)</p></li>
+</ul>
 </section>
 <section id="part-3-nonlinear-models">
 <h2>Part 3: Nonlinear Models<a class="headerlink" href="#part-3-nonlinear-models" title="Permalink to this heading">#</a></h2>
@@ -1395,7 +1392,7 @@ CHOSEN ALPHA: 3.2662073961103295
 <ul class="simple">
 <li><p>Form of predictions: <span class="math notranslate nohighlight">\(\hat{y}(x) = \sum_{i=1}^m \theta_ik(x_i,x)\)</span></p></li>
 <li><p>Loss function:<span class="math notranslate nohighlight">\(J(\theta) = MSE(y,\hat{y}) + \frac{\alpha}{2}\sum_{i=1}^n\theta_i^2\)</span></p></li>
-<li><p>Optimized parameters: <span class="math notranslate nohighlight">\(\theta = (\textbf{K}-\alpha\textbf{I})y\)</span></p>
+<li><p>Optimized parameters: <span class="math notranslate nohighlight">\(\theta = (\textbf{K}-\alpha\textbf{I})^{-1}y\)</span></p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\textbf{K} = k(x_i, x_j)\)</span></p></li>
 </ul>
@@ -1416,7 +1413,9 @@ CHOSEN ALPHA: 3.2662073961103295
 <h2>Housing Data with Kernel Ridge Regression<a class="headerlink" href="#housing-data-with-kernel-ridge-regression" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="kn">import</span> <span class="n">KernelRidge</span>
+
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
@@ -1426,15 +1425,23 @@ CHOSEN ALPHA: 3.2662073961103295
 <span class="n">Z</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">krr</span> <span class="o">=</span> <span class="n">KernelRidge</span><span class="p">()</span>
+<span class="n">krr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">krr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">MSE</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 4.327345119336953
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.kernel_ridge</span> <span class="kn">import</span> <span class="n">KernelRidge</span>
-
-<span class="n">distributions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">uniform</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> \
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distributions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">uniform</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> \
                                                             <span class="s1">&#39;polynomial&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">,</span> \
                                                             <span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="s1">&#39;laplacian&#39;</span><span class="p">],</span> \
                  <span class="s1">&#39;gamma&#39;</span><span class="p">:</span><span class="n">uniform</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>\
@@ -1451,324 +1458,189 @@ CHOSEN ALPHA: 3.2662073961103295
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py:824: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py&quot;, line 813, in _score
-    scores = scorer(estimator, X_test, y_test)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 266, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 353, in _score
-    y_pred = method_caller(estimator, &quot;predict&quot;, X)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 86, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_response.py&quot;, line 109, in _get_response_values
-    y_pred, pos_label = estimator.predict(X), None
-                        ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 236, in predict
-    K = self._get_kernel(X, self.X_fit_)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 168, in _get_kernel
-    return pairwise_kernels(X, Y, metric=self.kernel, filter_params=True, **params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 2365, in pairwise_kernels
-    return _parallel_pairwise(X, Y, func, n_jobs, **kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 1765, in _parallel_pairwise
-    return func(X, Y, **kwds)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 201, in wrapper
-    validate_parameter_constraints(
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 95, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The &#39;degree&#39; parameter of polynomial_kernel must be a float in the range [1.0, inf). Got 0 instead.
-
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py:824: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py&quot;, line 813, in _score
-    scores = scorer(estimator, X_test, y_test)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 266, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 353, in _score
-    y_pred = method_caller(estimator, &quot;predict&quot;, X)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 86, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_response.py&quot;, line 109, in _get_response_values
-    y_pred, pos_label = estimator.predict(X), None
-                        ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 236, in predict
-    K = self._get_kernel(X, self.X_fit_)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 168, in _get_kernel
-    return pairwise_kernels(X, Y, metric=self.kernel, filter_params=True, **params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 2365, in pairwise_kernels
-    return _parallel_pairwise(X, Y, func, n_jobs, **kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 1765, in _parallel_pairwise
-    return func(X, Y, **kwds)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 201, in wrapper
-    validate_parameter_constraints(
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 95, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The &#39;degree&#39; parameter of polynomial_kernel must be a float in the range [1.0, inf). Got 0 instead.
-
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py:824: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py&quot;, line 813, in _score
-    scores = scorer(estimator, X_test, y_test)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 266, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 353, in _score
-    y_pred = method_caller(estimator, &quot;predict&quot;, X)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 86, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_response.py&quot;, line 109, in _get_response_values
-    y_pred, pos_label = estimator.predict(X), None
-                        ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 236, in predict
-    K = self._get_kernel(X, self.X_fit_)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 168, in _get_kernel
-    return pairwise_kernels(X, Y, metric=self.kernel, filter_params=True, **params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 2365, in pairwise_kernels
-    return _parallel_pairwise(X, Y, func, n_jobs, **kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 1765, in _parallel_pairwise
-    return func(X, Y, **kwds)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 201, in wrapper
-    validate_parameter_constraints(
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 95, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The &#39;degree&#39; parameter of polynomial_kernel must be a float in the range [1.0, inf). Got 0 instead.
-
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py:824: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py&quot;, line 813, in _score
-    scores = scorer(estimator, X_test, y_test)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 266, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 353, in _score
-    y_pred = method_caller(estimator, &quot;predict&quot;, X)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 86, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_response.py&quot;, line 109, in _get_response_values
-    y_pred, pos_label = estimator.predict(X), None
-                        ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 236, in predict
-    K = self._get_kernel(X, self.X_fit_)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 168, in _get_kernel
-    return pairwise_kernels(X, Y, metric=self.kernel, filter_params=True, **params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 2365, in pairwise_kernels
-    return _parallel_pairwise(X, Y, func, n_jobs, **kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 1765, in _parallel_pairwise
-    return func(X, Y, **kwds)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 201, in wrapper
-    validate_parameter_constraints(
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 95, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The &#39;degree&#39; parameter of polynomial_kernel must be a float in the range [1.0, inf). Got 0 instead.
-
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py:824: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_validation.py&quot;, line 813, in _score
-    scores = scorer(estimator, X_test, y_test)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 266, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 353, in _score
-    y_pred = method_caller(estimator, &quot;predict&quot;, X)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\_scorer.py&quot;, line 86, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_response.py&quot;, line 109, in _get_response_values
-    y_pred, pos_label = estimator.predict(X), None
-                        ^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 236, in predict
-    K = self._get_kernel(X, self.X_fit_)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\kernel_ridge.py&quot;, line 168, in _get_kernel
-    return pairwise_kernels(X, Y, metric=self.kernel, filter_params=True, **params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 2365, in pairwise_kernels
-    return _parallel_pairwise(X, Y, func, n_jobs, **kwds)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\metrics\pairwise.py&quot;, line 1765, in _parallel_pairwise
-    return func(X, Y, **kwds)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 201, in wrapper
-    validate_parameter_constraints(
-  File &quot;C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py&quot;, line 95, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The &#39;degree&#39; parameter of polynomial_kernel must be a float in the range [1.0, inf). Got 0 instead.
-
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
-  warnings.warn(
-C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\linear_model\_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
   warnings.warn(
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomizedSearchCV(estimator=KernelRidge(), n_iter=50,
-                   param_distributions={&#39;alpha&#39;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x000001CA6D938450&gt;,
-                                        &#39;coef0&#39;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x000001CA7C364250&gt;,
-                                        &#39;degree&#39;: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
-                                        &#39;gamma&#39;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x000001CA6D8EEA10&gt;,
-                                        &#39;kernel&#39;: [&#39;linear&#39;, &#39;polynomial&#39;,
-                                                   &#39;rbf&#39;, &#39;sigmoid&#39;,
-                                                   &#39;laplacian&#39;]},
-                   scoring=&#39;neg_mean_squared_error&#39;)
-{&#39;alpha&#39;: 1.4955223273616443, &#39;coef0&#39;: 1.7029743989885442, &#39;degree&#39;: 1, &#39;gamma&#39;: 0.9280980797931906, &#39;kernel&#39;: &#39;polynomial&#39;} -0.29103091943862835
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
+  warnings.warn(
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\model_selection\_search.py:976: UserWarning: One or more of the test scores are non-finite: [-1.51721690e+07 -4.15652260e+00 -1.00960953e+03 -3.31163687e+00
- -1.03130897e+08 -6.71115254e+02 -4.64677940e-01             nan
- -4.61585069e+00 -1.34678120e+00 -2.91030919e-01 -2.30785649e+00
- -4.63030021e+00 -3.98732436e+00 -1.43804240e+02 -3.98452064e+00
- -3.45865151e+02 -3.98595913e+00 -3.44015256e+00 -1.46058671e+04
- -3.98668292e+00 -3.21855091e+05 -3.98975635e+00 -3.98632376e+00
- -4.63413319e+00 -6.29402745e-01 -3.99001721e+00 -3.95902555e+00
- -5.03797485e+01 -3.98608535e+00 -4.52769774e+00 -4.04546493e+04
- -3.02002590e+01 -4.58858571e+00 -3.98515048e+00 -3.98596526e+00
- -3.36088050e+00 -2.82397908e+02 -9.88420559e-01 -4.62942507e+00
- -3.98659441e+00 -1.93220687e+05 -4.28575107e+00 -3.98949651e+00
- -4.17559394e+03 -3.08064424e+02 -3.69365561e-01 -2.09419734e+00
- -6.13225089e+02 -3.98685439e+00]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
   warnings.warn(
+/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:250: UserWarning: Singular matrix in solving dual problem. Using least-squares solution instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:248: LinAlgWarning: Ill-conditioned matrix (rcond=1.48849e-17): result may not be accurate.
+  dual_coef = linalg.solve(K, y, assume_a=&quot;pos&quot;, overwrite_a=False)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:248: LinAlgWarning: Ill-conditioned matrix (rcond=4.40689e-18): result may not be accurate.
+  dual_coef = linalg.solve(K, y, assume_a=&quot;pos&quot;, overwrite_a=False)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:248: LinAlgWarning: Ill-conditioned matrix (rcond=5.15047e-18): result may not be accurate.
+  dual_coef = linalg.solve(K, y, assume_a=&quot;pos&quot;, overwrite_a=False)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:248: LinAlgWarning: Ill-conditioned matrix (rcond=4.46344e-18): result may not be accurate.
+  dual_coef = linalg.solve(K, y, assume_a=&quot;pos&quot;, overwrite_a=False)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">krr</span> <span class="o">=</span> <span class="n">KernelRidge</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">krr</span><span class="p">,</span> <span class="n">distributions</span><span class="p">,</span>\
+<span class="g g-Whitespace">     </span><span class="mi">10</span>                                    <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nb">print</span><span class="p">(</span><span class="n">random_search</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="nb">print</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span> <span class="n">random_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/base.py:1151,</span> in <span class="ni">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(estimator, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1144</span>     <span class="n">estimator</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1146</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1147</span>     <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1148</span>         <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
+<span class="g g-Whitespace">   </span><span class="mi">1149</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1150</span> <span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1151</span>     <span class="k">return</span> <span class="n">fit_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/model_selection/_search.py:898,</span> in <span class="ni">BaseSearchCV.fit</span><span class="nt">(self, X, y, groups, **fit_params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">892</span>     <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_results</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">893</span>         <span class="n">all_candidate_params</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">,</span> <span class="n">all_out</span><span class="p">,</span> <span class="n">all_more_results</span>
+<span class="g g-Whitespace">    </span><span class="mi">894</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">896</span>     <span class="k">return</span> <span class="n">results</span>
+<span class="ne">--&gt; </span><span class="mi">898</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_search</span><span class="p">(</span><span class="n">evaluate_candidates</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">900</span> <span class="c1"># multimetric is determined here because in the case of a callable</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span> <span class="c1"># self.scoring the return type is only known after calling</span>
+<span class="g g-Whitespace">    </span><span class="mi">902</span> <span class="n">first_test_score</span> <span class="o">=</span> <span class="n">all_out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;test_scores&quot;</span><span class="p">]</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/model_selection/_search.py:1806,</span> in <span class="ni">RandomizedSearchCV._run_search</span><span class="nt">(self, evaluate_candidates)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1804</span> <span class="k">def</span> <span class="nf">_run_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaluate_candidates</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1805</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Search n_iter candidates from param_distributions&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1806</span>     <span class="n">evaluate_candidates</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1807</span>         <span class="n">ParameterSampler</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1808</span>             <span class="bp">self</span><span class="o">.</span><span class="n">param_distributions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span>
+<span class="g g-Whitespace">   </span><span class="mi">1809</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1810</span>     <span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/model_selection/_search.py:845,</span> in <span class="ni">BaseSearchCV.fit.&lt;locals&gt;.evaluate_candidates</span><span class="nt">(candidate_params, cv, more_results)</span>
+<span class="g g-Whitespace">    </span><span class="mi">837</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">838</span>     <span class="nb">print</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">839</span>         <span class="s2">&quot;Fitting </span><span class="si">{0}</span><span class="s2"> folds for each of </span><span class="si">{1}</span><span class="s2"> candidates,&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">840</span>         <span class="s2">&quot; totalling </span><span class="si">{2}</span><span class="s2"> fits&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span>             <span class="n">n_splits</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">,</span> <span class="n">n_candidates</span> <span class="o">*</span> <span class="n">n_splits</span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">843</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">845</span> <span class="n">out</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">846</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_fit_and_score</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">847</span>         <span class="n">clone</span><span class="p">(</span><span class="n">base_estimator</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">848</span>         <span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">849</span>         <span class="n">y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">850</span>         <span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">851</span>         <span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">852</span>         <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span>         <span class="n">split_progress</span><span class="o">=</span><span class="p">(</span><span class="n">split_idx</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">854</span>         <span class="n">candidate_progress</span><span class="o">=</span><span class="p">(</span><span class="n">cand_idx</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>         <span class="o">**</span><span class="n">fit_and_score_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span>     <span class="k">for</span> <span class="p">(</span><span class="n">cand_idx</span><span class="p">,</span> <span class="n">parameters</span><span class="p">),</span> <span class="p">(</span><span class="n">split_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>         <span class="nb">enumerate</span><span class="p">(</span><span class="n">candidate_params</span><span class="p">),</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">groups</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">863</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">864</span>         <span class="s2">&quot;No fits were performed. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="s2">&quot;Was the CV iterator empty? &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">866</span>         <span class="s2">&quot;Were there no candidates?&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">867</span>     <span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/utils/parallel.py:65,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="n">iterable_with_config</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="p">(</span><span class="n">_with_config</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">65</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/joblib/parallel.py:1863,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1861</span>     <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sequential_output</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1862</span>     <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1863</span>     <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> <span class="c1"># Let&#39;s create an ID that uniquely identifies the current call. If the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1866</span> <span class="c1"># call is interrupted early and that the same instance is immediately</span>
+<span class="g g-Whitespace">   </span><span class="mi">1867</span> <span class="c1"># re-used, this id will be used to prevent workers that were</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span> <span class="c1"># concurrently finalizing a task from the previous call to run the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span> <span class="c1"># callback.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1870</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/joblib/parallel.py:1792,</span> in <span class="ni">Parallel._get_sequential_output</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1790</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_batches</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">1791</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">-&gt; </span><span class="mi">1792</span> <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1793</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_completed_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">1794</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_progress</span><span class="p">()</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/utils/parallel.py:127,</span> in <span class="ni">_FuncWrapper.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">127</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/model_selection/_validation.py:732,</span> in <span class="ni">_fit_and_score</span><span class="nt">(estimator, X, y, scorer, train, test, verbose, parameters, fit_params, return_train_score, return_parameters, return_n_test_samples, return_times, return_estimator, split_progress, candidate_progress, error_score)</span>
+<span class="g g-Whitespace">    </span><span class="mi">730</span>         <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">731</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">732</span>         <span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">734</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">735</span>     <span class="c1"># Note fit time as time until error</span>
+<span class="g g-Whitespace">    </span><span class="mi">736</span>     <span class="n">fit_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/base.py:1151,</span> in <span class="ni">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(estimator, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1144</span>     <span class="n">estimator</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1146</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1147</span>     <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1148</span>         <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
+<span class="g g-Whitespace">   </span><span class="mi">1149</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1150</span> <span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1151</span>     <span class="k">return</span> <span class="n">fit_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/kernel_ridge.py:210,</span> in <span class="ni">KernelRidge.fit</span><span class="nt">(self, X, y, sample_weight)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span>     <span class="n">ravel</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="n">copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">==</span> <span class="s2">&quot;precomputed&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">210</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual_coef_</span> <span class="o">=</span> <span class="n">_solve_cholesky_kernel</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="k">if</span> <span class="n">ravel</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="bp">self</span><span class="o">.</span><span class="n">dual_coef_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual_coef_</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/sklearn/linear_model/_ridge.py:248,</span> in <span class="ni">_solve_cholesky_kernel</span><span class="nt">(K, y, alpha, sample_weight, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span> <span class="n">K</span><span class="o">.</span><span class="n">flat</span><span class="p">[::</span> <span class="n">n_samples</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span>     <span class="c1"># Note: we must use overwrite_a=False in order to be able to</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="c1">#       use the fall-back solution below in case a LinAlgError</span>
+<span class="g g-Whitespace">    </span><span class="mi">247</span>     <span class="c1">#       is raised</span>
+<span class="ne">--&gt; </span><span class="mi">248</span>     <span class="n">dual_coef</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">assume_a</span><span class="o">=</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="n">overwrite_a</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">249</span> <span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">250</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">251</span>         <span class="s2">&quot;Singular matrix in solving dual problem. Using &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span>         <span class="s2">&quot;least-squares solution instead.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">253</span>     <span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/scipy/linalg/_basic.py:251,</span> in <span class="ni">solve</span><span class="nt">(a, b, lower, overwrite_a, overwrite_b, check_finite, assume_a, transposed)</span>
+<span class="g g-Whitespace">    </span><span class="mi">247</span> <span class="c1"># Positive definite case &#39;posv&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">248</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">249</span>     <span class="n">pocon</span><span class="p">,</span> <span class="n">posv</span> <span class="o">=</span> <span class="n">get_lapack_funcs</span><span class="p">((</span><span class="s1">&#39;pocon&#39;</span><span class="p">,</span> <span class="s1">&#39;posv&#39;</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">250</span>                                    <span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">251</span>     <span class="n">lu</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">posv</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">lower</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span>                        <span class="n">overwrite_a</span><span class="o">=</span><span class="n">overwrite_a</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">253</span>                        <span class="n">overwrite_b</span><span class="o">=</span><span class="n">overwrite_b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="n">_solve_check</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="n">rcond</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">pocon</span><span class="p">(</span><span class="n">lu</span><span class="p">,</span> <span class="n">anorm</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -1798,7 +1670,7 @@ C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\skle
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.23606179582135453
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.23499324697787755
 </pre></div>
 </div>
 </div>
@@ -1813,7 +1685,7 @@ C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\skle
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.531538172246382
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 0.5242651488478602
 </pre></div>
 </div>
 </div>
@@ -1860,6 +1732,15 @@ C:\Users\butlerju\AppData\Local\Programs\Python\Python311\Lib\site-packages\skle
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Classification Problems</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Week6_Slides.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

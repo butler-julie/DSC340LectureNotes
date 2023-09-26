@@ -64,6 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week6_Slides';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A Conceptual and Mathematical Introduction to Neural Networks" href="Week7_Slides_1.html" />
     <link rel="prev" title="Model Optimization and Nonlinear Models" href="Week5_Slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -164,6 +165,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_LectureNotes.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_LectureNotes.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -172,6 +177,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week4_Slides.html">Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_Slides.html">Model Optimization and Nonlinear Models</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 
     </div>
@@ -440,7 +449,7 @@ document.write(`
 <ul class="simple">
 <li><p>178 data points with 13 features and 3 different target values</p></li>
 <li><p>Goal: given information about a wine, predict which of three locations it originated from</p></li>
-<li><p>Data set challenges: varying scales and clas imbalance</p></li>
+<li><p>Data set challenges: varying scales and class imbalance</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -690,7 +699,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x103cda370&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x105922f70&gt;
 </pre></div>
 </div>
 <img alt="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" src="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" />
@@ -829,10 +838,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1656e1130&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x16b6e3af0&gt;
 </pre></div>
 </div>
-<img alt="_images/3d2f1fbe7b46fbc873b8bfa586bb5cbc6b2af4107e96d2ad8bbeab52a19fc59c.png" src="_images/3d2f1fbe7b46fbc873b8bfa586bb5cbc6b2af4107e96d2ad8bbeab52a19fc59c.png" />
+<img alt="_images/26c0b6fc613241ec523c1e12373ec04bac8e4784e5d225b07167f732761d09a7.png" src="_images/26c0b6fc613241ec523c1e12373ec04bac8e4784e5d225b07167f732761d09a7.png" />
 </div>
 </div>
 </section>
@@ -860,7 +869,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/534a9aa942e19744950da3dbd914d8ec97db7296569a8c177e63fa5c3c2b570e.png" src="_images/534a9aa942e19744950da3dbd914d8ec97db7296569a8c177e63fa5c3c2b570e.png" />
+<img alt="_images/02281d5861d56225aefce13e26e067b2996d0d8fc65fb757c4106e90d1b8feae.png" src="_images/02281d5861d56225aefce13e26e067b2996d0d8fc65fb757c4106e90d1b8feae.png" />
 </div>
 </div>
 </section>
@@ -892,7 +901,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ae625c437d41c241d27b73495802f19d810c20da491f5ec48f890b8d11cf3b94.png" src="_images/ae625c437d41c241d27b73495802f19d810c20da491f5ec48f890b8d11cf3b94.png" />
+<img alt="_images/e6a3f4be06f1ab3e00a7006ca9fa4526281ea736a4d5cba4fc048c08bf6408d3.png" src="_images/e6a3f4be06f1ab3e00a7006ca9fa4526281ea736a4d5cba4fc048c08bf6408d3.png" />
 </div>
 </div>
 <p>Method 2: Silhouette Scores</p>
@@ -925,7 +934,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7f8dd8a6a844dc353e84291c2b3e08e2d0542e622f6301c81b92f9198ce80b2b.png" src="_images/7f8dd8a6a844dc353e84291c2b3e08e2d0542e622f6301c81b92f9198ce80b2b.png" />
+<img alt="_images/5b74ce4dc5e97fb9e3ac5348f71afeed8a10594e402e2becff692fe77121fb14.png" src="_images/5b74ce4dc5e97fb9e3ac5348f71afeed8a10594e402e2becff692fe77121fb14.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1021,7 +1030,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 1.00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.94
 </pre></div>
 </div>
 </div>
@@ -1051,18 +1060,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.83
-Number of Components: 2 Accuracy: 0.97
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.89
+Number of Components: 2 Accuracy: 0.94
 Number of Components: 3 Accuracy: 1.00
-Number of Components: 4 Accuracy: 1.00
-Number of Components: 5 Accuracy: 0.97
-Number of Components: 6 Accuracy: 1.00
-Number of Components: 7 Accuracy: 1.00
-Number of Components: 8 Accuracy: 1.00
-Number of Components: 9 Accuracy: 1.00
-Number of Components: 10 Accuracy: 1.00
-Number of Components: 11 Accuracy: 1.00
-Number of Components: 12 Accuracy: 1.00
+Number of Components: 4 Accuracy: 0.97
+Number of Components: 5 Accuracy: 0.94
+Number of Components: 6 Accuracy: 0.94
+Number of Components: 7 Accuracy: 0.94
+Number of Components: 8 Accuracy: 0.94
+Number of Components: 9 Accuracy: 0.94
+Number of Components: 10 Accuracy: 0.94
+Number of Components: 11 Accuracy: 0.94
+Number of Components: 12 Accuracy: 0.94
 </pre></div>
 </div>
 </div>
@@ -1089,7 +1098,7 @@ Number of Components: 12 Accuracy: 1.00
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 1.00
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.94
 </pre></div>
 </div>
 </div>
@@ -1133,7 +1142,7 @@ Number of Components: 12 Accuracy: 1.00
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 0.8021543896469628, &#39;svc__kernel&#39;: &#39;rbf&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 0.5465905677701542, &#39;svc__kernel&#39;: &#39;rbf&#39;}
 Accuracy: 1.00
 </pre></div>
 </div>
@@ -1165,7 +1174,7 @@ Accuracy: 1.00
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of PCA Components: 10
-Accuracy: 0.97
+Accuracy: 0.94
 </pre></div>
 </div>
 </div>
@@ -1206,7 +1215,7 @@ Accuracy: 0.97
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;See Legend&#39;)
 </pre></div>
 </div>
-<img alt="_images/2d2b8d4ce9d3add73673f8c25abe17d0e927f681dcc231834e881fd80050f1df.png" src="_images/2d2b8d4ce9d3add73673f8c25abe17d0e927f681dcc231834e881fd80050f1df.png" />
+<img alt="_images/e3cf2ed2be0f5366f8976413d98618ab5d5e3afbc7e08062c462634463f8dc88.png" src="_images/e3cf2ed2be0f5366f8976413d98618ab5d5e3afbc7e08062c462634463f8dc88.png" />
 </div>
 </div>
 <p>PCA may not seem very useful for the data sets we encounter in this class, but many real world data sets can have hundreds or thousands of different features, and not all of them will be relevant.</p>
@@ -1252,6 +1261,15 @@ Accuracy: 0.97
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Model Optimization and Nonlinear Models</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Week7_Slides_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A Conceptual and Mathematical Introduction to Neural Networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
