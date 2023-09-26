@@ -167,6 +167,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_LectureNotes.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_LectureNotes.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="current nav bd-sidenav">
@@ -175,6 +179,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_Slides.html">Model Optimization and Nonlinear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week6_Slides.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 
     </div>
@@ -665,7 +673,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1698d23a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x105492b20&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -721,9 +729,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[11,  0,  0],
-       [ 0,  4,  4],
-       [ 0,  0, 11]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 6,  0,  0],
+       [ 0,  6,  2],
+       [ 0,  2, 14]])
 </pre></div>
 </div>
 </div>
@@ -738,10 +746,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x102ebc610&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x17e2a1d90&gt;
 </pre></div>
 </div>
-<img alt="_images/c09d861bea9274a8d3fe778abd2ed76684f6837f34862f9f5e3f3a3570f5e1f9.png" src="_images/c09d861bea9274a8d3fe778abd2ed76684f6837f34862f9f5e3f3a3570f5e1f9.png" />
+<img alt="_images/be42bd7ae4b629dd09664093eb1e116bb327c12c9617ddb83ee0922bfb3de817.png" src="_images/be42bd7ae4b629dd09664093eb1e116bb327c12c9617ddb83ee0922bfb3de817.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -771,10 +779,10 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1699252b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x17e2bc490&gt;
 </pre></div>
 </div>
-<img alt="_images/a656bbc16edc52ea4db48f5e1b9dd45f4c4698a9adf9593275e22d94cadd1a55.png" src="_images/a656bbc16edc52ea4db48f5e1b9dd45f4c4698a9adf9593275e22d94cadd1a55.png" />
+<img alt="_images/f56b869f667589787447822d1c47594749c232211dde3d54d181739e4716691b.png" src="_images/f56b869f667589787447822d1c47594749c232211dde3d54d181739e4716691b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -800,7 +808,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1e-05
-BEST SCORE: 0.8666666666666667
+BEST SCORE: 0.8333333333333334
 </pre></div>
 </div>
 </div>

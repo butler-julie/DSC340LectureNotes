@@ -12,6 +12,10 @@ parts:
     - file: Week4_LectureNotes
     - file: Week5_LectureNotes
     - file: Week6_LectureNotes
+    - file: Week7_LectureNotes_1
+    - file: Week7_LectureNotes_2
+    - file: Week8_LectureNotes
+    - file: Week9_LectureNotes
   - caption: Slides
     chapters:
     - file: Week1_Slides
@@ -19,3 +23,7 @@ parts:
     - file: Week4_Slides
     - file: Week5_Slides
     - file: Week6_Slides
+    - file: Week7_Slides_1
+    - file: Week7_Slides_2
+    - file: Week8_Slides
+    - file: Week9_Slides
