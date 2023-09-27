@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week7_Slides_1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -374,7 +376,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-material-covered-so-far">Review of Material Covered So Far</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-material-covered-so-far">Review of Material Covered So Far</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-set-iris-data-set">Data Set: Iris Data Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-ridge-regression">Kernel Ridge Regression</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-neural-network">Conceptual Neural Network</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-node">Neuron/Node</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layers">Layers</a></li>
@@ -436,6 +445,128 @@ document.write(`
 <p>Last Modified: September 26, 2023</p>
 <section id="review-of-material-covered-so-far">
 <h2>Review of Material Covered So Far<a class="headerlink" href="#review-of-material-covered-so-far" title="Permalink to this heading">#</a></h2>
+<section id="the-machine-learning-workflow">
+<h3>The Machine Learning Workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Import and clean data; perform initial analysis
+    * Same as with other machine learning models
+    
+2. Split the data into a training set and test set
+     Same as with other machine learning models
+     
+3. Train your model
+    * A slightly more complicated and lengthy process with neural networks
+    
+4. Test your model&#39;s performance with the test data
+    * Same as with other machine learning models
+    
+5. Improve the model through further data refinement or hyperparameter tuning
+    * Hyperparameter tuning will be much more complicated with neural networks
+</pre></div>
+</div>
+</section>
+<section id="data-set-iris-data-set">
+<h3>Data Set: Iris Data Set<a class="headerlink" href="#data-set-iris-data-set" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Four features with three class labels (clasification problem)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##############################</span>
+<span class="c1">##          IMPORTS         ##</span>
+<span class="c1">##############################</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the iris dataset from sklearn</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c1"># Convert the iris dataset to a pandas dataframe</span>
+<span class="n">iris_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="c1"># Add the target variable to the dataframe</span>
+<span class="n">iris_data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x155516250&gt;
+</pre></div>
+</div>
+<img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
+</div>
+</div>
+</section>
+<section id="linear-regression">
+<h3>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Output for Linear Regression:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\hat{y} = X\theta\)</span></p></li>
+<li><p>For a four feature data set: <span class="math notranslate nohighlight">\(\hat{y} = X_1\theta_1 + X_2\theta_2 + X_3\theta_3 + X_4\theta_4\)</span></p></li>
+<li><p>The output can only be a linear combination of the inputs.</p></li>
+</ul>
+</li>
+<li><p>Loss Function</p>
+<ul>
+<li><p>Mean-Squared Error: <span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{N}\sum_{i=1}^N (y_i - \hat{y}_i)^2\)</span></p></li>
+<li><p>The smaller the value the closer the predictions are to the true results.</p></li>
+</ul>
+</li>
+<li><p>Optimized Weights/Parameters</p>
+<ul>
+<li><p>Found by minimizing the loss function with respect to the weights</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_{Linear} = (X^TX)^{-1}X^Ty\)</span></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="ridge-regression">
+<h3>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Output for Ridge Regression:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\hat{y} = X\theta\)</span></p></li>
+<li><p>For a four feature data set: <span class="math notranslate nohighlight">\(\hat{y} = X_1\theta_1 + X_2\theta_2 + X_3\theta_3 + X_4\theta_4\)</span></p></li>
+<li><p>The output can only be a linear combination of the inputs.</p></li>
+</ul>
+</li>
+<li><p>Loss Function</p>
+<ul>
+<li><p>Regularized Mean-Squared Error: <span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{N}\sum_{i=1}^N (y_i - \hat{y}_i)^2 + \alpha\sum_{i=1}^N|\theta_i|^2\)</span></p></li>
+<li><p>The smaller the value the closer the predictions are to the true results.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is a hyperparameter whose value determines how regularized the algorithm is</p></li>
+</ul>
+</li>
+<li><p>Optimized Weights/Parameters</p>
+<ul>
+<li><p>Found by minimizing the loss function with respect to the weights</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_{Ridge} = (X^TX-\alpha\textbf{I})^{-1}X^Ty\)</span></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="kernel-ridge-regression">
+<h3>Kernel Ridge Regression<a class="headerlink" href="#kernel-ridge-regression" title="Permalink to this heading">#</a></h3>
+</section>
 </section>
 <section id="conceptual-neural-network">
 <h2>Conceptual Neural Network<a class="headerlink" href="#conceptual-neural-network" title="Permalink to this heading">#</a></h2>
@@ -596,7 +727,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-material-covered-so-far">Review of Material Covered So Far</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-material-covered-so-far">Review of Material Covered So Far</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-set-iris-data-set">Data Set: Iris Data Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-ridge-regression">Kernel Ridge Regression</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-neural-network">Conceptual Neural Network</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-node">Neuron/Node</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layers">Layers</a></li>
