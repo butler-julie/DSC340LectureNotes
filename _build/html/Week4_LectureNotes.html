@@ -630,7 +630,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x137f0f520&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x132dd6520&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -666,7 +666,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
 </pre></div>
 </div>
 </div>
@@ -679,9 +679,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 0, 0],
-       [0, 8, 6],
-       [0, 1, 6]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[10,  0,  0],
+       [ 0,  5,  4],
+       [ 0,  1, 10]])
 </pre></div>
 </div>
 </div>
@@ -696,10 +696,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x165019400&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1329381f0&gt;
 </pre></div>
 </div>
-<img alt="_images/9254d04829f69e63119417939d6f0eb52ac262a08c4df5c18ee1bace80e64c40.png" src="_images/9254d04829f69e63119417939d6f0eb52ac262a08c4df5c18ee1bace80e64c40.png" />
+<img alt="_images/1102ebc89270b53491c4c4197c30f6726a3406277a315c19e6834fa4d9d99bd7.png" src="_images/1102ebc89270b53491c4c4197c30f6726a3406277a315c19e6834fa4d9d99bd7.png" />
 </div>
 </div>
 <p>There are a couple of ways we can attempt to improve our results while still using the ridge classifier algorithm. First, since ridge classifier is a regularized algorithm, we can try applying the standard scaler to the data to change its scale.</p>
@@ -725,13 +725,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x137e89b20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1329389a0&gt;
 </pre></div>
 </div>
-<img alt="_images/f6d1b4050cac7de326e4e4727c548f20518b3f0ff39647eeacd75f6bd22065cc.png" src="_images/f6d1b4050cac7de326e4e4727c548f20518b3f0ff39647eeacd75f6bd22065cc.png" />
+<img alt="_images/cae996a28bfaaeb12db17e95ae973c972bf03e92f1a571e1c6a6f1e0fbe7e91c.png" src="_images/cae996a28bfaaeb12db17e95ae973c972bf03e92f1a571e1c6a6f1e0fbe7e91c.png" />
 </div>
 </div>
 <p>Second, the ridge classifier, like ridge regression, has a hyperparameter, <span class="math notranslate nohighlight">\(\alpha\)</span>. We can attempt to perform hyperparameter tuning to see if there is a value of <span class="math notranslate nohighlight">\(\alpha\)</span> which will give us a better accuracy score.</p>
@@ -756,7 +756,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.0001
-BEST SCORE: 0.8333333333333334
+BEST SCORE: 0.9
 </pre></div>
 </div>
 </div>
