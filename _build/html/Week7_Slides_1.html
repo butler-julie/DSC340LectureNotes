@@ -423,7 +423,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-details">Other Details</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-and-iterations">Training Process and Iterations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-error-versus-test-error">Training Error Versus Test Error</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">Vanishing Gradient</a></li>
@@ -512,7 +511,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x13f18a1c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x17c7641f0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -849,23 +848,42 @@ $<span class="math notranslate nohighlight">\( \theta_i = \theta_i + l_r\frac{\p
 </section>
 <section id="other-details">
 <h2>Other Details<a class="headerlink" href="#other-details" title="Permalink to this heading">#</a></h2>
-<section id="training-process-and-iterations">
-<h3>Training Process and Iterations<a class="headerlink" href="#training-process-and-iterations" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li></li>
-</ul>
-</section>
 <section id="overfitting-and-underfitting">
 <h3>Overfitting and Underfitting<a class="headerlink" href="#overfitting-and-underfitting" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Overfitting: the neural network has been trained too many times, has a low training error, but has no ability to generalize to new data and will have a bad test error</p></li>
+<li><p>Underfitting: the neural network has not been trained long enough and has not yet picked up the patterns in the data</p></li>
+<li><p>It is important to keep an eye on the error of each training iteration as it will likely decrease as the number of iterations increases (reducing the risk of underfitting) but if it becomes too low you run the risk of overfitting the data</p></li>
+</ul>
 </section>
 <section id="training-error-versus-test-error">
 <h3>Training Error Versus Test Error<a class="headerlink" href="#training-error-versus-test-error" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The error you get during the training process is called the training error and it will always be less than the test error (the error score you receive when feeding the trained neural network the test data set)</p></li>
+</ul>
 </section>
 <section id="vanishing-gradient">
 <h3>Vanishing Gradient<a class="headerlink" href="#vanishing-gradient" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A large problem in neural networks is a phenomenon called the vanishing gradient</p>
+<ul>
+<li><p>The optimization of the weight and biases can become zero so the weights and biases stop changing between changing iterations</p></li>
+</ul>
+</li>
+<li><p>More of a problem with older optimizers and less of a problem with the modern optimizers</p></li>
+</ul>
 </section>
 <section id="inherent-randomness">
 <h3>Inherent Randomness<a class="headerlink" href="#inherent-randomness" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Neural networks are inherently built on randomness and thus a single error or accuracy metric should not be reported as the performance of the network</p></li>
+<li><p>The weights and biases are initialized randomly each time the neural network is defined, leading to different training results each time</p>
+<ul>
+<li><p>There are several different types of initialization schemes that control how the values are initialized but they are not always the best choice depending on the data</p></li>
+</ul>
+</li>
+<li><p>The optimization is not closed form so even with a set initialization scheme the results will still vary</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -984,7 +1002,6 @@ $<span class="math notranslate nohighlight">\( \theta_i = \theta_i + l_r\frac{\p
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-details">Other Details</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-and-iterations">Training Process and Iterations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-error-versus-test-error">Training Error Versus Test Error</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">Vanishing Gradient</a></li>
