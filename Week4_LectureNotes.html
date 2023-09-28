@@ -630,7 +630,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x169eb24c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1357ce4c0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -666,7 +666,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
 </pre></div>
 </div>
 </div>
@@ -679,9 +679,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[12,  0,  0],
-       [ 0,  8,  2],
-       [ 0,  1,  7]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[14,  0,  0],
+       [ 0,  6,  4],
+       [ 0,  0,  6]])
 </pre></div>
 </div>
 </div>
@@ -696,10 +696,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x169f03670&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x140216d90&gt;
 </pre></div>
 </div>
-<img alt="_images/caa7c1593dcc5537a49a265af1dbcfcb629d1f427cb56a9c0d078b5c9c5df11d.png" src="_images/caa7c1593dcc5537a49a265af1dbcfcb629d1f427cb56a9c0d078b5c9c5df11d.png" />
+<img alt="_images/ee96b4a29a1817d3f7f9f18d1fea3edbec21d2d27f976251e5ce8a5cb45ecfb5.png" src="_images/ee96b4a29a1817d3f7f9f18d1fea3edbec21d2d27f976251e5ce8a5cb45ecfb5.png" />
 </div>
 </div>
 <p>There are a couple of ways we can attempt to improve our results while still using the ridge classifier algorithm. First, since ridge classifier is a regularized algorithm, we can try applying the standard scaler to the data to change its scale.</p>
@@ -728,10 +728,10 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9333333333333333
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x103631eb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1402337f0&gt;
 </pre></div>
 </div>
-<img alt="_images/2ffc3504c4f6925e609bc29d21f856d1a6339f9633082f55e05ec478aae8269b.png" src="_images/2ffc3504c4f6925e609bc29d21f856d1a6339f9633082f55e05ec478aae8269b.png" />
+<img alt="_images/f4989e4dafdceb1edd4735e540821cd0533d8197b20b23cbf265726abd8898c4.png" src="_images/f4989e4dafdceb1edd4735e540821cd0533d8197b20b23cbf265726abd8898c4.png" />
 </div>
 </div>
 <p>Second, the ridge classifier, like ridge regression, has a hyperparameter, <span class="math notranslate nohighlight">\(\alpha\)</span>. We can attempt to perform hyperparameter tuning to see if there is a value of <span class="math notranslate nohighlight">\(\alpha\)</span> which will give us a better accuracy score.</p>
@@ -755,8 +755,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 40.06088545046148
-BEST SCORE: 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.0001
+BEST SCORE: 0.9333333333333333
 </pre></div>
 </div>
 </div>

@@ -425,6 +425,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-and-iterations">Training Process and Iterations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-error-versus-test-error">Training Error Versus Test Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">Vanishing Gradient</a></li>
 </ul>
 </li>
 </ul>
@@ -509,7 +510,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x12c0ca1c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x13c8e31c0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -745,10 +746,21 @@ functions</p></li>
 <p>The loss function is what determines how closely the output of the neural network matches the true (or expected results). In the algorithms we have looked at previously, the loss function was always some form of the mean-squared error function, but in neural networks the loss function can be any function that determines how good the results of the neural network are. Thus, for neural networks, the loss function is an additional hyperparameter that the user has to set.  There are many common loss functions that are used for both regression and classification problems and you can also create custom loss functions.</p>
 <section id="regression-loss-functions">
 <h4>Regression Loss Functions<a class="headerlink" href="#regression-loss-functions" title="Permalink to this heading">#</a></h4>
-<p>The most common loss function to use with regression problems are the mean-squared error:</p>
+<p>The most common loss function to use with regression problems are the mean-squared error:
+$<span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{N}\sum_{i=1}^N (y_i-\hat{y}_i)^2,\)</span><span class="math notranslate nohighlight">\(
+but the mean absolute error is also common:
+\)</span><span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{N}\sum_{i=1}^N|y_i-\hat{y}_i|\)</span>$</p>
 </section>
 <section id="classification-loss-functions">
 <h4>Classification Loss Functions<a class="headerlink" href="#classification-loss-functions" title="Permalink to this heading">#</a></h4>
+<p>For classification the loss functions are different, reflecting the probability the neural network got the classification correct. For a binary classification problem, the most common lost function will be the binary cross-entropy which is defined as:</p>
+<div class="math notranslate nohighlight">
+\[ J(\theta) = -\frac{1}{n}\sum_{i=1}^n(y_ilog(p_i)+(1-y_i)log(1-p_i)),\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_i\)</span> is the probability that the point belongs to the first category.</p>
+<p>For multiclass classification, the analogous loss function is the categorical cross-entropy, which is defined as:</p>
+<div class="math notranslate nohighlight">
+\[J(\theta) = -\frac{1}{n}\sum{i=1}^N\sum_{j=1}^M y_{ij}log(p_{ij}),\]</div>
+<p>where i is a sum over all points and j is a sum over all categories.</p>
 </section>
 </section>
 <section id="backpropagation-and-optimization">
@@ -786,6 +798,9 @@ functions</p></li>
 </section>
 <section id="training-error-versus-test-error">
 <h3>Training Error Versus Test Error<a class="headerlink" href="#training-error-versus-test-error" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="vanishing-gradient">
+<h3>Vanishing Gradient<a class="headerlink" href="#vanishing-gradient" title="Permalink to this heading">#</a></h3>
 </section>
 </section>
 </section>
@@ -906,6 +921,7 @@ functions</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-and-iterations">Training Process and Iterations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-error-versus-test-error">Training Error Versus Test Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">Vanishing Gradient</a></li>
 </ul>
 </li>
 </ul>
