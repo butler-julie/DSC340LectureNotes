@@ -417,7 +417,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-hyperparameters">Neural Network Hyperparameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-and-activation-functions">Loss and Activation Functions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-neurons-and-layers">Architecture (Neurons and Layers)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-and-optimizer">Learning Rate and Optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-training-iterations">Number of Training Iterations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#others">Others</a></li>
 </ul>
 </li>
@@ -426,6 +427,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-error-versus-test-error">Training Error Versus Test Error</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">Vanishing Gradient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inherent-randomness">Inherent Randomness</a></li>
 </ul>
 </li>
 </ul>
@@ -510,7 +512,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x13c8e31c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x13f18a1c0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -592,7 +594,7 @@ document.write(`
 </ul>
 </li>
 </ul>
-<p>All machine learning methods we have investigated so far have closed form solutions for their weights/parameters.</p>
+<p>All machine learning methods we have investigated so far have closed-form solutions for their weights/parameters.</p>
 </section>
 </section>
 <section id="conceptual-neural-network">
@@ -608,8 +610,8 @@ document.write(`
 <section id="layers">
 <h3>Layers<a class="headerlink" href="#layers" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Many nodes that all recieve the same inputs but are not connected to each other</p></li>
-<li><p>Number of nodes in each layer varies and depends on the type of layer
+<li><p>Many nodes that all receive the same inputs but are not connected to each other</p></li>
+<li><p>The number of nodes in each layer varies and depends on the type of layer
 <img alt="Layer" src="_images/Layer.png" /></p></li>
 </ul>
 </section>
@@ -617,7 +619,7 @@ document.write(`
 <h3>Input Layer<a class="headerlink" href="#input-layer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>First layer in a neural network</p></li>
-<li><p>Number of nodes is the same as the number of features in the data set; each node is passed on of the features</p></li>
+<li><p>The number of nodes is the same as the number of features in the data set; each node is passed on of the features</p></li>
 <li><p>Does not manipulate its inputs, simply passes them onto the next layer</p></li>
 </ul>
 <p><img alt="Input Layer" src="_images/Input_Layer.png" /></p>
@@ -625,8 +627,8 @@ document.write(`
 <section id="output-layer">
 <h3>Output Layer<a class="headerlink" href="#output-layer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Last layer in the neural network, produces the output</p></li>
-<li><p>Number of nodes is equal to the number of dimensions of the output; each node outputs one of the dimensions</p></li>
+<li><p>The last layer in the neural network, produces the output</p></li>
+<li><p>The number of nodes is equal to the number of dimensions of the output; each node outputs one of the dimensions</p></li>
 <li><p>Manipulates data using the mathematical formula described later in the notebook</p></li>
 </ul>
 <p><img alt="Output Layer" src="_images/Output_Layer.png" /></p>
@@ -645,13 +647,13 @@ document.write(`
 <h3>Fully Connected<a class="headerlink" href="#fully-connected" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Fully connected means that each neuron is connected to every neuron in the next layer</p></li>
-<li><p>All networks we will look at in this course are fully connected (but this is not neccessarily try of all neural network architectures)</p></li>
+<li><p>All networks we will look at in this course are fully connected (but this is not necessary try of all neural network architectures)</p></li>
 </ul>
 </section>
 <section id="feedforward">
 <h3>Feedforward<a class="headerlink" href="#feedforward" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Feedforward means that data moves only from the input layer in the direction of the output layer, it is never fed backwards</p></li>
+<li><p>Feedforward means that data moves only from the input layer in the direction of the output layer, it is never fed backward</p></li>
 <li><p>“Regular” neural networks and convolutional neural networks are feed forward, recurrent neural networks are not</p></li>
 </ul>
 </section>
@@ -668,7 +670,7 @@ document.write(`
 <ul class="simple">
 <li><p>Backpropagation is the process of optimizing the weights of the neural network to get a better result the next time the neural network is run</p></li>
 <li><p>The loss function is used to update the weights of the network (represented in the diagram by the arrows)</p></li>
-<li><p>The feedforward-loss function-backpropagation process is one “training iteration”, neural networks are trained with hundred or thousands of training iterations</p></li>
+<li><p>The feedforward-loss function-backpropagation process is one “training iteration”, neural networks are trained with hundreds or thousands of training iterations</p></li>
 </ul>
 <p><img alt="Backpropagation" src="_images/Backpropagation.png" /></p>
 </section>
@@ -703,7 +705,7 @@ document.write(`
 <li><p>The activation function is applied to the entire output; gives the output some nonlinearity</p></li>
 <li><p>Neurons in the same layer will have the same activation function, different layers can have different activation
 functions</p></li>
-<li><p>A layer does not have to have an activation function (commonn for output layer)</p></li>
+<li><p>A layer does not have to have an activation function (common for output layer)</p></li>
 <li><p>Common activation functions:</p>
 <ul>
 <li><p>Sigmoid: <span class="math notranslate nohighlight">\(f(x) = \frac{1}{1+e^{-x}}\)</span></p></li>
@@ -743,10 +745,10 @@ functions</p></li>
 </section>
 <section id="mathematics-for-loss-functions">
 <h3>Mathematics for Loss Functions<a class="headerlink" href="#mathematics-for-loss-functions" title="Permalink to this heading">#</a></h3>
-<p>The loss function is what determines how closely the output of the neural network matches the true (or expected results). In the algorithms we have looked at previously, the loss function was always some form of the mean-squared error function, but in neural networks the loss function can be any function that determines how good the results of the neural network are. Thus, for neural networks, the loss function is an additional hyperparameter that the user has to set.  There are many common loss functions that are used for both regression and classification problems and you can also create custom loss functions.</p>
+<p>The loss function is what determines how closely the output of the neural network matches the true (or expected results). In the algorithms we have looked at previously, the loss function was always some form of the mean-squared error function, but in neural networks, the loss function can be any function that determines how good the results of the neural network are. Thus, for neural networks, the loss function is an additional hyperparameter that the user has to set.  There are many common loss functions that are used for both regression and classification problems and you can also create custom loss functions.</p>
 <section id="regression-loss-functions">
 <h4>Regression Loss Functions<a class="headerlink" href="#regression-loss-functions" title="Permalink to this heading">#</a></h4>
-<p>The most common loss function to use with regression problems are the mean-squared error:
+<p>The most common loss function to use with regression problems is the mean-squared error:
 $<span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{N}\sum_{i=1}^N (y_i-\hat{y}_i)^2,\)</span><span class="math notranslate nohighlight">\(
 but the mean absolute error is also common:
 \)</span><span class="math notranslate nohighlight">\(J(\theta) = \frac{1}{N}\sum_{i=1}^N|y_i-\hat{y}_i|\)</span>$</p>
@@ -761,37 +763,97 @@ but the mean absolute error is also common:
 <div class="math notranslate nohighlight">
 \[J(\theta) = -\frac{1}{n}\sum{i=1}^N\sum_{j=1}^M y_{ij}log(p_{ij}),\]</div>
 <p>where i is a sum over all points and j is a sum over all categories.</p>
+<p>The probability a point belongs to each category can be extracted from most neural network implementations.</p>
 </section>
 </section>
 <section id="backpropagation-and-optimization">
 <h3>Backpropagation and Optimization<a class="headerlink" href="#backpropagation-and-optimization" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Backpropagation is the process of using the loss function results to update the weights and biases of the neural network</p></li>
+<li><p>Updates the weights/biases of the output layer, then the last hidden layer, and back through the network until the first hidden layer</p></li>
+<li><p>Many different optimizers are used here and neural network optimization is a popular research topic in the field of machine learning</p></li>
+</ul>
 <section id="choice-of-optimizer">
 <h4>Choice of Optimizer<a class="headerlink" href="#choice-of-optimizer" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The choice of optimizer becomes a hyperparameter for neural networks</p></li>
+<li><p>The simplest optimizer is gradient descent:
+$<span class="math notranslate nohighlight">\( \theta_i = \theta_i + l_r\frac{\partial J(\theta)}{\theta_i}\)</span>$</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_i\)</span> is either a weight or bias</p></li>
+<li><p>The most common modern optimizer is called Adam and is much more complicated</p></li>
+</ul>
 </section>
 <section id="learning-rate">
 <h4>Learning Rate<a class="headerlink" href="#learning-rate" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A floating point number (usually less than 1) that controls how much the weights and biases will change with each iteration</p></li>
+<li><p>Too large and the optimal values may be overshot and too small means there will be very little change between iterations and the training process will be extended</p></li>
+<li><p>Analogous to the strength of the regularization (<span class="math notranslate nohighlight">\(\alpha\)</span>) in ridge regression and kernel ridge regression</p></li>
+</ul>
 </section>
 </section>
 </section>
 <section id="neural-network-hyperparameters">
 <h2>Neural Network Hyperparameters<a class="headerlink" href="#neural-network-hyperparameters" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Neural networks have an extensive number of hyperparameters that need to be set by the user before the algorithm is run and this makes using neural networks a complicated and time-consuming process.</p></li>
+<li><p>Hyperparameter tuning here becomes even more important than in previous algorithms but is also much more time-consuming due to the increased number of parameters and choices for each parameter.</p></li>
+</ul>
 <section id="loss-and-activation-functions">
 <h3>Loss and Activation Functions<a class="headerlink" href="#loss-and-activation-functions" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The choice of loss function and activation functions are both hyperparameters</p></li>
+<li><p>Though the loss function is a hyperparameter it is usually not tuned (it can be though)</p></li>
+<li><p>The activation function needs to be chosen per hidden layer and for the output layer and does not have to be the same function for the entire network</p></li>
+<li><p>No activation function is also an option on a neural network layer and is common for the output layer for regression problems so the output is not constrained by the range of the</p></li>
+</ul>
 </section>
 <section id="architecture-neurons-and-layers">
 <h3>Architecture (Neurons and Layers)<a class="headerlink" href="#architecture-neurons-and-layers" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The architecture of a neural network refers to the number of hidden layers and the number of neurons per hidden layer</p>
+<ul>
+<li><p>Also known as the width and depth of the neural network</p></li>
+</ul>
+</li>
+<li><p>The number of hidden layers and the number of neurons in each hidden layer are hyperparameters</p>
+<ul>
+<li><p>The number of neurons in each hidden layer does not have to be the same</p></li>
+</ul>
+</li>
+<li><p>The more hidden layers a network has the more of a chance it has to process the data and extract patterns</p></li>
+<li><p>The more neurons in a hidden layer corresponds to a larger weight matrix and more of a chance to create meaningful combinations of the data</p></li>
+<li><p>BUT a larger network takes longer to train and eventually adding more layers and neurons can be detrimental to the performance</p></li>
+</ul>
 </section>
-<section id="id1">
-<h3>Learning Rate<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<section id="learning-rate-and-optimizer">
+<h3>Learning Rate and Optimizer<a class="headerlink" href="#learning-rate-and-optimizer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Both the learning rate and the optimizer are hyperparameters that have to be set before the network is trained</p></li>
+<li><p>Here Adam is the most common value for the optimizer but the learning rate could be tuned to increase performance</p></li>
+</ul>
+</section>
+<section id="number-of-training-iterations">
+<h3>Number of Training Iterations<a class="headerlink" href="#number-of-training-iterations" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The number of feedforward-loss function-backpropagation cycles (training iterations) is also a hyperparameter and the number of iterations can lead to losses in the accuracy of the neural network if it’s too low or too high (discussed later in this notebook)</p></li>
+</ul>
 </section>
 <section id="others">
 <h3>Others<a class="headerlink" href="#others" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>There are other hyperparameters you can investigate as well including “dropout”, “regularization”, “early stopping”, and others</p></li>
+<li><p>You are unlikely to encounter tuning these in this course unless you are curious about using them to improve the performance of your models for the final project</p></li>
+</ul>
 </section>
 </section>
 <section id="other-details">
 <h2>Other Details<a class="headerlink" href="#other-details" title="Permalink to this heading">#</a></h2>
 <section id="training-process-and-iterations">
 <h3>Training Process and Iterations<a class="headerlink" href="#training-process-and-iterations" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
 </section>
 <section id="overfitting-and-underfitting">
 <h3>Overfitting and Underfitting<a class="headerlink" href="#overfitting-and-underfitting" title="Permalink to this heading">#</a></h3>
@@ -801,6 +863,9 @@ but the mean absolute error is also common:
 </section>
 <section id="vanishing-gradient">
 <h3>Vanishing Gradient<a class="headerlink" href="#vanishing-gradient" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="inherent-randomness">
+<h3>Inherent Randomness<a class="headerlink" href="#inherent-randomness" title="Permalink to this heading">#</a></h3>
 </section>
 </section>
 </section>
@@ -913,7 +978,8 @@ but the mean absolute error is also common:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-hyperparameters">Neural Network Hyperparameters</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-and-activation-functions">Loss and Activation Functions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-neurons-and-layers">Architecture (Neurons and Layers)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-and-optimizer">Learning Rate and Optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-training-iterations">Number of Training Iterations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#others">Others</a></li>
 </ul>
 </li>
@@ -922,6 +988,7 @@ but the mean absolute error is also common:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-underfitting">Overfitting and Underfitting</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-error-versus-test-error">Training Error Versus Test Error</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient">Vanishing Gradient</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inherent-randomness">Inherent Randomness</a></li>
 </ul>
 </li>
 </ul>
