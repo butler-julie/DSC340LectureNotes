@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Creating Neural Networks from Scratch &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -66,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Creating Neural Networks with Tensorflow" href="Week8_Slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -350,7 +349,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -366,6 +367,24 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-neural-network-equations">Review of Neural Network Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-neural-network-from-scratch-using-jax">Creating a Neural Network from Scratch Using JAX</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-data-set">Generate the Data Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-a-train-test-split">Perform a Train-Test Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-neural-network">Define the Neural Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-loss-function">Define the Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-neural-network">Train the Neural Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-the-results">Analyze the Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function">Hyperparameter Tuning: Changing the Number of Layers, the Number of Hidden Neurons, and the Activation Function</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -376,7 +395,664 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-neural-networks-from-scratch">
-<h1>Creating Neural Networks from Scratch<a class="headerlink" href="#creating-neural-networks-from-scratch" title="Permalink to this heading">#</a></h1>
+<h1>Creating Neural Networks from Scratch<a class="headerlink" href="#creating-neural-networks-from-scratch" title="Permalink to this headline">#</a></h1>
+<p>CSC/DSC 340 Week 9 Slides</p>
+<p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
+<p>Date Created: October 16, 2023</p>
+<p>Last Modified: October 16, 2023</p>
+<ul class="simple">
+<li><p>This week we will learn how to create neural networks from scratch, using the Python library JAX to perform the optimization.</p></li>
+<li><p>Another common library for this task is <em>autograd</em> but it is no longer being maintained</p></li>
+</ul>
+<section id="review-of-neural-network-equations">
+<h2>Review of Neural Network Equations<a class="headerlink" href="#review-of-neural-network-equations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>A return to Week 7 Slides</p></li>
+</ul>
+</section>
+<section id="creating-a-neural-network-from-scratch-using-jax">
+<h2>Creating a Neural Network from Scratch Using JAX<a class="headerlink" href="#creating-a-neural-network-from-scratch-using-jax" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>JAX is an automatic differentiation library in Python that can find the derivative of any chunk of code it is given.</p></li>
+<li><p>If you are interested you can read more about the library <a class="reference external" href="https://github.com/google/jax">here</a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># IMPORTS</span>
+<span class="c1"># Math for the ceiling function</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="c1"># Matplotlib for graphing capabilities</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># Numpy for arrays</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Modules from the JAX library for creating neural networks</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">grad</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span> <span class="k">as</span> <span class="n">npr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="generate-the-data-set">
+<h3>Generate the Data Set<a class="headerlink" href="#generate-the-data-set" title="Permalink to this headline">#</a></h3>
+<p>Let’s keep things simple and generate a data points from a Gaussian curve.  We will have our x data be evenly space between -10 and 10 and our y data be the corresponding points on a Gaussian curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s create a data set that is just a basic Gaussian curve</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perform-a-train-test-split">
+<h3>Perform a Train-Test Split<a class="headerlink" href="#perform-a-train-test-split" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will split the data set into two pieces, a training data set that contains</span>
+<span class="c1"># 80% of the total data and a test set that contains the other 20%</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_size</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">train_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-neural-network">
+<h3>Define the Neural Network<a class="headerlink" href="#define-the-neural-network" title="Permalink to this headline">#</a></h3>
+<p>First we will define the sigmoid function as our activation function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the value of the sigmoid function for </span>
+<span class="sd">        a given input of x</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Now we will define our neural network.</p></li>
+<li><p>Here we will be using an architecture with two hidden layers, each using the sigmoid activation function, and an output layer which does not have an activation function.</p></li>
+<li><p>Note that we do not use the bias offset in this code</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inputs:</span>
+<span class="sd">            W (a list): the weights of the neural network</span>
+<span class="sd">            x (a float): the input value of the neural network</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Unnamed (a float): The output of the neural network</span>
+<span class="sd">        Defines a neural network with one hidden layer.  The number of neurons in</span>
+<span class="sd">        the hidden layer is the length of W[0]. The activation function is the </span>
+<span class="sd">        sigmoid function on the hidden layer an none on the output layer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the output for the neurons in the hidden layers</span>
+    <span class="n">hidden_layer1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">hidden_layer2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">hidden_layer1</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1"># Calculate the result for the output neuron</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">hidden_layer2</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-loss-function">
+<h3>Define the Loss Function<a class="headerlink" href="#define-the-loss-function" title="Permalink to this headline">#</a></h3>
+<p>Now we need to define our loss function.  For simplicity we will be using the mean-squared error loss function, which is a very common loss function for training neural networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loss_function</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inputs:</span>
+<span class="sd">            W (a list): the weights of the neural network</span>
+<span class="sd">            t (a 1D NumPy array): the times to calculate the predicted position at</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            loss_sum (a float): The total loss over all times</span>
+<span class="sd">        The loss function for the neural network to solve for position given </span>
+<span class="sd">        a function for acceleration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Define a variable to hold the total loss</span>
+    <span class="n">loss_sum</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="c1"># Loop through each individual time</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+        <span class="c1"># Get the output of the neural network with the given set of weights</span>
+        <span class="n">nn</span> <span class="o">=</span> <span class="n">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">err_sqr</span> <span class="o">=</span> <span class="p">(</span><span class="n">nn</span><span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+        <span class="c1"># Update the loss sum</span>
+        <span class="n">loss_sum</span> <span class="o">+=</span> <span class="n">err_sqr</span>
+    <span class="n">loss_sum</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># Return the loss sum    </span>
+    <span class="k">return</span> <span class="n">loss_sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-the-neural-network">
+<h3>Train the Neural Network<a class="headerlink" href="#train-the-neural-network" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Finally we need to train our neural network.</p></li>
+<li><p>We will start by randomly initializing the weights of our neural network (with 25 neurons per hidden layer).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the key for the random number generator</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">npr</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Set the number of neurons in the hidden layer</span>
+<span class="n">number_hidden_neurons</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="c1"># Initialize the weights of the neural network with random numbers</span>
+<span class="n">W</span> <span class="o">=</span> <span class="p">[</span><span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span> <span class="n">number_hidden_neurons</span><span class="p">)),</span> 
+     <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="n">number_hidden_neurons</span><span class="p">,</span><span class="n">number_hidden_neurons</span><span class="p">)),</span> 
+     <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="n">number_hidden_neurons</span><span class="p">,</span> <span class="mi">1</span><span class="p">))]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We then define the parameters for the learning rate, the number of training iterations, and the threshold for stopping the training.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the learning rate and the number of training iterations for the network</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">num_training_iterations</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">previous_loss</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Next, we perform gradient descent to update the weights of the neural network over for the set number of training iterations, or until the loss function value converges to some set threshold.</p></li>
+</ul>
+<p><strong>WARNING</strong>: This cell will take a long time to run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the neural network for the specified number of iterations</span>
+<span class="c1"># Update the weights using the learning rates</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_training_iterations</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training Iteration:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">current_loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loss:&quot;</span><span class="p">,</span> <span class="n">current_loss</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="c1"># If the current loss is within a set threshold of the previous loss, stop</span>
+    <span class="c1"># the training</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">current_loss</span><span class="o">-</span><span class="n">previous_loss</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="c1"># Calculate the gradient of the loss function and then use that gradient to</span>
+    <span class="c1"># update the weights of the neural network using the learning rate and the </span>
+    <span class="c1"># gradient descent optimization method</span>
+    <span class="n">loss_grad</span> <span class="o">=</span>  <span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">W</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="c1"># Update first hidden layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Update second hidden layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Update output layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">previous_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 1
+Loss: 5.5809298
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 2
+Loss: 3.8354566
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 3
+Loss: 2.6951535
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 4
+Loss: 1.940991
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 5
+Loss: 1.4348279
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 6
+Loss: 1.0893753
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 7
+Loss: 0.8492181
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 8
+Loss: 0.678936
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 9
+Loss: 0.55570376
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 10
+Loss: 0.4646711
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 11
+Loss: 0.39606875
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 12
+Loss: 0.34338817
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 13
+Loss: 0.30223024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 14
+Loss: 0.26957497
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 15
+Loss: 0.24331306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 16
+Loss: 0.22194384
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 17
+Loss: 0.20438017
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 18
+Loss: 0.18981977
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 19
+Loss: 0.17765915
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 20
+Loss: 0.16743699
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 21
+Loss: 0.15879485
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 22
+Loss: 0.15145047
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="k">break</span><span class="p">;</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># Calculate the gradient of the loss function and then use that gradient to</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># update the weights of the neural network using the learning rate and the </span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># gradient descent optimization method</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">loss_grad</span> <span class="o">=</span>  <span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">W</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="c1"># Update first hidden layer</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">1</span> <span class="n">frame</span><span class="p">]</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/_src/api.py:1074,</span> in <span class="ni">grad.&lt;locals&gt;.grad_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1071</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">docstr</span><span class="o">=</span><span class="n">docstr</span><span class="p">,</span> <span class="n">argnums</span><span class="o">=</span><span class="n">argnums</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1072</span> <span class="nd">@api_boundary</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span> <span class="k">def</span> <span class="nf">grad_f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1074</span>   <span class="n">_</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">value_and_grad_f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1075</span>   <span class="k">return</span> <span class="n">g</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">1</span> <span class="n">frame</span><span class="p">]</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/_src/api.py:1150,</span> in <span class="ni">value_and_grad.&lt;locals&gt;.value_and_grad_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1148</span>   <span class="n">_check_input_dtype_grad</span><span class="p">(</span><span class="n">holomorphic</span><span class="p">,</span> <span class="n">allow_int</span><span class="p">,</span> <span class="n">leaf</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1149</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">has_aux</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1150</span>   <span class="n">ans</span><span class="p">,</span> <span class="n">vjp_py</span> <span class="o">=</span> <span class="n">_vjp</span><span class="p">(</span><span class="n">f_partial</span><span class="p">,</span> <span class="o">*</span><span class="n">dyn_args</span><span class="p">,</span> <span class="n">reduce_axes</span><span class="o">=</span><span class="n">reduce_axes</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1151</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1152</span>   <span class="n">ans</span><span class="p">,</span> <span class="n">vjp_py</span><span class="p">,</span> <span class="n">aux</span> <span class="o">=</span> <span class="n">_vjp</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1153</span>       <span class="n">f_partial</span><span class="p">,</span> <span class="o">*</span><span class="n">dyn_args</span><span class="p">,</span> <span class="n">has_aux</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reduce_axes</span><span class="o">=</span><span class="n">reduce_axes</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/_src/api.py:2597,</span> in <span class="ni">_vjp</span><span class="nt">(fun, has_aux, reduce_axes, *primals)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2595</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">has_aux</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2596</span>   <span class="n">flat_fun</span><span class="p">,</span> <span class="n">out_tree</span> <span class="o">=</span> <span class="n">flatten_fun_nokwargs</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">in_tree</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2597</span>   <span class="n">out_primal</span><span class="p">,</span> <span class="n">out_vjp</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">vjp</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2598</span>       <span class="n">flat_fun</span><span class="p">,</span> <span class="n">primals_flat</span><span class="p">,</span> <span class="n">reduce_axes</span><span class="o">=</span><span class="n">reduce_axes</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2599</span>   <span class="n">out_tree</span> <span class="o">=</span> <span class="n">out_tree</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">2600</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/ad.py:133,</span> in <span class="ni">vjp</span><span class="nt">(traceable, primals, has_aux, reduce_axes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span> <span class="k">def</span> <span class="nf">vjp</span><span class="p">(</span><span class="n">traceable</span><span class="p">,</span> <span class="n">primals</span><span class="p">,</span> <span class="n">has_aux</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reduce_axes</span><span class="o">=</span><span class="p">()):</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>   <span class="k">if</span> <span class="ow">not</span> <span class="n">has_aux</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">133</span>     <span class="n">out_primals</span><span class="p">,</span> <span class="n">pvals</span><span class="p">,</span> <span class="n">jaxpr</span><span class="p">,</span> <span class="n">consts</span> <span class="o">=</span> <span class="n">linearize</span><span class="p">(</span><span class="n">traceable</span><span class="p">,</span> <span class="o">*</span><span class="n">primals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>   <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>     <span class="n">out_primals</span><span class="p">,</span> <span class="n">pvals</span><span class="p">,</span> <span class="n">jaxpr</span><span class="p">,</span> <span class="n">consts</span><span class="p">,</span> <span class="n">aux</span> <span class="o">=</span> <span class="n">linearize</span><span class="p">(</span><span class="n">traceable</span><span class="p">,</span> <span class="o">*</span><span class="n">primals</span><span class="p">,</span> <span class="n">has_aux</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/ad.py:122,</span> in <span class="ni">linearize</span><span class="nt">(traceable, *primals, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="n">_</span><span class="p">,</span> <span class="n">in_tree</span> <span class="o">=</span> <span class="n">tree_flatten</span><span class="p">(((</span><span class="n">primals</span><span class="p">,</span> <span class="n">primals</span><span class="p">),</span> <span class="p">{}))</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span> <span class="n">jvpfun_flat</span><span class="p">,</span> <span class="n">out_tree</span> <span class="o">=</span> <span class="n">flatten_fun</span><span class="p">(</span><span class="n">jvpfun</span><span class="p">,</span> <span class="n">in_tree</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">122</span> <span class="n">jaxpr</span><span class="p">,</span> <span class="n">out_pvals</span><span class="p">,</span> <span class="n">consts</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">trace_to_jaxpr_nounits</span><span class="p">(</span><span class="n">jvpfun_flat</span><span class="p">,</span> <span class="n">in_pvals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="n">out_primals_pvals</span><span class="p">,</span> <span class="n">out_tangents_pvals</span> <span class="o">=</span> <span class="n">tree_unflatten</span><span class="p">(</span><span class="n">out_tree</span><span class="p">(),</span> <span class="n">out_pvals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span> <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">out_primal_pval</span><span class="o">.</span><span class="n">is_known</span><span class="p">()</span> <span class="k">for</span> <span class="n">out_primal_pval</span> <span class="ow">in</span> <span class="n">out_primals_pvals</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/_src/profiler.py:313,</span> in <span class="ni">annotate_function.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>   <span class="k">with</span> <span class="n">TraceAnnotation</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">decorator_kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">313</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">314</span>   <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/partial_eval.py:768,</span> in <span class="ni">trace_to_jaxpr_nounits</span><span class="nt">(fun, pvals, instantiate)</span>
+<span class="g g-Whitespace">    </span><span class="mi">766</span> <span class="k">with</span> <span class="n">core</span><span class="o">.</span><span class="n">new_main</span><span class="p">(</span><span class="n">JaxprTrace</span><span class="p">,</span> <span class="n">name_stack</span><span class="o">=</span><span class="n">current_name_stack</span><span class="p">)</span> <span class="k">as</span> <span class="n">main</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">767</span>   <span class="n">fun</span> <span class="o">=</span> <span class="n">trace_to_subjaxpr_nounits</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">main</span><span class="p">,</span> <span class="n">instantiate</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">768</span>   <span class="n">jaxpr</span><span class="p">,</span> <span class="p">(</span><span class="n">out_pvals</span><span class="p">,</span> <span class="n">consts</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span> <span class="o">=</span> <span class="n">fun</span><span class="o">.</span><span class="n">call_wrapped</span><span class="p">(</span><span class="n">pvals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">769</span>   <span class="k">assert</span> <span class="ow">not</span> <span class="n">env</span>
+<span class="g g-Whitespace">    </span><span class="mi">770</span>   <span class="k">del</span> <span class="n">main</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">env</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/linear_util.py:183,</span> in <span class="ni">WrappedFun.call_wrapped</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="n">gen</span><span class="p">,</span> <span class="n">out_store</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">183</span>   <span class="n">ans</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="k">except</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>   <span class="c1"># As above does for the first half of the transformation, exceptions</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>   <span class="c1"># raised in the second half of the transformation also require us to</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>   <span class="c1"># clean up references here.</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span>   <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/partial_eval.py:780,</span> in <span class="ni">trace_to_subjaxpr_nounits</span><span class="nt">(main, instantiate, in_pvals)</span>
+<span class="g g-Whitespace">    </span><span class="mi">774</span> <span class="nd">@lu</span><span class="o">.</span><span class="n">transformation</span>
+<span class="g g-Whitespace">    </span><span class="mi">775</span> <span class="k">def</span> <span class="nf">trace_to_subjaxpr_nounits</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">776</span>     <span class="n">main</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">MainTrace</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span>     <span class="n">instantiate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">]],</span>
+<span class="g g-Whitespace">    </span><span class="mi">778</span>     <span class="n">in_pvals</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">PartialVal</span><span class="p">]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span>   <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="n">PartialVal</span><span class="p">)</span> <span class="k">for</span> <span class="n">pv</span> <span class="ow">in</span> <span class="n">in_pvals</span><span class="p">]),</span> <span class="n">in_pvals</span>
+<span class="ne">--&gt; </span><span class="mi">780</span>   <span class="n">out_tracers</span><span class="p">,</span> <span class="n">jaxpr</span><span class="p">,</span> <span class="n">out_consts</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">_trace_to_subjaxpr_nounits</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span>       <span class="n">main</span><span class="p">,</span> <span class="n">instantiate</span><span class="p">,</span> <span class="n">in_pvals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">782</span>   <span class="n">out_pvals</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">pval</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">out_tracers</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>   <span class="k">del</span> <span class="n">out_tracers</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/partial_eval.py:803,</span> in <span class="ni">_trace_to_subjaxpr_nounits</span><span class="nt">(main, instantiate, in_pvals)</span>
+<span class="g g-Whitespace">    </span><span class="mi">800</span> <span class="n">out_tracers</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace</span><span class="o">.</span><span class="n">instantiate_const</span><span class="p">(</span><span class="n">trace</span><span class="o">.</span><span class="n">full_raise</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="k">if</span> <span class="n">inst</span> <span class="k">else</span> <span class="n">t</span>
+<span class="g g-Whitespace">    </span><span class="mi">801</span>                <span class="k">for</span> <span class="n">inst</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">instantiate</span><span class="p">,</span> <span class="n">out_tracers</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">802</span> <span class="n">out_tracers_</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">out_tracers</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">is_known</span><span class="p">()]</span>
+<span class="ne">--&gt; </span><span class="mi">803</span> <span class="n">jaxpr</span><span class="p">,</span> <span class="n">out_consts</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="n">tracers_to_jaxpr</span><span class="p">(</span><span class="n">in_tracers</span><span class="p">,</span> <span class="n">out_tracers_</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">804</span> <span class="k">return</span> <span class="n">out_tracers</span><span class="p">,</span> <span class="n">jaxpr</span><span class="p">,</span> <span class="n">out_consts</span><span class="p">,</span> <span class="n">env</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/partial_eval.py:919,</span> in <span class="ni">tracers_to_jaxpr</span><span class="nt">(in_tracers, out_tracers)</span>
+<span class="g g-Whitespace">    </span><span class="mi">916</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">JaxprEqnRecipe</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">917</span>   <span class="c1"># TODO broadcast_in_dim can create a new tracer, not present in parents</span>
+<span class="g g-Whitespace">    </span><span class="mi">918</span>   <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">eqn_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processed_eqn_ids</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">919</span>     <span class="n">in_atoms</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">get_atom</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">in_tracers</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">920</span>     <span class="n">outvars</span> <span class="o">=</span> <span class="p">[</span><span class="n">DropVar</span><span class="p">(</span><span class="n">type_substitute</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="k">if</span> <span class="n">rf</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">newvar</span><span class="p">(</span><span class="n">rf</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span>                <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">rf</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">out_avals</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">out_tracer_refs</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">922</span>     <span class="n">eqns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_jaxpr_eqn</span><span class="p">(</span><span class="n">in_atoms</span><span class="p">,</span> <span class="n">outvars</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">primitive</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">923</span>                               <span class="n">r</span><span class="o">.</span><span class="n">effects</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">source_info</span><span class="p">))</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/_src/util.py:49,</span> in <span class="ni">safe_map</span><span class="nt">(f, *args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>   <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;length mismatch: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">49</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">))</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/jax/interpreters/partial_eval.py:896,</span> in <span class="ni">tracers_to_jaxpr.&lt;locals&gt;.get_atom</span><span class="nt">(t)</span>
+<span class="g g-Whitespace">    </span><span class="mi">895</span> <span class="k">def</span> <span class="nf">get_atom</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">JaxprTracer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Atom</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">896</span>   <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">recipe</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">recipe</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Literal</span> <span class="k">else</span> <span class="n">t_to_var</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analyze-the-results">
+<h3>Analyze the Results<a class="headerlink" href="#analyze-the-results" title="Permalink to this headline">#</a></h3>
+<p>Now we need to analyze the performance of our neural network using the test data set that was reserved earlier.  First we need to generate the neural network predictions for the y component of the test data set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_nn</span> <span class="o">=</span> <span class="p">[</span><span class="n">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">xi</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">X_test</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>First lets analyze the results graphically by plotting the predicted test data set and the true test data set on the same graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_nn</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;NN Prediction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;y&#39;)
+</pre></div>
+</div>
+<img alt="_images/920f993aafc1e131e93900218dc969c8588af5c784d8ec4683b65c9c9ad1ae7b.png" src="_images/920f993aafc1e131e93900218dc969c8588af5c784d8ec4683b65c9c9ad1ae7b.png" />
+</div>
+</div>
+<p>Next let’s analyze the error numerically using the root mean-squared error (RMSE) function, which is simiply the square root of the mean-squared error.  The RMSE gives the average error on each data point (instead of the squared average error) so it is a met more of a clear metric for error analysis.  First, let’s define a function to calculate the RMSE between two data sets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inputs:</span>
+<span class="sd">            A,B (NumPy arrays)</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Unnamed (a float): the RMSE error between A and B</span>
+<span class="sd">        Calculates the RMSE error between A and B.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">),</span><span class="s2">&quot;The data sets must be the same length to calcualte</span><span class="se">\</span>
+<span class="s2">        the RMSE.&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">((</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s print the RMSE between the true test data set and the neural network prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE between true test set and neural network result:&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">y_nn</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE between true test set and neural network result: 0.28406674843753915
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function">
+<h2>Hyperparameter Tuning: Changing the Number of Layers, the Number of Hidden Neurons, and the Activation Function<a class="headerlink" href="#hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>First let’s change the activation function to the hyperbolic tangent function and add in an additional hidden layer</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inputs:</span>
+<span class="sd">            W (a list): the weights of the neural network</span>
+<span class="sd">            x (a float): the input value of the neural network</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Unnamed (a float): The output of the neural network</span>
+<span class="sd">        Defines a neural network with one hidden layer.  The number of neurons in</span>
+<span class="sd">        the hidden layer is the length of W[0]. The activation function is the </span>
+<span class="sd">        sigmoid function on the hidden layer an none on the output layer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the output for the neurons in the hidden layers</span>
+    <span class="n">hidden_layer1</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">hidden_layer2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">hidden_layer1</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">hidden_layer3</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">hidden_layer2</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="c1"># Calculate the result for the output neuron</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">hidden_layer3</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We also need to change the weights matrix to reflect the additional hidden layer. Let’s also change the number of neurons per layer to 10.</p></li>
+<li><p>Not you can also change this code to have a different number of neurons per layer. The tuple passed to npr.normal just needs the form (neurons in previous layer, neurons in thsi layer).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate the key for the random number generator</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">npr</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Set the number of neurons in the hidden layer</span>
+<span class="n">number_hidden_neurons</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># Initialize the weights of the neural network with random numbers</span>
+<span class="n">W</span> <span class="o">=</span> <span class="p">[</span><span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span> <span class="n">number_hidden_neurons</span><span class="p">)),</span> 
+     <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="n">number_hidden_neurons</span><span class="p">,</span><span class="n">number_hidden_neurons</span><span class="p">)),</span>
+     <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="n">number_hidden_neurons</span><span class="p">,</span><span class="n">number_hidden_neurons</span><span class="p">)),</span>
+     <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="n">number_hidden_neurons</span><span class="p">,</span> <span class="mi">1</span><span class="p">))]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The loss function can stay the same but we need to update the training loop so that the gradient descent is applied correctly to all layers</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the neural network for the specified number of iterations</span>
+<span class="c1"># Update the weights using the learning rates</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_training_iterations</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training Iteration:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">current_loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loss:&quot;</span><span class="p">,</span> <span class="n">current_loss</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="c1"># If the current loss is within a set threshold of the previous loss, stop</span>
+    <span class="c1"># the training</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">current_loss</span><span class="o">-</span><span class="n">previous_loss</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="c1"># Calculate the gradient of the loss function and then use that gradient to</span>
+    <span class="c1"># update the weights of the neural network using the learning rate and the </span>
+    <span class="c1"># gradient descent optimization method</span>
+    <span class="n">loss_grad</span> <span class="o">=</span>  <span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">W</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="c1"># Update first hidden layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Update second hidden layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Update the third hidden layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="c1"># Update the output layer</span>
+    <span class="n">W</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">loss_grad</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">previous_loss</span> <span class="o">=</span> <span class="n">current_loss</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 1
+Loss: 1.1299691
+
+Training Iteration: 2
+Loss: 0.6174519
+
+Training Iteration: 3
+Loss: 0.31264007
+
+Training Iteration: 4
+Loss: 0.16775803
+
+Training Iteration: 5
+Loss: 0.14251728
+
+Training Iteration: 6
+Loss: 0.1224951
+
+Training Iteration: 7
+Loss: 0.10705274
+
+Training Iteration: 8
+Loss: 0.095398515
+
+Training Iteration: 9
+Loss: 0.086740516
+
+Training Iteration: 10
+Loss: 0.0803774
+
+Training Iteration: 11
+Loss: 0.07573033
+
+Training Iteration: 12
+Loss: 0.072346665
+
+Training Iteration: 13
+Loss: 0.06988322
+
+Training Iteration: 14
+Loss: 0.068086274
+
+Training Iteration: 15
+Loss: 0.06677092
+
+Training Iteration: 16
+Loss: 0.065803535
+
+Training Iteration: 17
+Loss: 0.065088086
+
+Training Iteration: 18
+Loss: 0.06455563
+
+Training Iteration: 19
+Loss: 0.06415678
+
+Training Iteration: 20
+Loss: 0.063855894
+
+Training Iteration: 21
+Loss: 0.06362721
+
+Training Iteration: 22
+Loss: 0.06345217
+
+Training Iteration: 23
+Loss: 0.06331712
+
+Training Iteration: 24
+Loss: 0.06321208
+
+Training Iteration: 25
+Loss: 0.06312969
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The analysis code can be the same</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_nn</span> <span class="o">=</span> <span class="p">[</span><span class="n">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">xi</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">X_test</span><span class="p">]</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_nn</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;NN Prediction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSE between true test set and neural network result:&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">(</span><span class="n">y_nn</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE between true test set and neural network result: 0.2615405748140697
+</pre></div>
+</div>
+<img alt="_images/a4922c949ed75bbf785c0b19a0f27f34d7ad33c7195d6f2f7a9d9ad0e3d1d7cb.png" src="_images/a4922c949ed75bbf785c0b19a0f27f34d7ad33c7195d6f2f7a9d9ad0e3d1d7cb.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -428,6 +1104,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-neural-network-equations">Review of Neural Network Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-neural-network-from-scratch-using-jax">Creating a Neural Network from Scratch Using JAX</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-data-set">Generate the Data Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-a-train-test-split">Perform a Train-Test Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-neural-network">Define the Neural Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-loss-function">Define the Loss Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-neural-network">Train the Neural Network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-the-results">Analyze the Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function">Hyperparameter Tuning: Changing the Number of Layers, the Number of Hidden Neurons, and the Activation Function</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
