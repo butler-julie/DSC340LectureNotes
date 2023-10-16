@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>&lt;no title&gt; &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -65,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -162,6 +161,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week3_LectureNotes.html">Regularized Linear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_LectureNotes.html">Using Machine Learning to Solve Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_LectureNotes.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_LectureNotes.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_LectureNotes_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_LectureNotes.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_LectureNotes.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Slides</span></p>
 <ul class="nav bd-sidenav">
@@ -169,6 +173,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week2_Slides.html">Linear Regression and the Machine Learning Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week4_Slides.html">Classification Problems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week5_Slides.html">Model Optimization and Nonlinear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week6_Slides.html">Unsupervised Machine Learning: Clustering and Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_1.html">A Conceptual and Mathematical Introduction to Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
 </ul>
 
     </div>
@@ -400,7 +409,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x10aa342e0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11a7334c0&gt;]
 </pre></div>
 </div>
 <img alt="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" src="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" />
@@ -426,7 +435,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2411
 2411
 (2411,)
-1.009472834776384 0.009472834776384026
+0.9971924680306441 -0.002807531969355931
 </pre></div>
 </div>
 </div>
@@ -439,10 +448,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x10ab0a640&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11a83c4f0&gt;]
 </pre></div>
 </div>
-<img alt="_images/977199b4e57014792676b305d7a601e79dab69db4a8ee5de31fcd9bc5aa09a80.png" src="_images/977199b4e57014792676b305d7a601e79dab69db4a8ee5de31fcd9bc5aa09a80.png" />
+<img alt="_images/c73b0a2192013dc49b0321da164c5a09c743aacef5d513624c729c0f5da21da0.png" src="_images/c73b0a2192013dc49b0321da164c5a09c743aacef5d513624c729c0f5da21da0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -480,27 +489,27 @@ document.write(`
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>1.009473</td>
+      <td>0.997192</td>
     </tr>
     <tr>
       <th>1</th>
       <td>100</td>
-      <td>0.934981</td>
+      <td>0.913566</td>
     </tr>
     <tr>
       <th>2</th>
       <td>200</td>
-      <td>0.991252</td>
+      <td>1.031110</td>
     </tr>
     <tr>
       <th>3</th>
       <td>300</td>
-      <td>0.893380</td>
+      <td>0.986326</td>
     </tr>
     <tr>
       <th>4</th>
       <td>400</td>
-      <td>0.984682</td>
+      <td>0.892071</td>
     </tr>
     <tr>
       <th>...</th>
@@ -510,27 +519,27 @@ document.write(`
     <tr>
       <th>2406</th>
       <td>240600</td>
-      <td>0.037277</td>
+      <td>0.071914</td>
     </tr>
     <tr>
       <th>2407</th>
       <td>240700</td>
-      <td>0.046824</td>
+      <td>0.045694</td>
     </tr>
     <tr>
       <th>2408</th>
       <td>240800</td>
-      <td>0.023521</td>
+      <td>0.059094</td>
     </tr>
     <tr>
       <th>2409</th>
       <td>240900</td>
-      <td>0.053116</td>
+      <td>0.043360</td>
     </tr>
     <tr>
       <th>2410</th>
       <td>241000</td>
-      <td>0.069602</td>
+      <td>-0.072145</td>
     </tr>
   </tbody>
 </table>
@@ -590,16 +599,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">linear_model</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Load the diabetes dataset</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients: 
+ [ 3.06094248e-01 -2.37635570e+02  5.10538048e+02  3.27729878e+02
+ -8.14111926e+02  4.92799595e+02  1.02841240e+02  1.84603496e+02
+  7.43509388e+02  7.60966464e+01]
+Mean squared error: 2004.52
+Coefficient of determination: 0.59
 </pre></div>
 </div>
+<img alt="_images/7eb0ae568138a34d8cf1bdea05bd0b5cfaac2c5ca18174bf252fbbe5bf09d3a5.png" src="_images/7eb0ae568138a34d8cf1bdea05bd0b5cfaac2c5ca18174bf252fbbe5bf09d3a5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -682,7 +690,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x19db19f0310&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x16a931f70&gt;]
 </pre></div>
 </div>
 <img alt="_images/c38e40c536ea0ecc21d4fa65dc29b017caf0303301d7f8368711623c2b7ffe7e.png" src="_images/c38e40c536ea0ecc21d4fa65dc29b017caf0303301d7f8368711623c2b7ffe7e.png" />
@@ -695,7 +703,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>91
 </pre></div>
 </div>
 </div>

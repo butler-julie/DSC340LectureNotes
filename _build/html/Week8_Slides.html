@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Creating Neural Networks with Tensorflow &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -67,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Creating Neural Networks from Scratch" href="Week9_Slides.html" />
     <link rel="prev" title="Creating Neural Networks with Scikit-Learn and Keras" href="Week7_Slides_2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -351,7 +350,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -367,6 +368,27 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keras-and-tensorflow">Keras and Tensorflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keras-neural-network-with-new-data-set">Keras Neural Network With New Data Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-loss-functions">Custom Loss Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorflow-variables">Tensorflow Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-support">GPU Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-layers">Preprocessing Layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten-layer">Flatten Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization-layer">Normalization Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categoryencoding-layer">CategoryEncoding Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-preprocessing-layers">Image Preprocessing Layers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-trained-models">Saving Trained Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-tensorflow-customizations">Other Tensorflow Customizations</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -377,7 +399,259 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-neural-networks-with-tensorflow">
-<h1>Creating Neural Networks with Tensorflow<a class="headerlink" href="#creating-neural-networks-with-tensorflow" title="Permalink to this heading">#</a></h1>
+<h1>Creating Neural Networks with Tensorflow<a class="headerlink" href="#creating-neural-networks-with-tensorflow" title="Permalink to this headline">#</a></h1>
+<p>CSC/DSC 340 Week 8 Slides</p>
+<p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
+<p>Date Created: October 6, 2023</p>
+<p>Last Modified: October 6, 2023</p>
+<section id="keras-and-tensorflow">
+<h2>Keras and Tensorflow<a class="headerlink" href="#keras-and-tensorflow" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Keras and Tensorflow use to be seperate libraries but Keras is now apart of Tensorflow</p></li>
+<li><p>In recent versions of Tensorflow, it has become hard to create and use neural networks without also using Keras</p></li>
+<li><p>However, there are a few features that are still useful</p></li>
+</ul>
+</section>
+<section id="keras-neural-network-with-new-data-set">
+<h2>Keras Neural Network With New Data Set<a class="headerlink" href="#keras-neural-network-with-new-data-set" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>MNIST Data Set</p>
+<ul>
+<li><p>Input: images of handwritten digits (28x28 pixels)</p></li>
+<li><p>Output: digit shown in the image</p></li>
+</ul>
+</li>
+<li><p>We will go into more detail on image manipulation and classification when we cover neural networks, but we can do a preliminary analysis on the MNIST data set with regular neural networks.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+
+<span class="c1">## NOTE: The same data set is avaliable from Scikit-Learn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorflow&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">train_images</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">),</span> <span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_images</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display a few sample images</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Change this to display a different number of images</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">train_images</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Label: </span><span class="si">{</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c1e4da4839dd5661aa1b5d30da05ebb6f0c26c9ee680b097cd1c89b74eac1830.png" src="_images/c1e4da4839dd5661aa1b5d30da05ebb6f0c26c9ee680b097cd1c89b74eac1830.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize pixel values to be between 0 and 1</span>
+<span class="n">train_images</span><span class="p">,</span> <span class="n">test_images</span> <span class="o">=</span> <span class="n">train_images</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">test_images</span> <span class="o">/</span> <span class="mf">255.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># One-hot encode the labels</span>
+<span class="n">train_labels</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">train_images</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(28, 28)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mnist_classification_model</span> <span class="p">():</span>
+    <span class="c1"># Define the model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+    <span class="c1"># Add layers to the model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)))</span>  <span class="c1"># Flatten the 28x28 input images to a 1D vector</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>  <span class="c1"># Fully connected layer with ReLU activation</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>   <span class="c1"># Another fully connected layer with ReLU activation</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span> <span class="c1"># Output layer with 10 neurons for 10 classes (digits 0-9)</span>
+    
+    <span class="c1"># Compile the model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mnist_model</span> <span class="o">=</span> <span class="n">mnist_classification_model</span> <span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">mnist_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_images</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+1500/1500 [==============================] - 1s 835us/step - loss: 0.0065 - accuracy: 0.9980 - val_loss: 0.1808 - val_accuracy: 0.9755
+Epoch 2/10
+1500/1500 [==============================] - 1s 828us/step - loss: 0.0098 - accuracy: 0.9969 - val_loss: 0.1679 - val_accuracy: 0.9751
+Epoch 3/10
+1500/1500 [==============================] - 1s 810us/step - loss: 0.0079 - accuracy: 0.9975 - val_loss: 0.1697 - val_accuracy: 0.9745
+Epoch 4/10
+1500/1500 [==============================] - 1s 808us/step - loss: 0.0059 - accuracy: 0.9982 - val_loss: 0.1896 - val_accuracy: 0.9735
+Epoch 5/10
+1500/1500 [==============================] - 1s 805us/step - loss: 0.0112 - accuracy: 0.9965 - val_loss: 0.1665 - val_accuracy: 0.9784
+Epoch 6/10
+1500/1500 [==============================] - 1s 808us/step - loss: 0.0052 - accuracy: 0.9983 - val_loss: 0.1901 - val_accuracy: 0.9747
+Epoch 7/10
+1500/1500 [==============================] - 1s 874us/step - loss: 0.0094 - accuracy: 0.9973 - val_loss: 0.1842 - val_accuracy: 0.9757
+Epoch 8/10
+1500/1500 [==============================] - 1s 857us/step - loss: 0.0063 - accuracy: 0.9982 - val_loss: 0.2077 - val_accuracy: 0.9749
+Epoch 9/10
+1500/1500 [==============================] - 1s 809us/step - loss: 0.0072 - accuracy: 0.9976 - val_loss: 0.1842 - val_accuracy: 0.9770
+Epoch 10/10
+1500/1500 [==============================] - 1s 838us/step - loss: 0.0053 - accuracy: 0.9984 - val_loss: 0.1975 - val_accuracy: 0.9758
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate the model on the test data</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>313/313 [==============================] - 0s 464us/step - loss: 0.0953 - accuracy: 0.9721
+Test accuracy: 97.21%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summarize history for accuracy</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;model accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1b32eeb69fe1be73339fa5d10d5d68c18491cb1a0df578f4322efe4b18e4d915.png" src="_images/1b32eeb69fe1be73339fa5d10d5d68c18491cb1a0df578f4322efe4b18e4d915.png" />
+</div>
+</div>
+</section>
+<section id="custom-loss-functions">
+<h2>Custom Loss Functions<a class="headerlink" href="#custom-loss-functions" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="tensorflow-variables">
+<h2>Tensorflow Variables<a class="headerlink" href="#tensorflow-variables" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="gpu-support">
+<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="preprocessing-layers">
+<h2>Preprocessing Layers<a class="headerlink" href="#preprocessing-layers" title="Permalink to this headline">#</a></h2>
+<section id="flatten-layer">
+<h3>Flatten Layer<a class="headerlink" href="#flatten-layer" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="normalization-layer">
+<h3>Normalization Layer<a class="headerlink" href="#normalization-layer" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="categoryencoding-layer">
+<h3>CategoryEncoding Layer<a class="headerlink" href="#categoryencoding-layer" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="image-preprocessing-layers">
+<h3>Image Preprocessing Layers<a class="headerlink" href="#image-preprocessing-layers" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="saving-trained-models">
+<h2>Saving Trained Models<a class="headerlink" href="#saving-trained-models" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="other-tensorflow-customizations">
+<h2>Other Tensorflow Customizations<a class="headerlink" href="#other-tensorflow-customizations" title="Permalink to this headline">#</a></h2>
+<p>Tensorflow offers many other customizations besides the ones discussed here:</p>
+<ul class="simple">
+<li><p>Custom Activation Functions</p></li>
+<li><p>Custom Initialization Schemes</p></li>
+<li><p>Custom Layers</p></li>
+<li><p>Custom Training Loops</p></li>
+</ul>
+<p>These are unlikely to be used in this course, but are good to know about for the future</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -438,6 +712,33 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keras-and-tensorflow">Keras and Tensorflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keras-neural-network-with-new-data-set">Keras Neural Network With New Data Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-loss-functions">Custom Loss Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorflow-variables">Tensorflow Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-support">GPU Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-layers">Preprocessing Layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flatten-layer">Flatten Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization-layer">Normalization Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categoryencoding-layer">CategoryEncoding Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-preprocessing-layers">Image Preprocessing Layers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-trained-models">Saving Trained Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-tensorflow-customizations">Other Tensorflow Customizations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
