@@ -629,7 +629,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x126ea2730&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1568c7730&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -665,7 +665,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9333333333333333
 </pre></div>
 </div>
 </div>
@@ -679,8 +679,8 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9,  0,  0],
-       [ 0,  6,  4],
-       [ 0,  0, 11]])
+       [ 0,  9,  2],
+       [ 0,  0, 10]])
 </pre></div>
 </div>
 </div>
@@ -695,10 +695,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1050dfdf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x156fe2b50&gt;
 </pre></div>
 </div>
-<img alt="_images/b68c3cbd7b0dd32e6877de1b65008cdf1dd96a3a7d12e6211247ec3e05fb20e4.png" src="_images/b68c3cbd7b0dd32e6877de1b65008cdf1dd96a3a7d12e6211247ec3e05fb20e4.png" />
+<img alt="_images/af0d03767074e890e2d51b391bfde05f90bdd1ebe7d875ed51daea0cc25ba5e2.png" src="_images/af0d03767074e890e2d51b391bfde05f90bdd1ebe7d875ed51daea0cc25ba5e2.png" />
 </div>
 </div>
 <p>There are a couple of ways we can attempt to improve our results while still using the ridge classifier algorithm. First, since ridge classifier is a regularized algorithm, we can try applying the standard scaler to the data to change its scale.</p>
@@ -727,10 +727,10 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x127144460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x156f18b80&gt;
 </pre></div>
 </div>
-<img alt="_images/02543922882855160c9c30a7e0efc5d78b3a6e35e142ce187dae148c43607c63.png" src="_images/02543922882855160c9c30a7e0efc5d78b3a6e35e142ce187dae148c43607c63.png" />
+<img alt="_images/f89a470b576efa9179f66b545cb265342ad499abdee24b2887e06ae23e2acffc.png" src="_images/f89a470b576efa9179f66b545cb265342ad499abdee24b2887e06ae23e2acffc.png" />
 </div>
 </div>
 <p>Second, the ridge classifier, like ridge regression, has a hyperparameter, <span class="math notranslate nohighlight">\(\alpha\)</span>. We can attempt to perform hyperparameter tuning to see if there is a value of <span class="math notranslate nohighlight">\(\alpha\)</span> which will give us a better accuracy score.</p>
@@ -754,8 +754,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.0001
-BEST SCORE: 0.8333333333333334
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1.2314536877204176
+BEST SCORE: 0.8666666666666667
 </pre></div>
 </div>
 </div>
