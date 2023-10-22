@@ -183,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10_Slides.html">Introduction to Convolutional Neural Networks</a></li>
 </ul>
 
     </div>
@@ -673,7 +674,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x17905bb50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x16db2c130&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -716,7 +717,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7666666666666667
 </pre></div>
 </div>
 </div>
@@ -730,8 +731,8 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 8,  0,  0],
-       [ 0,  6,  2],
-       [ 0,  2, 12]])
+       [ 0,  4,  5],
+       [ 0,  2, 11]])
 </pre></div>
 </div>
 </div>
@@ -746,10 +747,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x17bdffe80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x17c8f3fd0&gt;
 </pre></div>
 </div>
-<img alt="_images/0b7f4cb25b1bfe7472f3087012d7d4134b76487351a18d9f6f39c704ca3fa871.png" src="_images/0b7f4cb25b1bfe7472f3087012d7d4134b76487351a18d9f6f39c704ca3fa871.png" />
+<img alt="_images/09b51bc68470c1dc4c58df158977f939a1a89dc75e1df8e7d35524ef252ee5de.png" src="_images/09b51bc68470c1dc4c58df158977f939a1a89dc75e1df8e7d35524ef252ee5de.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -776,13 +777,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x17cf463d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x17db3a400&gt;
 </pre></div>
 </div>
-<img alt="_images/a44bb91b1db976560017f1445fef1ebe2155131beda8475dd32a6777b3e40ff1.png" src="_images/a44bb91b1db976560017f1445fef1ebe2155131beda8475dd32a6777b3e40ff1.png" />
+<img alt="_images/2d8bcaf64fc396b2aa55e651eb0a2bce08b8547ce1c98bc00d01c412295305fa.png" src="_images/2d8bcaf64fc396b2aa55e651eb0a2bce08b8547ce1c98bc00d01c412295305fa.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -807,8 +808,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 1e-05
-BEST SCORE: 0.8666666666666667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 5.283778324166959
+BEST SCORE: 0.9333333333333333
 </pre></div>
 </div>
 </div>
