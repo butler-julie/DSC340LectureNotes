@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Unsupervised Machine Learning: Clustering and Dimensionality Reduction &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,6 +44,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -66,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="A Conceptual and Mathematical Introduction to Neural Networks" href="Week7_Slides_1.html" />
     <link rel="prev" title="Model Optimization and Nonlinear Models" href="Week5_Slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -411,7 +412,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="unsupervised-machine-learning-clustering-and-dimensionality-reduction">
-<h1>Unsupervised Machine Learning: Clustering and Dimensionality Reduction<a class="headerlink" href="#unsupervised-machine-learning-clustering-and-dimensionality-reduction" title="Permalink to this headline">#</a></h1>
+<h1>Unsupervised Machine Learning: Clustering and Dimensionality Reduction<a class="headerlink" href="#unsupervised-machine-learning-clustering-and-dimensionality-reduction" title="Permalink to this heading">#</a></h1>
 <p>CSC/DSC 340 Week 6 Slides</p>
 <p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
 <p>Date Created: August 24, 2023</p>
@@ -444,7 +445,7 @@ document.write(`
 </div>
 </div>
 <section id="wine-data-set-classification">
-<h2>Wine Data Set (Classification)<a class="headerlink" href="#wine-data-set-classification" title="Permalink to this headline">#</a></h2>
+<h2>Wine Data Set (Classification)<a class="headerlink" href="#wine-data-set-classification" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>178 data points with 13 features and 3 different target values</p></li>
 <li><p>Goal: given information about a wine, predict which of three locations it originated from</p></li>
@@ -694,20 +695,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x103b35c70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x10529b2e0&gt;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in callback &lt;function flush_figures at 0x16a3aa4c0&gt; (for post_execute):
-</pre></div>
-</div>
+<img alt="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" src="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" />
 </div>
 </div>
 <section id="support-vector-classification">
-<h3>Support Vector Classification<a class="headerlink" href="#support-vector-classification" title="Permalink to this headline">#</a></h3>
+<h3>Support Vector Classification<a class="headerlink" href="#support-vector-classification" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Binary classifier that finds a hyperplane that separates the two classes of data</p></li>
 <li><p>Can be extended to multiclass classification using a One-vs-Rest (OvR) approach</p></li>
@@ -730,7 +729,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.83
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.86
 </pre></div>
 </div>
 </div>
@@ -762,16 +761,16 @@ document.write(`
 </section>
 </section>
 <section id="clustering">
-<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">#</a></h2>
+<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading">#</a></h2>
 <section id="what-is-unsupervised-learning">
-<h3>What is Unsupervised Learning?<a class="headerlink" href="#what-is-unsupervised-learning" title="Permalink to this headline">#</a></h3>
+<h3>What is Unsupervised Learning?<a class="headerlink" href="#what-is-unsupervised-learning" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Algorithms learn from unlabeled data (just the feature) with the goal of finding hidden patterns in the data</p></li>
 <li><p>Examples of unsupervised learning tasks: clustering, dimensionality reduction, and anomaly detection</p></li>
 </ul>
 </section>
 <section id="what-is-clustering">
-<h3>What is Clustering?<a class="headerlink" href="#what-is-clustering" title="Permalink to this headline">#</a></h3>
+<h3>What is Clustering?<a class="headerlink" href="#what-is-clustering" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Unsupervised learning technique where data is grouped into clusters based on similarity</p></li>
 <li><p>Unsupervised learning version of classification, could be grouped in a workflow with classification</p></li>
@@ -779,13 +778,13 @@ document.write(`
 </ul>
 </section>
 <section id="k-means-kmeans">
-<h3>k-Means (KMeans)<a class="headerlink" href="#k-means-kmeans" title="Permalink to this headline">#</a></h3>
+<h3>k-Means (KMeans)<a class="headerlink" href="#k-means-kmeans" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Used for partitioning data into clusters based on similarities in the data points</p></li>
 </ul>
 </section>
 <section id="how-does-k-means-work">
-<h3>How does k-means work?<a class="headerlink" href="#how-does-k-means-work" title="Permalink to this headline">#</a></h3>
+<h3>How does k-means work?<a class="headerlink" href="#how-does-k-means-work" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Initialize the cluster centroids</p></li>
 <li><p>Assign each data point to the closest centroid</p></li>
@@ -795,7 +794,7 @@ document.write(`
 <p><img alt="kmeans" src="https://media.licdn.com/dms/image/C5612AQH8kEizAouznA/article-cover_image-shrink_600_2000/0/1626424726069?e=2147483647&amp;v=beta&amp;t=deUL_yPDFPXK8dkspX2oJZWX1qqyx3XBokl02TN8x9k" /></p>
 </section>
 <section id="measure-of-success">
-<h3>Measure of Success<a class="headerlink" href="#measure-of-success" title="Permalink to this headline">#</a></h3>
+<h3>Measure of Success<a class="headerlink" href="#measure-of-success" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Within-Cluster Sum of Squares (WCSS) or Interia</p>
 <ul>
@@ -805,7 +804,7 @@ document.write(`
 </li>
 </ul>
 <section id="assuming-we-know-the-number-of-clusters">
-<h4>Assuming We Know the Number of Clusters<a class="headerlink" href="#assuming-we-know-the-number-of-clusters" title="Permalink to this headline">#</a></h4>
+<h4>Assuming We Know the Number of Clusters<a class="headerlink" href="#assuming-we-know-the-number-of-clusters" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
@@ -822,7 +821,7 @@ document.write(`
 </div>
 </section>
 <section id="plot-the-predicted-clusters">
-<h4>Plot the predicted clusters<a class="headerlink" href="#plot-the-predicted-clusters" title="Permalink to this headline">#</a></h4>
+<h4>Plot the predicted clusters<a class="headerlink" href="#plot-the-predicted-clusters" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the clusters</span>
@@ -839,15 +838,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x28ee2ca90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1578dc190&gt;
 </pre></div>
 </div>
-<img alt="_images/26c0b6fc613241ec523c1e12373ec04bac8e4784e5d225b07167f732761d09a7.png" src="_images/26c0b6fc613241ec523c1e12373ec04bac8e4784e5d225b07167f732761d09a7.png" />
+<img alt="_images/69787e6188c8c6e47820b0e757a35b8955051d6f3374a1c90107819d8ccb185d.png" src="_images/69787e6188c8c6e47820b0e757a35b8955051d6f3374a1c90107819d8ccb185d.png" />
 </div>
 </div>
 </section>
 <section id="compare-to-the-true-clusters">
-<h4>Compare to the True Clusters<a class="headerlink" href="#compare-to-the-true-clusters" title="Permalink to this headline">#</a></h4>
+<h4>Compare to the True Clusters<a class="headerlink" href="#compare-to-the-true-clusters" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>There is no error score or accuracy score because the algorithm is learning from unlabeled data</p></li>
 </ul>
@@ -870,12 +869,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/02281d5861d56225aefce13e26e067b2996d0d8fc65fb757c4106e90d1b8feae.png" src="_images/02281d5861d56225aefce13e26e067b2996d0d8fc65fb757c4106e90d1b8feae.png" />
+<img alt="_images/6d39eec9896fe383bea90598f7633c5ac9f9a4cf2ff022fabf3e83d35184c39a.png" src="_images/6d39eec9896fe383bea90598f7633c5ac9f9a4cf2ff022fabf3e83d35184c39a.png" />
 </div>
 </div>
 </section>
 <section id="what-if-we-do-not-know-the-number-of-clusters">
-<h4>What if We Do Not Know the Number of Clusters?<a class="headerlink" href="#what-if-we-do-not-know-the-number-of-clusters" title="Permalink to this headline">#</a></h4>
+<h4>What if We Do Not Know the Number of Clusters?<a class="headerlink" href="#what-if-we-do-not-know-the-number-of-clusters" title="Permalink to this heading">#</a></h4>
 <p>Method 1: Elbow Plot</p>
 <ul class="simple">
 <li><p>Plot of WCSS vs. the number of clusters</p></li>
@@ -902,7 +901,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7fc69a01bd948cfd420ef21b337be03fc37af1091d2cf4480028261162135d00.png" src="_images/7fc69a01bd948cfd420ef21b337be03fc37af1091d2cf4480028261162135d00.png" />
+<img alt="_images/01052e7923e5c14dd58c6898f62e81f92a40c0d3f01266bdf1c9ffc3e2ee153d.png" src="_images/01052e7923e5c14dd58c6898f62e81f92a40c0d3f01266bdf1c9ffc3e2ee153d.png" />
 </div>
 </div>
 <p>Method 2: Silhouette Scores</p>
@@ -935,7 +934,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a01f814efecc1441261c490775f3a61e78445b3416810bcaee9704b285527473.png" src="_images/a01f814efecc1441261c490775f3a61e78445b3416810bcaee9704b285527473.png" />
+<img alt="_images/3ec65048c5285cbad69742fd64ff67dba65a9ccb28f1a4bb44db74aedcf82b42.png" src="_images/3ec65048c5285cbad69742fd64ff67dba65a9ccb28f1a4bb44db74aedcf82b42.png" />
 </div>
 </div>
 <ul class="simple">
@@ -952,7 +951,7 @@ document.write(`
 </section>
 </section>
 <section id="dimensionality-reduction">
-<h2>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">#</a></h2>
+<h2>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Reducing the number of dimensions in the data set while preserving the essential information needed to train a model</p></li>
 <li><p>High dimensional data can lead to overfitting, increased complexity, and poorcomputational efficiency</p></li>
@@ -960,14 +959,14 @@ document.write(`
 <li><p>General machine learning workflow will involve peforming dimensionality reduction of the features of the data set (unsupervised learning) and the use of those reduced features and the data set labels to train a classification or regression model (supervised learning)</p></li>
 </ul>
 <section id="principal-component-analysis-pca">
-<h3>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this headline">#</a></h3>
+<h3>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A dimensionality reduction technique used to transform high-dimensional data into lower-dimensional data while retaining as much variance as possible</p></li>
 <li><p>Benefits: reduced noise and complexity, improved visualization and computational effiecency</p></li>
 </ul>
 <p><img alt="PCA" src="https://raw.githubusercontent.com/Akramz/Hands-on-Machine-Learning-with-Scikit-Learn-Keras-and-TensorFlow/63b8d7a91ff1ca2fdc35947a6a390c5a81085bd2//static/imgs/2D_variance_projection.png" /></p>
 <section id="how-does-pca-work">
-<h4>How does PCA Work?<a class="headerlink" href="#how-does-pca-work" title="Permalink to this headline">#</a></h4>
+<h4>How does PCA Work?<a class="headerlink" href="#how-does-pca-work" title="Permalink to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Standardize the data (data <strong>must</strong> be standardized for PCA)</p></li>
 <li><p>Calculate the covariance matrix</p>
@@ -992,7 +991,7 @@ document.write(`
 </section>
 </section>
 <section id="interpretability-and-challenges">
-<h2>Interpretability and Challenges<a class="headerlink" href="#interpretability-and-challenges" title="Permalink to this headline">#</a></h2>
+<h2>Interpretability and Challenges<a class="headerlink" href="#interpretability-and-challenges" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The principal components can be interpreted as linear combinations of the original features <strong>but</strong> the lower dimensional data has no physical interpretation.</p></li>
 <li><p>Limitations</p>
@@ -1061,15 +1060,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.86
-Number of Components: 2 Accuracy: 1.00
-Number of Components: 3 Accuracy: 1.00
-Number of Components: 4 Accuracy: 0.97
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.89
+Number of Components: 2 Accuracy: 0.97
+Number of Components: 3 Accuracy: 0.97
+Number of Components: 4 Accuracy: 1.00
 Number of Components: 5 Accuracy: 1.00
 Number of Components: 6 Accuracy: 0.97
 Number of Components: 7 Accuracy: 0.97
 Number of Components: 8 Accuracy: 0.97
-Number of Components: 9 Accuracy: 1.00
+Number of Components: 9 Accuracy: 0.94
 Number of Components: 10 Accuracy: 1.00
 Number of Components: 11 Accuracy: 1.00
 Number of Components: 12 Accuracy: 1.00
@@ -1143,7 +1142,7 @@ Number of Components: 12 Accuracy: 1.00
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 0.6660029547793321, &#39;svc__kernel&#39;: &#39;rbf&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 6.4125985834070525, &#39;svc__kernel&#39;: &#39;rbf&#39;}
 Accuracy: 0.97
 </pre></div>
 </div>
@@ -1216,7 +1215,7 @@ Accuracy: 0.94
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;See Legend&#39;)
 </pre></div>
 </div>
-<img alt="_images/13b150ae3c8a7a3eff55b8e88e7a2d2a1396d5302dcf063c125ffd90834d9e2b.png" src="_images/13b150ae3c8a7a3eff55b8e88e7a2d2a1396d5302dcf063c125ffd90834d9e2b.png" />
+<img alt="_images/2e611b5671e4a90db7cd7e24527da886fb839ec06d8fcd588f6a40fe0af648dc.png" src="_images/2e611b5671e4a90db7cd7e24527da886fb839ec06d8fcd588f6a40fe0af648dc.png" />
 </div>
 </div>
 <p>PCA may not seem very useful for the data sets we encounter in this class, but many real world data sets can have hundreds or thousands of different features, and not all of them will be relevant.</p>

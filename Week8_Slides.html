@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Creating Neural Networks with Tensorflow &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,6 +44,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -66,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Creating Neural Networks from Scratch" href="Week9_Slides.html" />
     <link rel="prev" title="Creating Neural Networks with Scikit-Learn and Keras" href="Week7_Slides_2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -399,13 +400,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-neural-networks-with-tensorflow">
-<h1>Creating Neural Networks with Tensorflow<a class="headerlink" href="#creating-neural-networks-with-tensorflow" title="Permalink to this headline">#</a></h1>
+<h1>Creating Neural Networks with Tensorflow<a class="headerlink" href="#creating-neural-networks-with-tensorflow" title="Permalink to this heading">#</a></h1>
 <p>CSC/DSC 340 Week 8 Slides</p>
 <p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
 <p>Date Created: October 6, 2023</p>
 <p>Last Modified: October 6, 2023</p>
 <section id="keras-and-tensorflow">
-<h2>Keras and Tensorflow<a class="headerlink" href="#keras-and-tensorflow" title="Permalink to this headline">#</a></h2>
+<h2>Keras and Tensorflow<a class="headerlink" href="#keras-and-tensorflow" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Keras and Tensorflow use to be seperate libraries but Keras is now apart of Tensorflow</p></li>
 <li><p>In recent versions of Tensorflow, it has become hard to create and use neural networks without also using Keras</p></li>
@@ -413,7 +414,7 @@ document.write(`
 </ul>
 </section>
 <section id="keras-neural-network-with-new-data-set">
-<h2>Keras Neural Network With New Data Set<a class="headerlink" href="#keras-neural-network-with-new-data-set" title="Permalink to this headline">#</a></h2>
+<h2>Keras Neural Network With New Data Set<a class="headerlink" href="#keras-neural-network-with-new-data-set" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>MNIST Data Set</p>
 <ul>
@@ -433,13 +434,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorflow&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the &#39;ssl&#39; module is compiled with &#39;LibreSSL 2.8.3&#39;. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
 </pre></div>
 </div>
 </div>
@@ -549,6 +545,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mnist_model</span> <span class="o">=</span> <span class="n">mnist_classification_model</span> <span class="p">()</span>
+
+<span class="nn">Cell In[9], line 6,</span> in <span class="ni">mnist_classification_model</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Add layers to the model</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)))</span>  <span class="c1"># Flatten the 28x28 input images to a 1D vector</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>  <span class="c1"># Fully connected layer with ReLU activation</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>   <span class="c1"># Another fully connected layer with ReLU activation</span>
+
+<span class="ne">NameError</span>: name &#39;Flatten&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -585,7 +598,7 @@ Epoch 10/10
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate the model on the test data</span>
 <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test accuracy: </span><span class="si">{</span><span class="n">test_accuracy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -615,34 +628,34 @@ Test accuracy: 97.21%
 </div>
 </section>
 <section id="custom-loss-functions">
-<h2>Custom Loss Functions<a class="headerlink" href="#custom-loss-functions" title="Permalink to this headline">#</a></h2>
+<h2>Custom Loss Functions<a class="headerlink" href="#custom-loss-functions" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="tensorflow-variables">
-<h2>Tensorflow Variables<a class="headerlink" href="#tensorflow-variables" title="Permalink to this headline">#</a></h2>
+<h2>Tensorflow Variables<a class="headerlink" href="#tensorflow-variables" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="gpu-support">
-<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this headline">#</a></h2>
+<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="preprocessing-layers">
-<h2>Preprocessing Layers<a class="headerlink" href="#preprocessing-layers" title="Permalink to this headline">#</a></h2>
+<h2>Preprocessing Layers<a class="headerlink" href="#preprocessing-layers" title="Permalink to this heading">#</a></h2>
 <section id="flatten-layer">
-<h3>Flatten Layer<a class="headerlink" href="#flatten-layer" title="Permalink to this headline">#</a></h3>
+<h3>Flatten Layer<a class="headerlink" href="#flatten-layer" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="normalization-layer">
-<h3>Normalization Layer<a class="headerlink" href="#normalization-layer" title="Permalink to this headline">#</a></h3>
+<h3>Normalization Layer<a class="headerlink" href="#normalization-layer" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="categoryencoding-layer">
-<h3>CategoryEncoding Layer<a class="headerlink" href="#categoryencoding-layer" title="Permalink to this headline">#</a></h3>
+<h3>CategoryEncoding Layer<a class="headerlink" href="#categoryencoding-layer" title="Permalink to this heading">#</a></h3>
 </section>
 <section id="image-preprocessing-layers">
-<h3>Image Preprocessing Layers<a class="headerlink" href="#image-preprocessing-layers" title="Permalink to this headline">#</a></h3>
+<h3>Image Preprocessing Layers<a class="headerlink" href="#image-preprocessing-layers" title="Permalink to this heading">#</a></h3>
 </section>
 </section>
 <section id="saving-trained-models">
-<h2>Saving Trained Models<a class="headerlink" href="#saving-trained-models" title="Permalink to this headline">#</a></h2>
+<h2>Saving Trained Models<a class="headerlink" href="#saving-trained-models" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="other-tensorflow-customizations">
-<h2>Other Tensorflow Customizations<a class="headerlink" href="#other-tensorflow-customizations" title="Permalink to this headline">#</a></h2>
+<h2>Other Tensorflow Customizations<a class="headerlink" href="#other-tensorflow-customizations" title="Permalink to this heading">#</a></h2>
 <p>Tensorflow offers many other customizations besides the ones discussed here:</p>
 <ul class="simple">
 <li><p>Custom Activation Functions</p></li>
