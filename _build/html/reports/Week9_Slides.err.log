@@ -1,39 +1,42 @@
 Traceback (most recent call last):
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 730, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/util.py", line 96, in ensure_async
-    result = await obj
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/jupyter_client/channels.py", line 230, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/Users/butlerju/Library/Python/3.9/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/butlerju/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1305, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
+  File "/Users/butlerju/Library/Python/3.9/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
   File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
     return future.result()
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/Users/butlerju/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 949, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 754, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 801, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['# Train the neural network for the specified number of iterations', '# Update the weights using the learning rates', 'for i in range(num_training_iterations):', '    print("Training Iteration:", i+1)', '    current_loss = loss_function(W,X_train,y_train)']
-...
-['    # Update second hidden layer', '    W[1] = W[1] - learning_rate * loss_grad[1]', '    # Update output layer', '    W[2] = W[2] - learning_rate * loss_grad[2]', '    previous_loss = current_loss']
--------------------
+  File "/Users/butlerju/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/butlerju/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# IMPORTS
+# Math for the ceiling function
+from math import ceil
+# Matplotlib for graphing capabilities
+from matplotlib import pyplot as plt
+# Numpy for arrays
+import numpy as np
+# Modules from the JAX library for creating neural networks
+import jax.numpy as jnp
+from jax import grad
+from jax import random as npr
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 9[0m
+[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      8[0m [38;5;66;03m# Modules from the JAX library for creating neural networks[39;00m
+[0;32m----> 9[0m [38;5;28;01mimport[39;00m [38;5;21;01mjax[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mjnp[39;00m
+[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01mjax[39;00m [38;5;28;01mimport[39;00m grad
+[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mjax[39;00m [38;5;28;01mimport[39;00m random [38;5;28;01mas[39;00m npr
+
+[0;31mModuleNotFoundError[0m: No module named 'jax'
 
