@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>&lt;no title&gt; &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -65,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -179,6 +178,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10_Slides.html">Introduction to Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11_Slides.html">Advanced Methods for Improving the Performance of Convolutional Neural Networks</a></li>
 </ul>
 
     </div>
@@ -410,7 +411,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x10d751790&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1100825b0&gt;]
 </pre></div>
 </div>
 <img alt="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" src="_images/4ee8aba94e01030455c3a632c137ec01c6dc2f49773e73709f976f4fc61ce875.png" />
@@ -436,7 +437,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2411
 2411
 (2411,)
-1.0000808341745804 8.083417458029651e-05
+1.061264797800087 0.06126479780008717
 </pre></div>
 </div>
 </div>
@@ -449,10 +450,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x10d872490&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11018a760&gt;]
 </pre></div>
 </div>
-<img alt="_images/dc95e32ea10cc01cc99794c2434945630a8004f9108310e501fd228b411afd30.png" src="_images/dc95e32ea10cc01cc99794c2434945630a8004f9108310e501fd228b411afd30.png" />
+<img alt="_images/58bdaaf4bc5cd88341750a46e24fad6c755f1764a92490f320693917e7539859.png" src="_images/58bdaaf4bc5cd88341750a46e24fad6c755f1764a92490f320693917e7539859.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -490,27 +491,27 @@ document.write(`
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>1.000081</td>
+      <td>1.061265</td>
     </tr>
     <tr>
       <th>1</th>
       <td>100</td>
-      <td>0.952457</td>
+      <td>0.912090</td>
     </tr>
     <tr>
       <th>2</th>
       <td>200</td>
-      <td>0.921876</td>
+      <td>0.992976</td>
     </tr>
     <tr>
       <th>3</th>
       <td>300</td>
-      <td>0.965446</td>
+      <td>0.987081</td>
     </tr>
     <tr>
       <th>4</th>
       <td>400</td>
-      <td>0.889934</td>
+      <td>0.957546</td>
     </tr>
     <tr>
       <th>...</th>
@@ -520,27 +521,27 @@ document.write(`
     <tr>
       <th>2406</th>
       <td>240600</td>
-      <td>-0.093675</td>
+      <td>0.012349</td>
     </tr>
     <tr>
       <th>2407</th>
       <td>240700</td>
-      <td>0.057078</td>
+      <td>-0.098140</td>
     </tr>
     <tr>
       <th>2408</th>
       <td>240800</td>
-      <td>0.035096</td>
+      <td>0.028522</td>
     </tr>
     <tr>
       <th>2409</th>
       <td>240900</td>
-      <td>-0.071626</td>
+      <td>0.086560</td>
     </tr>
     <tr>
       <th>2410</th>
       <td>241000</td>
-      <td>-0.002702</td>
+      <td>-0.001567</td>
     </tr>
   </tbody>
 </table>
@@ -691,7 +692,7 @@ Coefficient of determination: 0.59
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x13d7dabb0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x16d5eeb20&gt;]
 </pre></div>
 </div>
 <img alt="_images/c38e40c536ea0ecc21d4fa65dc29b017caf0303301d7f8368711623c2b7ffe7e.png" src="_images/c38e40c536ea0ecc21d4fa65dc29b017caf0303301d7f8368711623c2b7ffe7e.png" />

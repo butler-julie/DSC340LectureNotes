@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Unsupervised Machine Learning: Clustering and Dimensionality Reduction &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -67,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="A Conceptual and Mathematical Introduction to Neural Networks" href="Week7_LectureNotes_1.html" />
     <link rel="prev" title="Model Optimization and Nonlinear Models" href="Week5_LectureNotes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -181,6 +180,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10_Slides.html">Introduction to Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11_Slides.html">Advanced Methods for Improving the Performance of Convolutional Neural Networks</a></li>
 </ul>
 
     </div>
@@ -410,7 +411,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="unsupervised-machine-learning-clustering-and-dimensionality-reduction">
-<h1>Unsupervised Machine Learning: Clustering and Dimensionality Reduction<a class="headerlink" href="#unsupervised-machine-learning-clustering-and-dimensionality-reduction" title="Permalink to this heading">#</a></h1>
+<h1>Unsupervised Machine Learning: Clustering and Dimensionality Reduction<a class="headerlink" href="#unsupervised-machine-learning-clustering-and-dimensionality-reduction" title="Permalink to this headline">#</a></h1>
 <p>CSC/DSC 340 Week 6 Lecture Notes</p>
 <p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
 <p>Date Created: August 30, 2023</p>
@@ -443,7 +444,7 @@ document.write(`
 </div>
 </div>
 <section id="wine-data-set">
-<h2>Wine Data Set<a class="headerlink" href="#wine-data-set" title="Permalink to this heading">#</a></h2>
+<h2>Wine Data Set<a class="headerlink" href="#wine-data-set" title="Permalink to this headline">#</a></h2>
 <p>In these lecture notes we will be investigating a new data set, called the wine data set.  This data set is provided by Scikit-Learn, it it already comes cleaned and formatted for machine learning. This data set contains 178 data points across three different labels and each data point as 13 features.  The features of each data point are quantifiable descriptions of the wine (such as color and chemical composition) and the labels are which of the three regions that wine comes from. The goal of this data set, phrased in a supervised learning context, is to predict which of the three regions the wine originated from. This data set does have come challenges however.  The different features have varying scales, meaning that scaling the data down to a consistent scale will likely be important.  Additionally, there are also class imbalances in the data that may make predicting one of the classes much more difficult due to a lack of data points.  Both of these challenges are found in real world data, so it is important to know how to deal with them.</p>
 <p>The differences in scaled data can be handled through any number of scaling methods, such as standard scaler which we have been using.  The class imbalance, depending on how skewed it is, can be handled by creating a data set that intentionally has roughly equal representations from all of the classes instead of creating the training set randomly, which may leave one or more classes unrepresented or underrepresented.</p>
 <p>Let’s import the data set from Scikit-learn and convert the data set to a Pandas array.</p>
@@ -692,20 +693,165 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/butlerju/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/juliehartley/Library/Python/3.9/lib/python/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x10964b6a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x1035f00d0&gt;
 </pre></div>
 </div>
-<img alt="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" src="_images/a464f7ef8c0a8ef18c4172586dbb47607f23c8487335fd9d04692482ae62290f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in callback &lt;function flush_figures at 0x161dbbb80&gt; (for post_execute):
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib_inline/backend_inline.py:126,</span> in <span class="ni">flush_figures</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="k">if</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">close_figures</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="c1"># ignore the tracking, just draw and close all figures</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">126</span>         <span class="k">return</span> <span class="n">show</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>         <span class="c1"># safely show traceback if in IPython, else raise</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>         <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib_inline/backend_inline.py:90,</span> in <span class="ni">show</span><span class="nt">(close, block)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>     <span class="k">for</span> <span class="n">figure_manager</span> <span class="ow">in</span> <span class="n">Gcf</span><span class="o">.</span><span class="n">get_all_fig_managers</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">90</span>         <span class="n">display</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span>             <span class="n">figure_manager</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">figure</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>             <span class="n">metadata</span><span class="o">=</span><span class="n">_fetch_figure_metadata</span><span class="p">(</span><span class="n">figure_manager</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">figure</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span>         <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="n">show</span><span class="o">.</span><span class="n">_to_draw</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/IPython/core/display_functions.py:298,</span> in <span class="ni">display</span><span class="nt">(include, exclude, metadata, transient, display_id, raw, clear, *objs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="n">publish_display_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">298</span>     <span class="n">format_dict</span><span class="p">,</span> <span class="n">md_dict</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="n">include</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">format_dict</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="c1"># nothing to display (e.g. _ipython_display_ took over)</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>         <span class="k">continue</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/IPython/core/formatters.py:178,</span> in <span class="ni">DisplayFormatter.format</span><span class="nt">(self, obj, include, exclude)</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span> <span class="n">md</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">178</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">formatter</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span> <span class="k">except</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span>     <span class="c1"># FIXME: log the exception</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span>     <span class="k">raise</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/decorator.py:232,</span> in <span class="ni">decorate.&lt;locals&gt;.fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>     <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">232</span> <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/IPython/core/formatters.py:222,</span> in <span class="ni">catch_format_error</span><span class="nt">(method, self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span> <span class="sd">&quot;&quot;&quot;show traceback on failed format call&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">222</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span> <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="c1"># don&#39;t warn on NotImplementedErrors</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_return</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/IPython/core/formatters.py:339,</span> in <span class="ni">BaseFormatter.__call__</span><span class="nt">(self, obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span>     <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">338</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">339</span>     <span class="k">return</span> <span class="n">printer</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span> <span class="c1"># Finally look for special method names</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span> <span class="n">method</span> <span class="o">=</span> <span class="n">get_real_method</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_method</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/IPython/core/pylabtools.py:151,</span> in <span class="ni">print_figure</span><span class="nt">(fig, fmt, bbox_inches, base64, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>     <span class="kn">from</span> <span class="nn">matplotlib.backend_bases</span> <span class="kn">import</span> <span class="n">FigureCanvasBase</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="n">FigureCanvasBase</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">151</span> <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">print_figure</span><span class="p">(</span><span class="n">bytes_io</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span> <span class="n">data</span> <span class="o">=</span> <span class="n">bytes_io</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;svg&#39;</span><span class="p">:</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/backend_bases.py:2346,</span> in <span class="ni">FigureCanvasBase.print_figure</span><span class="nt">(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2344</span> <span class="k">if</span> <span class="n">bbox_inches</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2345</span>     <span class="k">if</span> <span class="n">bbox_inches</span> <span class="o">==</span> <span class="s2">&quot;tight&quot;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2346</span>         <span class="n">bbox_inches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2347</span>             <span class="n">renderer</span><span class="p">,</span> <span class="n">bbox_extra_artists</span><span class="o">=</span><span class="n">bbox_extra_artists</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2348</span>         <span class="k">if</span> <span class="n">pad_inches</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2349</span>             <span class="n">pad_inches</span> <span class="o">=</span> <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.pad_inches&#39;</span><span class="p">]</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/figure.py:1785,</span> in <span class="ni">FigureBase.get_tightbbox</span><span class="nt">(self, renderer, bbox_extra_artists)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1781</span> <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_visible</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">1782</span>     <span class="c1"># some axes don&#39;t take the bbox_extra_artists kwarg so we</span>
+<span class="g g-Whitespace">   </span><span class="mi">1783</span>     <span class="c1"># need this conditional....</span>
+<span class="g g-Whitespace">   </span><span class="mi">1784</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1785</span>         <span class="n">bbox</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1786</span>             <span class="n">renderer</span><span class="p">,</span> <span class="n">bbox_extra_artists</span><span class="o">=</span><span class="n">bbox_extra_artists</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1787</span>     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1788</span>         <span class="n">bbox</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/axes/_base.py:4388,</span> in <span class="ni">_AxesBase.get_tightbbox</span><span class="nt">(self, renderer, call_axes_locator, bbox_extra_artists, for_layout_only)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4386</span>         <span class="k">if</span> <span class="n">ba</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4387</span>             <span class="n">bb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">4388</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_title_position</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4389</span> <span class="n">axbbox</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_window_extent</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4390</span> <span class="n">bb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axbbox</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/axes/_base.py:2963,</span> in <span class="ni">_AxesBase._update_title_position</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2960</span> <span class="n">bb</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">2961</span> <span class="k">if</span> <span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_ticks_position</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2962</span>         <span class="ow">or</span> <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_label_position</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;top&#39;</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">2963</span>     <span class="n">bb</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2964</span> <span class="k">if</span> <span class="n">bb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2965</span>     <span class="k">if</span> <span class="s1">&#39;outline&#39;</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2966</span>         <span class="c1"># Special case for colorbars:</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/axis.py:1325,</span> in <span class="ni">Axis.get_tightbbox</span><span class="nt">(self, renderer, for_layout_only)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1322</span>     <span class="n">renderer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">_get_renderer</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1323</span> <span class="n">ticks_to_draw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_ticks</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1325</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_label_position</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1327</span> <span class="c1"># go back to just this axis&#39;s tick labels</span>
+<span class="g g-Whitespace">   </span><span class="mi">1328</span> <span class="n">tlb1</span><span class="p">,</span> <span class="n">tlb2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ticklabel_bboxes</span><span class="p">(</span><span class="n">ticks_to_draw</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/axis.py:2314,</span> in <span class="ni">XAxis._update_label_position</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2311</span> <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2312</span>     <span class="c1"># use Axes if spine doesn&#39;t exist</span>
+<span class="g g-Whitespace">   </span><span class="mi">2313</span>     <span class="n">spinebbox</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">bbox</span>
+<span class="ne">-&gt; </span><span class="mi">2314</span> <span class="n">bbox</span> <span class="o">=</span> <span class="n">mtransforms</span><span class="o">.</span><span class="n">Bbox</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">bboxes</span> <span class="o">+</span> <span class="p">[</span><span class="n">spinebbox</span><span class="p">])</span>
+<span class="g g-Whitespace">   </span><span class="mi">2315</span> <span class="n">bottom</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">y0</span>
+<span class="g g-Whitespace">   </span><span class="mi">2317</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2318</span>     <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">labelpad</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">dpi</span> <span class="o">/</span> <span class="mi">72</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2319</span> <span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/matplotlib/transforms.py:654,</span> in <span class="ni">BboxBase.union</span><span class="nt">(bboxes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">652</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">bboxes</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;bboxes&#39; cannot be empty&quot;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">654</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">xmin</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">655</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">xmax</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">656</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">ymin</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">])</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/numpy/core/fromnumeric.py:2953,</span> in <span class="ni">min</span><span class="nt">(a, axis, out, keepdims, initial, where)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2836</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_min_dispatcher</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2837</span> <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2838</span>         <span class="n">where</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">2839</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2840</span><span class="sd">     Return the minimum of an array or minimum along an axis.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2841</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2951</span><span class="sd">     6</span>
+<span class="g g-Whitespace">   </span><span class="mi">2952</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">2953</span>     <span class="k">return</span> <span class="n">_wrapreduction</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2954</span>                           <span class="n">keepdims</span><span class="o">=</span><span class="n">keepdims</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">)</span>
+
+<span class="nn">File ~/Library/Python/3.9/lib/python/site-packages/numpy/core/fromnumeric.py:88,</span> in <span class="ni">_wrapreduction</span><span class="nt">(obj, ufunc, method, axis, dtype, out, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>             <span class="k">return</span> <span class="n">reduction</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">88</span> <span class="k">return</span> <span class="n">ufunc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
 </div>
 </div>
 <p>For some general observations, there are some plots in the pairplot where it will be hard to determine where a wine originated because the data overlaps so much.  However, there are also some plots which give us hope that we will be able to accurately classify the data because the wine classes are relatively distinct.  Now, lets train a classifier and see how well it will do.</p>
 </section>
 <section id="support-vector-classifier">
-<h2>Support Vector Classifier<a class="headerlink" href="#support-vector-classifier" title="Permalink to this heading">#</a></h2>
+<h2>Support Vector Classifier<a class="headerlink" href="#support-vector-classifier" title="Permalink to this headline">#</a></h2>
 <p>We will be using a new classifier for this data set, called the support vector classifier (SVC). SVC belongs to a class of algorithms called support vector machines, which is a relatively popular branch of machine learning algorithms.  SVC uses the kernel trick to modify its inputs, like the kernel ridge regression algorithm we studied last week, to add nonlinearity into itself, which should make it a better classifier than the ridge classifier when it comes to nonlinear patterns in the data. SVC is actually a binary classifier that works by finding a hyperplane in the feature space that separates the two classes of data. SVC can be extended to be a multiclass classifier using a One-vs-Rest approach, where it uses a binary classifier to decide if a data point belongs to class X or anything but class X.  You do not have to implement this as Scikit-Learn will do it automatically, but it is good to know how the classifier works as the One-vs-Rest approach may not be best for some data sets.</p>
 <p>Let’s train an SVC on the wine data set, first without using the standard scaler and then with using the standard scaler to see the difference in scaling the data.</p>
 <div class="cell docutils container">
@@ -725,7 +871,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.97
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.94
 </pre></div>
 </div>
 </div>
@@ -756,17 +902,17 @@ document.write(`
 <p>The results will vary based on the random splitting, but we can consider these our baseline results that we will attempt to improve later in this notebook when we study dimensionality reduction.  However, we are first going to be looking at clustering, which is the unsupervised task related to classification.</p>
 </section>
 <section id="clustering">
-<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this heading">#</a></h2>
+<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">#</a></h2>
 <section id="what-is-unsupervised-learning">
-<h3>What is Unsupervised Learning?<a class="headerlink" href="#what-is-unsupervised-learning" title="Permalink to this heading">#</a></h3>
+<h3>What is Unsupervised Learning?<a class="headerlink" href="#what-is-unsupervised-learning" title="Permalink to this headline">#</a></h3>
 <p>Unsupervised learning describes a class of machine learning algorithms that draw patterns from unlabeled data, meaning that they only receive the features of the data set, not the targets/labels. The goal of these algorithms is to find patterns that are hidden in the features of the data set. Examples of tasks that can be performed by unsupervised learning methods are clustering (how many groups do the data points fall into?), dimensionality reduction (is it possible to reduce the number of features by eliminating some or combining the features?), and anomaly detection (is it possible to detect anomalies in a given data set).</p>
 </section>
 <section id="what-is-clustering">
-<h3>What is Clustering?<a class="headerlink" href="#what-is-clustering" title="Permalink to this heading">#</a></h3>
+<h3>What is Clustering?<a class="headerlink" href="#what-is-clustering" title="Permalink to this headline">#</a></h3>
 <p>The first unsupervised learning technique we will be looking at is clustering. Clustering decides how many groups are present in a data set and into which category the data points fall.  It does this only by looking at the features, so it has no idea how many different groups are actually present in the data set. This does mean that if you know how many groups are present in the data set you may get some interesting results, but clustering is especially useful when you have data that you know is somehow grouped but you don’t know how many categories you have or into what category each point falls. In these cases, you could use clustering to determine how many categories there are and into what category your current data falls. You can then use these results to train a supervised learning classification algorithm in order to classify future data. Examples of clustering algorithms are k-means (this notebook), hierarchical clustering analysis (HCA), and DBSCAN.</p>
 </section>
 <section id="k-means-kmeans">
-<h3>k-Means (KMeans)<a class="headerlink" href="#k-means-kmeans" title="Permalink to this heading">#</a></h3>
+<h3>k-Means (KMeans)<a class="headerlink" href="#k-means-kmeans" title="Permalink to this headline">#</a></h3>
 <p>k-Means (or KMeans) is a clustering algorithm that partitions data into clusters based on similarities in the data points. It does this by following a rather short algorithm. The algorithm must be initialized with the number of clusters to find, and then the following steps occur.</p>
 <ol class="arabic simple">
 <li><p><em>Initialize the Cluster Centroids.</em> The cluster centroids are points at the geometric center of each cluster.  Since we are not sure what are clusters are at this point, however, we randomly place the specified number of clusters in the feature space.</p></li>
@@ -776,12 +922,12 @@ document.write(`
 </ol>
 <p><img alt="kmeans" src="https://media.licdn.com/dms/image/C5612AQH8kEizAouznA/article-cover_image-shrink_600_2000/0/1626424726069?e=2147483647&amp;v=beta&amp;t=deUL_yPDFPXK8dkspX2oJZWX1qqyx3XBokl02TN8x9k" /></p>
 <section id="measure-of-success">
-<h4>Measure of Success<a class="headerlink" href="#measure-of-success" title="Permalink to this heading">#</a></h4>
+<h4>Measure of Success<a class="headerlink" href="#measure-of-success" title="Permalink to this headline">#</a></h4>
 <p>Since k-means is an unsupervised algorithm, we cannot measure success in the same way we would a supervised algorithm.  Since supervised algorithms have known labels/targets using success metrics like the mean-squared error score or the accuracy score.  With unsupervised learning, we do not have error or accuracy scores, but we do have metrics that we can use to determine the performance of the algorithms.  For k-means, we can use a metric called the within-cluster sum of squares (WCSS) (also called inertia) to determine its success in clustering the data. This is the sum of the squared distance between each data point and the centroid of its cluster. Essentially, it is a measure of the compactness of the clusters.  A high inertia score means the clusters are quite spread out, which may actually be the case but is also a reason to second guess the clusters given by the algorithm. We will see a bit later in this notebook how the inertia score can be used to determine how many clusters are in the data set if the number is unknown.</p>
 </section>
 </section>
 <section id="assuming-we-know-the-number-of-clusters">
-<h3>Assuming we know the number of clusters<a class="headerlink" href="#assuming-we-know-the-number-of-clusters" title="Permalink to this heading">#</a></h3>
+<h3>Assuming we know the number of clusters<a class="headerlink" href="#assuming-we-know-the-number-of-clusters" title="Permalink to this headline">#</a></h3>
 <p>Let’s first analyze the wine data set with k-means assuming we know the number of clusters (3).  Knowing this we can define a k-means algorithm, train it, and then extract the predicted labels for each of the data points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -814,7 +960,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x176f4f7f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x28de90400&gt;
 </pre></div>
 </div>
 <img alt="_images/ccae1524464baf17ce51602d4dd17d940ebd2571121cce36f75f6b98b4da81a1.png" src="_images/ccae1524464baf17ce51602d4dd17d940ebd2571121cce36f75f6b98b4da81a1.png" />
@@ -844,7 +990,7 @@ document.write(`
 </div>
 </div>
 <section id="what-if-we-do-not-know-the-number-of-clusters">
-<h4>What if We Do Not Know the Number of Clusters?<a class="headerlink" href="#what-if-we-do-not-know-the-number-of-clusters" title="Permalink to this heading">#</a></h4>
+<h4>What if We Do Not Know the Number of Clusters?<a class="headerlink" href="#what-if-we-do-not-know-the-number-of-clusters" title="Permalink to this headline">#</a></h4>
 <p>If we were applying this method to a real data set, we either would not know the exact number of classifications in the data or we may be interested to see how many groups the clustering algorithm things best fits the data.  There are several methods that can be used to determine what the optimal number of clusters for the data set is and we will discuss two of them in this notebook. The first method we will be looking at is called hte elbow plot. This is a plot of the number of clusters used in the k-means algorithm plotted on the x-axis, and the WCSS score for each number of clusters on the y-axis. The goal of the plot is to find the “elbow”, the point at which the reduction in WCSS (or the compactness of the clusters) starts to slow down as more clusters are added into the data.  The number of points at this elbow is the optimal number of clusters. We can make an elbow plot for the wine data for cluster numbers between 1 and 10 using the below code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -867,7 +1013,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/15932c06abc682e1d4b700d6a08cf02693c77fa487a19178052b3da084ef4cde.png" src="_images/15932c06abc682e1d4b700d6a08cf02693c77fa487a19178052b3da084ef4cde.png" />
+<img alt="_images/3c9d6720e82b8ed87de31a4acd025819b04c824e65bcd96b7d5be14a5b456818.png" src="_images/3c9d6720e82b8ed87de31a4acd025819b04c824e65bcd96b7d5be14a5b456818.png" />
 </div>
 </div>
 <p>Looking at the above graph, the rate of change fo the graph seems to start to slow down around 3 to 4 clusters, so I would say that the optimal number of clusters based on this elbow plot is 3 (this is a bit of a subjective measure however). Perhaps a better way to determine the optimal number of clusters is using a silhouette score, which is a measure of how well-separated and distinct the predicted clusters are. If the sihlouette score is close to +1 then the data is well clustered with the given number of clusters and there is a clear separation between the clusters. A score close to 0 means that the clusters are overlapping and crowded, and a score close to -1 means the data may have been misclassified.  Therefore, we can create a plot of the number fo clusters on the x-axis and the sihlouette score on the y-axis and find the number of clusters that maximizes the silhouette score.</p>
@@ -891,7 +1037,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c0c66c92fc61972383895e16ca837cfd560634c37396ff28253952df8c0f513b.png" src="_images/c0c66c92fc61972383895e16ca837cfd560634c37396ff28253952df8c0f513b.png" />
+<img alt="_images/db60c01283ff0f283b8c1d661e7e0fbd12c2c7fa6c383f4a2ef3acb1c59a13d8.png" src="_images/db60c01283ff0f283b8c1d661e7e0fbd12c2c7fa6c383f4a2ef3acb1c59a13d8.png" />
 </div>
 </div>
 <p>Based on the silhouette plot, the best number of clusters for the data set is actually 2, with the second-best number of clusters being 3. Remembering the pairplot with the overlapping clusters in many of the plots, it does make sense why two distinct clusters in feature space may score higher than three distinct clusters if the number of categories is not known.</p>
@@ -901,28 +1047,28 @@ document.write(`
 </section>
 </section>
 <section id="dimensionality-reduction">
-<h2>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this heading">#</a></h2>
+<h2>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">#</a></h2>
 <p>The next unsupervised learning learning task we will study is dimensionality reduction.  The goal of dimensionality reduction is to reduce the dimensions of the data (the number of features) wile preserving the essential information needed to train a supervised learning model. There are a view reasons we want to do dimensionality reduction. First, high dimensional data can lead to overfitting a supervised learning algorithm. Increased dimensions leads to increased complexity and ultimately to increased computational effeciencies. The data sets we will see in this class will have 20 feature or less, but in the real world its not uncommon to find data sets that have hundreds or thousands of features.  Trying to train a supervised learning model with all of this data will not only obsure the patterns that are important to train the model, but it will take a very long time as well.  Therefore, for data sets with many dimensions, we will employ dimensionality reduction to reduce the total number of features in hopes of improving the accuracy and the computational effeciency.</p>
 <p>There are two main ways to reduce the dimensions of the data. The first is to reduce to total number of features through a process called feature selection. We have been doing feature selection by hand so far, but there are unsupervised learning methods which will perform feature selection as well. The second method to reduce dimension is called feature extracton, which creates entirely new features using patterns it finds in the original features.  Principal component analysis (PCA) used feature extration to create new features based off the current features. The general machine leanring workflow that uses dimensionality reduction will involve performing the dimensionality reduction (unsupervised learning) before then feeding the new data and the targets/labels into a regression or classification model to use as training data (supervised machine learning). If you train your model using features that have been altered using dimensionality reduction, then you need to also alter any test data points you pass into also needs to have its features altered with the same dimensionality reduction algorithm.</p>
 <section id="principal-component-analysis-pca">
-<h3>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this heading">#</a></h3>
+<h3>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this headline">#</a></h3>
 <p>The dimensionality reduction algorithm we will be using this week is called principal component analysis, typically known as PCA. The goal of PCA is to perform dimensionality reduction to transform a high dimensional data set into a lower dimension while keeping as much of the variance of the data as possible. In the below example, to transform the 2D data into a one dimensional data set, there are many options (three are shown) but the top axis (label c1) keeps the most variance of the data (spread of the data).</p>
 <p><img alt="PCA" src="https://raw.githubusercontent.com/Akramz/Hands-on-Machine-Learning-with-Scikit-Learn-Keras-and-TensorFlow/63b8d7a91ff1ca2fdc35947a6a390c5a81085bd2//static/imgs/2D_variance_projection.png" /></p>
 <p>PCA has several benefits. It reduces both the noise and the complexity in the data. It can also help improve visualization by allowing high dimensional data to be brought down into a lower dimension in order to be plotted. Finally, by reducing the number of dimensions in the data set, the computational effeciency of the late supervised machine learning algorithm can be improved.</p>
 <section id="how-does-pca-work">
-<h4>How does PCA Work?<a class="headerlink" href="#how-does-pca-work" title="Permalink to this heading">#</a></h4>
+<h4>How does PCA Work?<a class="headerlink" href="#how-does-pca-work" title="Permalink to this headline">#</a></h4>
 <p>The algorithm for PCA can be broken down into five steps. First, the data set needs to be standardized.  Unlike previous algorithms we have looked at here the data standardization is optional but can improve accuracy, the data for a PCA algorithm needs to be standardized.</p>
 <p>Secondly, the data needs to be used to create a covariance matrix. A convariance matrix is a matrix where each element is the covariance between two variables. Covariance is a measure of how two variables change together. Next, the eigenvectors and eigenvalues of the covariance matric are calculated.  These eigenvectors will become the <em>principal components</em>, which are used to create new features in the lower dimensional space.</p>
 <p>The eigenvectors which will be chosen as principal components will be used as the new features are chosen with the eigenvalues. The largest eigenvalues of the covariance matrix correspond to the eigenvectors (principal components) that capture the most data. Given N principal components, the N eigenvectors with the largest eigenvalues will be kept.</p>
 <p>Finally, the data is transformed into a lower dimension.  A transformation is created where the principal components are the columns and this transformation matrix is them multiplied by the original data to create the low dimension data set. In math terms, PCA is a projection from a high dimensional space into a lower dimension space.</p>
 </section>
 <section id="interpretability-and-challenges">
-<h4>Interpretability and Challenges<a class="headerlink" href="#interpretability-and-challenges" title="Permalink to this heading">#</a></h4>
+<h4>Interpretability and Challenges<a class="headerlink" href="#interpretability-and-challenges" title="Permalink to this headline">#</a></h4>
 <p>While PCA does have its benefits the drawbacks come from its interpretabolity and other challenges. The principal componenents can be interpreted as linear combinations of the original features but the lower dimensional data has not physical interpretation. This can make it very difficult ot make sense of the model that the lower dimensional data will be used to train.</p>
 <p>There are alsp some limitations that come from PCA. The dimensionality reduction can lead to a potential loss of information. Complex relationships in the data can not be perserved. The data set must be scaled before it can be used which causes an extra step in the machine learning workflow. Finally, PCA workds best when there are correlations between features, which may not be true for all data sets.</p>
 </section>
 <section id="using-pca">
-<h4>Using PCA<a class="headerlink" href="#using-pca" title="Permalink to this heading">#</a></h4>
+<h4>Using PCA<a class="headerlink" href="#using-pca" title="Permalink to this headline">#</a></h4>
 <p>To start out, let’s attempt to reduce the number of features in the wine data set from 13 to 6 by setting the number of components to 6. Even with just this initial guess in the number of principal components, we are able to improve the accuracy of the SVC.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -985,18 +1131,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.81
-Number of Components: 2 Accuracy: 0.94
-Number of Components: 3 Accuracy: 0.89
-Number of Components: 4 Accuracy: 0.89
-Number of Components: 5 Accuracy: 0.92
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Components: 1 Accuracy: 0.78
+Number of Components: 2 Accuracy: 0.92
+Number of Components: 3 Accuracy: 0.94
+Number of Components: 4 Accuracy: 0.94
+Number of Components: 5 Accuracy: 0.89
 Number of Components: 6 Accuracy: 0.89
-Number of Components: 7 Accuracy: 0.89
-Number of Components: 8 Accuracy: 0.89
-Number of Components: 9 Accuracy: 0.89
-Number of Components: 10 Accuracy: 0.89
-Number of Components: 11 Accuracy: 0.92
-Number of Components: 12 Accuracy: 0.92
+Number of Components: 7 Accuracy: 0.94
+Number of Components: 8 Accuracy: 0.97
+Number of Components: 9 Accuracy: 0.97
+Number of Components: 10 Accuracy: 0.97
+Number of Components: 11 Accuracy: 0.94
+Number of Components: 12 Accuracy: 0.94
 </pre></div>
 </div>
 </div>
@@ -1043,7 +1189,7 @@ Number of Components: 12 Accuracy: 0.92
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 0.14120890779872322, &#39;svc__kernel&#39;: &#39;linear&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Hyperparameters: {&#39;pca__n_components&#39;: 8, &#39;svc__C&#39;: 2.1523720161520665, &#39;svc__kernel&#39;: &#39;rbf&#39;}
 Accuracy: 0.97
 </pre></div>
 </div>
@@ -1075,7 +1221,7 @@ Accuracy: 0.97
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of PCA Components: 10
-Accuracy: 0.97
+Accuracy: 0.92
 </pre></div>
 </div>
 </div>
@@ -1117,7 +1263,7 @@ Accuracy: 0.97
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;See Legend&#39;)
 </pre></div>
 </div>
-<img alt="_images/affb1eaa914791e8c849428182f9e477f3b83c70420951067ca7da8caf86af1f.png" src="_images/affb1eaa914791e8c849428182f9e477f3b83c70420951067ca7da8caf86af1f.png" />
+<img alt="_images/a0e4ad720bba57dcc7d26a571bc71547896e9bb9d0a21eb77654db917db104ea.png" src="_images/a0e4ad720bba57dcc7d26a571bc71547896e9bb9d0a21eb77654db917db104ea.png" />
 </div>
 </div>
 </section>

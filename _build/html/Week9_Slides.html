@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Creating Neural Networks from Scratch &#8212; Machine Learning and Neural Networks</title>
   
@@ -44,7 +44,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -64,9 +63,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week9_Slides';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction to Convolutional Neural Networks" href="Week10_Slides.html" />
     <link rel="prev" title="Creating Neural Networks with Tensorflow" href="Week8_Slides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -180,6 +180,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week7_Slides_2.html">Creating Neural Networks with Scikit-Learn and Keras</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week8_Slides.html">Creating Neural Networks with Tensorflow</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Creating Neural Networks from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week10_Slides.html">Introduction to Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week11_Slides.html">Advanced Methods for Improving the Performance of Convolutional Neural Networks</a></li>
 </ul>
 
     </div>
@@ -396,7 +398,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="creating-neural-networks-from-scratch">
-<h1>Creating Neural Networks from Scratch<a class="headerlink" href="#creating-neural-networks-from-scratch" title="Permalink to this heading">#</a></h1>
+<h1>Creating Neural Networks from Scratch<a class="headerlink" href="#creating-neural-networks-from-scratch" title="Permalink to this headline">#</a></h1>
 <p>CSC/DSC 340 Week 9 Slides</p>
 <p>Author: <span class="xref myst">Dr. Julie Butler</span></p>
 <p>Date Created: October 16, 2023</p>
@@ -406,13 +408,13 @@ document.write(`
 <li><p>Another common library for this task is <em>autograd</em> but it is no longer being maintained</p></li>
 </ul>
 <section id="review-of-neural-network-equations">
-<h2>Review of Neural Network Equations<a class="headerlink" href="#review-of-neural-network-equations" title="Permalink to this heading">#</a></h2>
+<h2>Review of Neural Network Equations<a class="headerlink" href="#review-of-neural-network-equations" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>A return to Week 7 Slides</p></li>
 </ul>
 </section>
 <section id="creating-a-neural-network-from-scratch-using-jax">
-<h2>Creating a Neural Network from Scratch Using JAX<a class="headerlink" href="#creating-a-neural-network-from-scratch-using-jax" title="Permalink to this heading">#</a></h2>
+<h2>Creating a Neural Network from Scratch Using JAX<a class="headerlink" href="#creating-a-neural-network-from-scratch-using-jax" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>JAX is an automatic differentiation library in Python that can find the derivative of any chunk of code it is given.</p></li>
 <li><p>If you are interested you can read more about the library <a class="reference external" href="https://github.com/google/jax">here</a>.</p></li>
@@ -433,23 +435,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Modules from the JAX library for creating neural networks</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">grad</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span> <span class="k">as</span> <span class="n">npr</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;jax&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <section id="generate-the-data-set">
-<h3>Generate the Data Set<a class="headerlink" href="#generate-the-data-set" title="Permalink to this heading">#</a></h3>
+<h3>Generate the Data Set<a class="headerlink" href="#generate-the-data-set" title="Permalink to this headline">#</a></h3>
 <p>Let’s keep things simple and generate a data points from a Gaussian curve.  We will have our x data be evenly space between -10 and 10 and our y data be the corresponding points on a Gaussian curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -462,7 +450,7 @@ document.write(`
 </div>
 </section>
 <section id="perform-a-train-test-split">
-<h3>Perform a Train-Test Split<a class="headerlink" href="#perform-a-train-test-split" title="Permalink to this heading">#</a></h3>
+<h3>Perform a Train-Test Split<a class="headerlink" href="#perform-a-train-test-split" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will split the data set into two pieces, a training data set that contains</span>
@@ -476,12 +464,12 @@ document.write(`
 </div>
 </section>
 <section id="define-the-neural-network">
-<h3>Define the Neural Network<a class="headerlink" href="#define-the-neural-network" title="Permalink to this heading">#</a></h3>
+<h3>Define the Neural Network<a class="headerlink" href="#define-the-neural-network" title="Permalink to this headline">#</a></h3>
 <p>First we will define the sigmoid function as our activation function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates the value of the sigmoid function for </span>
 <span class="sd">        a given input of x</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -498,7 +486,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inputs:</span>
 <span class="sd">            W (a list): the weights of the neural network</span>
 <span class="sd">            x (a float): the input value of the neural network</span>
@@ -519,12 +507,12 @@ document.write(`
 </div>
 </section>
 <section id="define-the-loss-function">
-<h3>Define the Loss Function<a class="headerlink" href="#define-the-loss-function" title="Permalink to this heading">#</a></h3>
+<h3>Define the Loss Function<a class="headerlink" href="#define-the-loss-function" title="Permalink to this headline">#</a></h3>
 <p>Now we need to define our loss function.  For simplicity we will be using the mean-squared error loss function, which is a very common loss function for training neural networks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loss_function</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inputs:</span>
 <span class="sd">            W (a list): the weights of the neural network</span>
 <span class="sd">            t (a 1D NumPy array): the times to calculate the predicted position at</span>
@@ -551,7 +539,7 @@ document.write(`
 </div>
 </section>
 <section id="train-the-neural-network">
-<h3>Train the Neural Network<a class="headerlink" href="#train-the-neural-network" title="Permalink to this heading">#</a></h3>
+<h3>Train the Neural Network<a class="headerlink" href="#train-the-neural-network" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Finally we need to train our neural network.</p></li>
 <li><p>We will start by randomly initializing the weights of our neural network (with 25 neurons per hidden layer).</p></li>
@@ -617,311 +605,98 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 1
-Loss: 5.7393837
-
-Training Iteration: 2
-Loss: 3.9249494
-
-Training Iteration: 3
-Loss: 2.7430646
-
-Training Iteration: 4
-Loss: 1.9642867
-
-Training Iteration: 5
-Loss: 1.4439908
-
-Training Iteration: 6
-Loss: 1.0908564
-
-Training Iteration: 7
-Loss: 0.8469455
-
-Training Iteration: 8
-Loss: 0.6752586
-
-Training Iteration: 9
-Loss: 0.5519808
-
-Training Iteration: 10
-Loss: 0.46164405
-
-Training Iteration: 11
-Loss: 0.39409688
-
-Training Iteration: 12
-Loss: 0.34260026
-
-Training Iteration: 13
-Loss: 0.30262083
-
-Training Iteration: 14
-Loss: 0.2710642
-
-Training Iteration: 15
-Loss: 0.24578558
-
-Training Iteration: 16
-Loss: 0.22527163
-
-Training Iteration: 17
-Loss: 0.20843603
-
-Training Iteration: 18
-Loss: 0.1944845
-
-Training Iteration: 19
-Loss: 0.18282592
-
-Training Iteration: 20
-Loss: 0.17301211
-
-Training Iteration: 21
-Loss: 0.16469756
-
-Training Iteration: 22
-Loss: 0.15761234
-
-Training Iteration: 23
-Loss: 0.1515421
-
-Training Iteration: 24
-Loss: 0.14631484
-
-Training Iteration: 25
-Loss: 0.14179125
-
-Training Iteration: 26
-Loss: 0.13785718
-
-Training Iteration: 27
-Loss: 0.13441862
-
-Training Iteration: 28
-Loss: 0.13139778
-
-Training Iteration: 29
-Loss: 0.12872973
-
-Training Iteration: 30
-Loss: 0.12636037
-
-Training Iteration: 31
-Loss: 0.12424435
-
-Training Iteration: 32
-Loss: 0.12234331
-
-Training Iteration: 33
-Loss: 0.12062525
-
-Training Iteration: 34
-Loss: 0.119062945
-
-Training Iteration: 35
-Loss: 0.1176336
-
-Training Iteration: 36
-Loss: 0.11631781
-
-Training Iteration: 37
-Loss: 0.11509922
-
-Training Iteration: 38
-Loss: 0.113963954
-
-Training Iteration: 39
-Loss: 0.11290028
-
-Training Iteration: 40
-Loss: 0.11189827
-
-Training Iteration: 41
-Loss: 0.11094945
-
-Training Iteration: 42
-Loss: 0.110046774
-
-Training Iteration: 43
-Loss: 0.10918406
-
-Training Iteration: 44
-Loss: 0.10835604
-
-Training Iteration: 45
-Loss: 0.1075586
-
-Training Iteration: 46
-Loss: 0.10678794
-
-Training Iteration: 47
-Loss: 0.10604083
-
-Training Iteration: 48
-Loss: 0.105314724
-
-Training Iteration: 49
-Loss: 0.10460715
-
-Training Iteration: 50
-Loss: 0.10391628
-
-Training Iteration: 51
-Loss: 0.103240326
-
-Training Iteration: 52
-Loss: 0.10257807
-
-Training Iteration: 53
-Loss: 0.10192816
-
-Training Iteration: 54
-Loss: 0.10128962
-
-Training Iteration: 55
-Loss: 0.10066156
-
-Training Iteration: 56
-Loss: 0.10004312
-
-Training Iteration: 57
-Loss: 0.09943377
-
-Training Iteration: 58
-Loss: 0.098832875
-
-Training Iteration: 59
-Loss: 0.098239936
-
-Training Iteration: 60
-Loss: 0.0976546
-
-Training Iteration: 61
-Loss: 0.097076416
-
-Training Iteration: 62
-Loss: 0.09650502
-
-Training Iteration: 63
-Loss: 0.09594035
-
-Training Iteration: 64
-Loss: 0.09538187
-
-Training Iteration: 65
-Loss: 0.09482949
-
-Training Iteration: 66
-Loss: 0.09428306
-
-Training Iteration: 67
-Loss: 0.09374238
-
-Training Iteration: 68
-Loss: 0.09320727
-
-Training Iteration: 69
-Loss: 0.09267756
-
-Training Iteration: 70
-Loss: 0.09215312
-
-Training Iteration: 71
-Loss: 0.091633804
-
-Training Iteration: 72
-Loss: 0.09111967
-
-Training Iteration: 73
-Loss: 0.090610415
-
-Training Iteration: 74
-Loss: 0.09010603
-
-Training Iteration: 75
-Loss: 0.08960638
-
-Training Iteration: 76
-Loss: 0.08911151
-
-Training Iteration: 77
-Loss: 0.08862111
-
-Training Iteration: 78
-Loss: 0.08813539
-
-Training Iteration: 79
-Loss: 0.087654
-
-Training Iteration: 80
-Loss: 0.087177046
-
-Training Iteration: 81
-Loss: 0.08670438
-
-Training Iteration: 82
-Loss: 0.08623596
-
-Training Iteration: 83
-Loss: 0.08577179
-
-Training Iteration: 84
-Loss: 0.08531174
-
-Training Iteration: 85
-Loss: 0.084855735
-
-Training Iteration: 86
-Loss: 0.08440378
-
-Training Iteration: 87
-Loss: 0.08395572
-
-Training Iteration: 88
-Loss: 0.08351156
-
-Training Iteration: 89
-Loss: 0.08307134
-
-Training Iteration: 90
-Loss: 0.08263482
-
-Training Iteration: 91
-Loss: 0.08220212
-
-Training Iteration: 92
-Loss: 0.08177301
-
-Training Iteration: 93
-Loss: 0.08134764
-
-Training Iteration: 94
-Loss: 0.08092584
-
-Training Iteration: 95
-Loss: 0.08050759
-
-Training Iteration: 96
-Loss: 0.080092885
-
-Training Iteration: 97
-Loss: 0.07968161
-
-Training Iteration: 98
-Loss: 0.07927379
-
-Training Iteration: 99
-Loss: 0.07886927
-
-Training Iteration: 100
-Loss: 0.078468055
+Loss: 5.3948293
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 2
+Loss: 3.73042
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 3
+Loss: 2.6401887
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 4
+Loss: 1.9165754
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 5
+Loss: 1.428656
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 6
+Loss: 1.0936975
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 7
+Loss: 0.85916555
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 8
+Loss: 0.69148195
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 9
+Loss: 0.5690006
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 10
+Loss: 0.4776287
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 11
+Loss: 0.40808192
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 12
+Loss: 0.35415912
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 13
+Loss: 0.31165215
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 14
+Loss: 0.27765605
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 15
+Loss: 0.25012755
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 16
+Loss: 0.22760028
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 17
+Loss: 0.20900093
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 18
+Loss: 0.19352901
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 19
+Loss: 0.18057571
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 20
+Loss: 0.1696702
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 21
+Loss: 0.16044348
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Iteration: 22
+Loss: 0.15260157
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="analyze-the-results">
-<h3>Analyze the Results<a class="headerlink" href="#analyze-the-results" title="Permalink to this heading">#</a></h3>
+<h3>Analyze the Results<a class="headerlink" href="#analyze-the-results" title="Permalink to this headline">#</a></h3>
 <p>Now we need to analyze the performance of our neural network using the test data set that was reserved earlier.  First we need to generate the neural network predictions for the y component of the test data set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -952,7 +727,7 @@ Loss: 0.078468055
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inputs:</span>
 <span class="sd">            A,B (NumPy arrays)</span>
 <span class="sd">        Returns:</span>
@@ -982,14 +757,14 @@ Loss: 0.078468055
 </section>
 </section>
 <section id="hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function">
-<h2>Hyperparameter Tuning: Changing the Number of Layers, the Number of Hidden Neurons, and the Activation Function<a class="headerlink" href="#hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function" title="Permalink to this heading">#</a></h2>
+<h2>Hyperparameter Tuning: Changing the Number of Layers, the Number of Hidden Neurons, and the Activation Function<a class="headerlink" href="#hyperparameter-tuning-changing-the-number-of-layers-the-number-of-hidden-neurons-and-the-activation-function" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>First let’s change the activation function to the hyperbolic tangent function and add in an additional hidden layer</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">neural_network</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inputs:</span>
 <span class="sd">            W (a list): the weights of the neural network</span>
 <span class="sd">            x (a float): the input value of the neural network</span>
@@ -1205,6 +980,15 @@ Loss: 0.06312969
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Creating Neural Networks with Tensorflow</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Week10_Slides.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Convolutional Neural Networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
