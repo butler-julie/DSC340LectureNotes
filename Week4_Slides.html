@@ -184,6 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Week9_Slides.html">Creating Neural Networks from Scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week10_Slides.html">Introduction to Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Week11_Slides.html">Advanced Methods for Improving the Performance of Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Week12_Slides.html">Recurrent Neural Networks</a></li>
 </ul>
 
     </div>
@@ -674,7 +675,7 @@ document.write(`
   self._figure.tight_layout(*args, **kwargs)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x169a90280&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x14c1d87c0&gt;
 </pre></div>
 </div>
 <img alt="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" src="_images/1a3070f162f027a78c17b903f2ebc1ce6395e1bbed352105d12724a4bcfd6de9.png" />
@@ -730,9 +731,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[11,  0,  0],
-       [ 0,  6,  1],
-       [ 0,  3,  9]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9,  0,  0],
+       [ 0,  7,  0],
+       [ 0,  4, 10]])
 </pre></div>
 </div>
 </div>
@@ -747,10 +748,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16a400550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x14bf03910&gt;
 </pre></div>
 </div>
-<img alt="_images/6deff0ad583c241f35c986295a98d91772fd380a469013c75e4581a515fdd831.png" src="_images/6deff0ad583c241f35c986295a98d91772fd380a469013c75e4581a515fdd831.png" />
+<img alt="_images/29e288e19e36535c0ad1ef4e5dc7abed13043d5467652baa02879775adfafecf.png" src="_images/29e288e19e36535c0ad1ef4e5dc7abed13043d5467652baa02879775adfafecf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -777,13 +778,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7333333333333333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x16a41e4f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x14d0f4790&gt;
 </pre></div>
 </div>
-<img alt="_images/f81ad1dedcc68d1e0bb9ea7ac2fd5c02d4e033a319bf44fd965ba43ccedbf436.png" src="_images/f81ad1dedcc68d1e0bb9ea7ac2fd5c02d4e033a319bf44fd965ba43ccedbf436.png" />
+<img alt="_images/7989dbe50c53590fc4a4f2571a509162dfc97313f598068bdc7ac6f295fb1649.png" src="_images/7989dbe50c53590fc4a4f2571a509162dfc97313f598068bdc7ac6f295fb1649.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -808,8 +809,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 0.7134617161385436
-BEST SCORE: 0.7333333333333333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BEST ALPHA: 4.340377520156955
+BEST SCORE: 0.8666666666666667
 </pre></div>
 </div>
 </div>
